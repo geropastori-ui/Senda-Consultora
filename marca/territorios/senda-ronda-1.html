@@ -1,0 +1,503 @@
+<title>Senda · Territorios de marca</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Archivo:wdth,wght@62..125,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&family=Overpass+Mono:wght@400;600&family=Overpass:wght@400;600;800;900&display=swap">
+<style>
+/* Layout: documento de presentación de estudio. Cromo neutro y sobrio; cada territorio es una banda a ancho completo con su propia paleta fija. */
+:root{
+  --bg:#F4F4F1; --fg:#1A1B1A; --muted:#5E605B; --line:#D4D5CF; --panel:#FFFFFF;
+  --f-text:"Newsreader", Georgia, "Times New Roman", serif;
+  --f-label:"Overpass Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --max:1120px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#131413; --fg:#E7E7E2; --muted:#9C9E97; --line:#2E302D; --panel:#1C1D1B; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#131413; --fg:#E7E7E2; --muted:#9C9E97; --line:#2E302D; --panel:#1C1D1B; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-text);font-size:18px;line-height:1.5;margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{text-wrap:balance;margin:0;font-weight:500}
+p{margin:0;max-width:62ch}
+.label{font-family:var(--f-label);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+a{color:inherit}
+
+/* ---------- cabecera ---------- */
+.intro{padding-block:56px 40px;display:grid;gap:28px}
+.intro h1{font-size:clamp(34px,5vw,56px);line-height:1.05;letter-spacing:-.01em;max-width:18ch}
+.intro .lead{font-size:20px;color:var(--muted)}
+.tensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border-top:1px solid var(--line)}
+.tensions div{padding:16px 16px 16px 0;border-bottom:1px solid var(--line);display:grid;gap:4px;min-width:0}
+.tensions b{font-weight:500;font-size:19px}
+.tensions span{color:var(--muted);font-size:16px}
+.toc{display:flex;flex-wrap:wrap;gap:8px 24px}
+.toc a{text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+.toc a:hover,.toc a:focus-visible{border-color:var(--fg);outline:none}
+
+/* ---------- comparación de símbolos ---------- */
+.compare{padding-block:8px 48px}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:14px}
+.cmp{background:var(--panel);border:1px solid var(--line);padding:18px;display:grid;gap:14px;min-width:0}
+.cmp .sizes{display:flex;align-items:flex-end;gap:18px}
+.cmp .sizes figure{margin:0;display:grid;justify-items:start;gap:6px}
+.cmp figcaption{font-family:var(--f-label);font-size:11px;color:var(--muted)}
+
+/* ---------- bandas de territorio ---------- */
+.terr{background:var(--t-bg);color:var(--t-fg);padding-block:64px;color-scheme:light}
+.terr .wrap{display:grid;gap:44px}
+.t-head{display:grid;gap:14px}
+.t-head .label{color:var(--t-muted)}
+.t-head h2{font-size:clamp(36px,6vw,64px);line-height:1}
+.t-head .concept{font-size:clamp(20px,2.4vw,26px);line-height:1.3;max-width:34ch}
+.t-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.t-cols > div{min-width:0;display:grid;gap:10px;align-content:start}
+.t-cols h3{font-size:14px}
+.t-cols p{font-size:17px}
+
+.stage{background:var(--t-stage);display:grid;place-items:center;padding:clamp(36px,7vw,80px) 16px;min-width:0;overflow:hidden}
+.variants{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.variants figure{margin:0;display:grid;gap:8px}
+.variants .box{display:grid;place-items:center;height:120px;padding:12px;overflow:hidden}
+.variants figcaption{font-family:var(--f-label);font-size:11px;color:var(--t-muted)}
+
+/* paleta */
+.palette{display:grid;gap:14px}
+.ratio{display:flex;height:56px;border:1px solid var(--t-rule)}
+.ratio span{display:block}
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.chip{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;min-width:0}
+.chip i{display:block;width:44px;height:44px;border:1px solid var(--t-rule)}
+.chip b{display:block;font-weight:600;font-size:15px}
+.chip span{display:block;font-family:var(--f-label);font-size:12px;color:var(--t-muted);font-variant-numeric:tabular-nums}
+.chip em{display:block;font-style:normal;font-size:14px;line-height:1.35;margin-top:2px}
+
+/* tipografía */
+.type{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;border-top:1px solid var(--t-rule);padding-top:24px}
+.type > div{min-width:0;display:grid;gap:8px;align-content:start}
+.type .meta{font-family:var(--f-label);font-size:12px;color:var(--t-muted)}
+.type .note{font-size:15px}
+
+/* aplicaciones */
+.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:start}
+.apps figure{margin:0;display:grid;gap:8px;min-width:0}
+.apps figcaption{font-family:var(--f-label);font-size:11px;color:var(--t-muted)}
+.card{aspect-ratio:85/55;max-width:100%;position:relative;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.12),0 8px 24px rgba(0,0,0,.08)}
+.square{aspect-ratio:1/1;max-width:100%;position:relative;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.12),0 8px 24px rgba(0,0,0,.08)}
+.a4{aspect-ratio:210/297;max-width:100%;position:relative;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.12),0 8px 24px rgba(0,0,0,.08)}
+
+/* evaluación */
+.eval{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;border-top:1px solid var(--t-rule);padding-top:24px}
+.eval > div{min-width:0;display:grid;gap:10px;align-content:start}
+.scores{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.scores li{display:grid;grid-template-columns:110px 1fr 18px;gap:10px;align-items:center;font-size:15px}
+.scores .bar{display:flex;gap:3px}
+.scores .bar i{flex:1;height:8px;background:var(--t-rule)}
+.scores .bar i.on{background:var(--t-fg)}
+.scores b{font-family:var(--f-label);font-weight:600;font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+
+/* lockups */
+.lock{display:inline-flex;align-items:center;white-space:nowrap;line-height:1}
+.lock svg{display:block;flex:none}
+
+/* ---------- Territorio A: líneas de deseo ---------- */
+.t-a{--t-bg:#D7D8D2;--t-fg:#1D221E;--t-muted:#4B524C;--t-rule:#B8BAB1;--t-stage:#CBCDC5;
+  --a-horm:#D7D8D2;--a-pasto:#3D5634;--a-tinta:#1D221E;--a-tierra:#A0703F}
+.t-a .t-head h2,.t-a .t-head .concept{font-family:"Archivo",sans-serif;font-stretch:112%;font-weight:620;letter-spacing:-.015em}
+.t-a .t-head .concept{font-weight:450;font-stretch:100%;letter-spacing:0}
+.a-word{font-family:"Archivo",sans-serif;font-stretch:115%;font-weight:640;letter-spacing:-.025em}
+.a-sys{position:relative;background:var(--a-horm);border:1px solid var(--t-rule);aspect-ratio:16/7;max-width:100%}
+
+/* ---------- Territorio B: marcas de sendero ---------- */
+.t-b{--t-bg:#F3F2EC;--t-fg:#24221F;--t-muted:#5C5A54;--t-rule:#D3D1C8;--t-stage:#E8E6DE;
+  --b-cal:#F3F2EC;--b-corteza:#24221F;--b-amar:#F0B323;--b-piedra:#7E7B74}
+.t-b .t-head h2{font-family:"Overpass",sans-serif;font-weight:900;letter-spacing:-.01em}
+.t-b .t-head .concept{font-family:"Overpass",sans-serif;font-weight:600}
+.b-word{font-family:"Overpass",sans-serif;font-weight:800;letter-spacing:-.01em}
+.b-signs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.b-signs figure{margin:0;background:var(--b-corteza);color:var(--b-cal);padding:18px;display:grid;gap:12px;align-content:start}
+.b-signs figcaption{font-family:"Overpass",sans-serif;font-weight:600;font-size:15px;line-height:1.25}
+.b-signs small{display:block;font-family:"Overpass Mono",monospace;font-size:11px;color:#B9B6AD;font-weight:400;margin-top:2px}
+
+/* ---------- Territorio C: apacheta ---------- */
+.t-c{--t-bg:#22397F;--t-fg:#ECEEEA;--t-muted:#B7C0DA;--t-rule:#3D5397;--t-stage:#1C3070;
+  --c-salina:#ECEEEA;--c-cobalto:#22397F;--c-basalto:#2B2A2E;--c-ocre:#B9842F;--c-coiron:#D9C27A}
+.t-c .t-head h2{font-family:"Alegreya SC",serif;font-weight:700;letter-spacing:.02em}
+.t-c .t-head .concept{font-family:"Alegreya Sans",sans-serif;font-weight:400;font-style:italic}
+.c-word{font-family:"Alegreya SC",serif;font-weight:700;letter-spacing:.05em}
+
+/* ---------- cierre ---------- */
+.closing{padding-block:64px 80px;display:grid;gap:40px}
+.closing h2{font-size:clamp(28px,4vw,40px)}
+.reco{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px}
+.reco > div{min-width:0;display:grid;gap:12px;align-content:start}
+.reco ol{margin:0;padding-left:1.2em;display:grid;gap:8px}
+.reco li{max-width:58ch}
+.muted{color:var(--muted)}
+
+@media (max-width:520px){
+  body{font-size:17px}
+  .terr{padding-block:44px}
+  .scores li{grid-template-columns:96px 1fr 18px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="wrap intro">
+  <div class="label muted">Senda Consultora · Identidad · Ronda 1 de exploración</div>
+  <h1>Tres maneras de marcar una senda</h1>
+  <p class="lead">Una senda es un camino angosto que no se construye: lo hace la gente al pasar. Ese dato es más útil que cualquier montaña o brújula. Abajo hay tres territorios divergentes, cada uno con logo, paleta, tipografía, recurso gráfico y piezas aplicadas. Al final, la recomendación.</p>
+  <div class="tensions">
+    <div><span class="label">Tensión 1</span><b>Datos / personas</b><span>La investigación y la IA piden rigor; la venta consultiva pide calidez.</span></div>
+    <div><span class="label">Tensión 2</span><b>Artesanal / automatizado</b><span>Se automatizan procesos, pero el diagnóstico se hace a mano y en el terreno.</span></div>
+    <div><span class="label">Tensión 3</span><b>Chica / integral</b><span>Una consultora nueva que ofrece mucho tiene que verse enfocada, no dispersa.</span></div>
+  </div>
+  <nav class="toc label" aria-label="Territorios">
+    <a href="#a">A · Líneas de deseo</a><a href="#b">B · Marcas de sendero</a><a href="#c">C · Apacheta</a><a href="#reco">Recomendación</a>
+  </nav>
+</header>
+
+<section class="wrap compare" aria-label="Prueba de reducción">
+  <div class="label muted">Prueba de reducción: los tres símbolos a 16, 24 y 48 px</div>
+  <div class="compare-grid">
+    <div class="cmp"><span class="label">A · Líneas de deseo</span><div class="sizes" data-sizes="A"></div></div>
+    <div class="cmp"><span class="label">B · Marcas de sendero</span><div class="sizes" data-sizes="B"></div></div>
+    <div class="cmp"><span class="label">C · Apacheta</span><div class="sizes" data-sizes="C"></div></div>
+  </div>
+</section>
+
+<!-- ================= A ================= -->
+<section class="terr t-a" id="a">
+  <div class="wrap">
+    <div class="t-head">
+      <span class="label">Territorio A</span>
+      <h2>Líneas de deseo</h2>
+      <p class="concept">Senda encuentra los caminos que tus clientes ya recorren, aunque nadie los haya diseñado.</p>
+    </div>
+
+    <div class="t-cols">
+      <div><h3 class="label">De dónde sale</h3><p>En urbanismo, una <i>línea de deseo</i> es el sendero de tierra que la gente marca en el pasto cuando el camino diseñado da la vuelta. Los urbanistas buenos esperan a que aparezcan y recién ahí pavimentan.</p></div>
+      <div><h3 class="label">Qué dice del negocio</h3><p>Es el método de Senda en una imagen. La investigación de mercado encuentra la línea de deseo, el trabajo comercial la recorre y la automatización la pavimenta.</p></div>
+      <div><h3 class="label">El símbolo</h3><p>Un cuadrado de pasto con una diagonal levemente curva gastada de esquina a esquina. Es la vista aérea de cualquier plaza argentina. El logotipo en grotesca ancha se queda quieto para que la diagonal sea lo único que se mueve.</p></div>
+    </div>
+
+    <div class="stage"><div data-lock="A" data-size="clamp(44px,9vw,96px)" data-ink="#1D221E" data-sym="#3D5634" data-cut="#A0703F"></div></div>
+
+    <div class="variants">
+      <figure><div class="box" style="background:#3D5634"><div data-lock="A" data-size="34px" data-ink="#D7D8D2" data-sym="#D7D8D2" data-cut="#A0703F"></div></div><figcaption>Negativo sobre pasto</figcaption></figure>
+      <figure><div class="box" style="background:#FFFFFF"><div data-lock="A" data-size="34px" data-ink="#1D221E" data-sym="#1D221E"></div></div><figcaption>Monocromo</figcaption></figure>
+      <figure><div class="box" style="background:#1D221E"><div data-sym-only="A" data-size="64px" data-sym="#3D5634" data-cut="#C08A55"></div></div><figcaption>Avatar</figcaption></figure>
+    </div>
+
+    <div class="palette">
+      <h3 class="label" style="color:var(--t-muted)">Paleta · tomada de una plaza a las seis de la tarde</h3>
+      <div class="ratio" aria-hidden="true"><span style="flex:60;background:#D7D8D2"></span><span style="flex:22;background:#3D5634"></span><span style="flex:12;background:#1D221E"></span><span style="flex:6;background:#A0703F"></span></div>
+      <div class="chips">
+        <div class="chip"><i style="background:#D7D8D2"></i><div><b>Hormigón</b><span>#D7D8D2 · 60%</span><em>Fondo. Gris de vereda, no crema.</em></div></div>
+        <div class="chip"><i style="background:#3D5634"></i><div><b>Pasto</b><span>#3D5634 · 22%</span><em>Primario. 5,7:1 sobre hormigón: apto texto.</em></div></div>
+        <div class="chip"><i style="background:#1D221E"></i><div><b>Tinta</b><span>#1D221E · 12%</span><em>Texto. 11,3:1 sobre hormigón.</em></div></div>
+        <div class="chip"><i style="background:#A0703F"></i><div><b>Tierra pisada</b><span>#A0703F · 6%</span><em>Solo la senda y los datos clave. 3:1, no apto texto chico.</em></div></div>
+      </div>
+    </div>
+
+    <div class="type">
+      <div>
+        <span class="meta">Titulares · Archivo, ancho 112, peso 620</span>
+        <div style="font-family:'Archivo',sans-serif;font-stretch:112%;font-weight:620;font-size:clamp(28px,4vw,40px);line-height:1.05;letter-spacing:-.015em">Por dónde llegan de verdad tus clientes</div>
+        <p class="note">Omnibus-Type, Buenos Aires. Grotesca con eje de ancho: la versión ancha da presencia sin recurrir a negritas pesadas. Alternativa paga: GT America Expanded (Grilli Type).</p>
+      </div>
+      <div>
+        <span class="meta">Texto · Newsreader 400, 17/26</span>
+        <p style="font-family:'Newsreader',serif;font-size:18px;line-height:1.5">Relevamos 40 conversaciones de venta y encontramos que la mitad de las consultas llegaba por un canal que nadie atendía. Ahí empieza el trabajo.</p>
+        <p class="note">Production Type. Serif de lectura en pantalla con tamaño óptico: aporta la voz humana que la grotesca no tiene. <span style="color:var(--t-muted)">(Texto de ejemplo.)</span></p>
+      </div>
+    </div>
+
+    <div class="t-cols" style="grid-template-columns:1fr">
+      <div><h3 class="label">Recurso gráfico</h3><p>Grillas ortogonales con una sola diagonal que las cruza. En diapositivas e informes, la diagonal conecta el hallazgo principal; en gráficos, marca la tendencia real frente a la planificada.</p></div>
+      <div class="a-sys" data-asys></div>
+    </div>
+
+    <div class="apps">
+      <figure><div class="card" data-app="A-card"></div><figcaption>Tarjeta · frente</figcaption></figure>
+      <figure><div class="square" data-app="A-post"></div><figcaption>Post de LinkedIn</figcaption></figure>
+    </div>
+
+    <div class="eval">
+      <div><h3 class="label">Riesgo</h3><p>El concepto es el más fuerte de los tres, pero necesita ser contado: sin la historia, el símbolo puede leerse como una hoja o una bandera. Se mitiga usando la diagonal en todas las piezas y nombrando el método ("buscamos líneas de deseo").</p></div>
+      <div><h3 class="label">Autoevaluación</h3><ul class="scores" data-scores="4,5,4,4,4"></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= B ================= -->
+<section class="terr t-b" id="b">
+  <div class="wrap">
+    <div class="t-head">
+      <span class="label">Territorio B</span>
+      <h2>Marcas de sendero</h2>
+      <p class="concept">Senda no entrega un mapa: marca el camino, paso a paso, para que el equipo lo recorra solo.</p>
+    </div>
+
+    <div class="t-cols">
+      <div><h3 class="label">De dónde sale</h3><p>Las marcas pintadas en piedras y troncos de los senderos de montaña: dos franjas paralelas indican "seguí", franjas quebradas indican "girá", una cruz indica "por acá no". Es un sistema de signos real, con cien años de uso, que cualquiera entiende sin leer.</p></div>
+      <div><h3 class="label">Qué dice del negocio</h3><p>Una consultora que no hace dependencia: deja el camino señalizado. Las marcas se vuelven el idioma de los entregables: pasos, decisiones, desvíos a evitar.</p></div>
+      <div><h3 class="label">El símbolo</h3><p>Las dos franjas, en proporción de marca de sendero real. El logotipo es Overpass, heredera de la letra de los carteles viales: "Senda" escrita como se escribe un destino.</p></div>
+    </div>
+
+    <div class="stage"><div data-lock="B" data-size="clamp(44px,9vw,96px)" data-ink="#24221F" data-top="#24221F"></div></div>
+
+    <div class="variants">
+      <figure><div class="box" style="background:#24221F"><div data-lock="B" data-size="34px" data-ink="#F3F2EC" data-top="#F3F2EC"></div></div><figcaption>Negativo: la marca como está pintada en la roca</figcaption></figure>
+      <figure><div class="box" style="background:#FFFFFF"><div data-lock="B" data-size="34px" data-ink="#24221F" data-top="#24221F" data-bot="#24221F"></div></div><figcaption>Monocromo</figcaption></figure>
+      <figure><div class="box" style="background:#F0B323"><div data-sym-only="B" data-size="64px" data-top="#F3F2EC" data-bot="#24221F"></div></div><figcaption>Avatar</figcaption></figure>
+    </div>
+
+    <div class="palette">
+      <h3 class="label" style="color:var(--t-muted)">Paleta · pintura de señalización sobre piedra</h3>
+      <div class="ratio" aria-hidden="true"><span style="flex:55;background:#F3F2EC"></span><span style="flex:30;background:#24221F"></span><span style="flex:10;background:#F0B323"></span><span style="flex:5;background:#7E7B74"></span></div>
+      <div class="chips">
+        <div class="chip"><i style="background:#F3F2EC"></i><div><b>Cal</b><span>#F3F2EC · 55%</span><em>Fondo. Blanco de pintura a la cal.</em></div></div>
+        <div class="chip"><i style="background:#24221F"></i><div><b>Corteza</b><span>#24221F · 30%</span><em>Texto y fondos fuertes. 14:1 sobre cal.</em></div></div>
+        <div class="chip"><i style="background:#F0B323"></i><div><b>Amarillo señal</b><span>#F0B323 · 10%</span><em>Solo señal, nunca texto sobre cal (1,7:1). Sobre corteza, 8,4:1.</em></div></div>
+        <div class="chip"><i style="background:#7E7B74"></i><div><b>Piedra</b><span>#7E7B74 · 5%</span><em>Secundario. 3,8:1: solo texto grande o líneas.</em></div></div>
+      </div>
+    </div>
+
+    <div class="type">
+      <div>
+        <span class="meta">Titulares · Overpass 800 / 900</span>
+        <div style="font-family:'Overpass',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);line-height:1.05">Paso 2: ordenar el embudo comercial</div>
+        <p class="note">Delve Fonts, libre. Basada en Highway Gothic, la letra de los carteles de ruta: hecha para leerse rápido, de lejos y en movimiento. Alternativa paga: Transport New (A2-Type).</p>
+      </div>
+      <div>
+        <span class="meta">Texto y datos · Overpass 400 + Overpass Mono</span>
+        <p style="font-family:'Overpass',sans-serif;font-size:17px;line-height:1.55">Tiempo de respuesta a consultas: <span style="font-family:'Overpass Mono',monospace;font-weight:600">38 h → 4 h</span> con un circuito de derivación automático.</p>
+        <p class="note">Una sola familia para todo: más fácil de aplicar en Slides y Docs sin un diseñador. La mono va solo en cifras. <span style="color:var(--t-muted)">(Cifras de ejemplo.)</span></p>
+      </div>
+    </div>
+
+    <div class="t-cols" style="grid-template-columns:1fr">
+      <div><h3 class="label">Recurso gráfico · el idioma de las marcas</h3><p>Las señales del sendero reemplazan viñetas, íconos y flechas en propuestas, informes y presentaciones.</p></div>
+      <div class="b-signs" data-bsigns></div>
+    </div>
+
+    <div class="apps">
+      <figure><div class="card" data-app="B-card"></div><figcaption>Tarjeta · dorso</figcaption></figure>
+      <figure><div class="a4" data-app="B-cover" style="max-width:340px"></div><figcaption>Portada de propuesta</figcaption></figure>
+    </div>
+
+    <div class="eval">
+      <div><h3 class="label">Riesgo</h3><p>Puede leerse como club de trekking o turismo aventura. Se mitiga con disciplina: cero fotos de naturaleza, cero montañas. El amarillo funciona como señal en documentos de trabajo, no como paisaje.</p></div>
+      <div><h3 class="label">Autoevaluación</h3><ul class="scores" data-scores="5,4,5,5,5"></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= C ================= -->
+<section class="terr t-c" id="c">
+  <div class="wrap">
+    <div class="t-head">
+      <span class="label">Territorio C · el incómodo</span>
+      <h2>Apacheta</h2>
+      <p class="concept">Cada dato es una piedra; apilados, marcan el rumbo.</p>
+    </div>
+
+    <div class="t-cols">
+      <div><h3 class="label">De dónde sale</h3><p>En los pasos de la cordillera, quien cruza deja una piedra sobre la apacheta. Ninguna piedra sola indica nada; la pila, vista de lejos, es la señal del camino. Es una práctica andina con sentido ritual.</p></div>
+      <div><h3 class="label">Qué dice del negocio</h3><p>Investigación de mercado en su forma más honesta: muchas fuentes chicas que, acumuladas, dan una dirección. La pila de piedras es también un gráfico de barras horizontal.</p></div>
+      <div><h3 class="label">El símbolo</h3><p>Cinco piedras planas apiladas, de ancho decreciente. La última, en ocre, es el aporte del cliente. Tipografía de Huerta Tipográfica, fundición argentina, para anclarlo en la región.</p></div>
+    </div>
+
+    <div class="stage"><div data-lock="C" data-size="clamp(44px,9vw,96px)" data-ink="#ECEEEA" data-sym="#ECEEEA" data-top="#D9C27A"></div></div>
+
+    <div class="variants">
+      <figure><div class="box" style="background:#ECEEEA"><div data-lock="C" data-size="34px" data-ink="#22397F" data-sym="#22397F" data-top="#B9842F"></div></div><figcaption>Positivo sobre salina</figcaption></figure>
+      <figure><div class="box" style="background:#FFFFFF"><div data-lock="C" data-size="34px" data-ink="#2B2A2E" data-sym="#2B2A2E" data-top="#2B2A2E"></div></div><figcaption>Monocromo</figcaption></figure>
+      <figure><div class="box" style="background:#B9842F"><div data-sym-only="C" data-size="64px" data-sym="#22397F" data-top="#ECEEEA"></div></div><figcaption>Avatar</figcaption></figure>
+    </div>
+
+    <div class="palette">
+      <h3 class="label" style="color:var(--t-muted)">Paleta · la Puna al mediodía</h3>
+      <div class="ratio" aria-hidden="true"><span style="flex:55;background:#ECEEEA"></span><span style="flex:25;background:#22397F"></span><span style="flex:12;background:#2B2A2E"></span><span style="flex:6;background:#B9842F"></span><span style="flex:2;background:#D9C27A"></span></div>
+      <div class="chips">
+        <div class="chip"><i style="background:#ECEEEA"></i><div><b>Salina</b><span>#ECEEEA · 55%</span><em>Fondo. Blanco de salar, frío.</em></div></div>
+        <div class="chip"><i style="background:#22397F"></i><div><b>Cielo de altura</b><span>#22397F · 25%</span><em>Primario. 9,2:1 con salina.</em></div></div>
+        <div class="chip"><i style="background:#2B2A2E"></i><div><b>Basalto</b><span>#2B2A2E · 12%</span><em>Texto largo. 12,2:1.</em></div></div>
+        <div class="chip"><i style="background:#B9842F"></i><div><b>Ocre</b><span>#B9842F · 6%</span><em>La última piedra. 2,8:1: nunca texto.</em></div></div>
+        <div class="chip"><i style="background:#D9C27A"></i><div><b>Coirón</b><span>#D9C27A · 2%</span><em>Acento sobre cielo. 6,1:1.</em></div></div>
+      </div>
+    </div>
+
+    <div class="type">
+      <div>
+        <span class="meta">Titulares · Alegreya SC 700</span>
+        <div style="font-family:'Alegreya SC',serif;font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:.02em">Cinco fuentes, un rumbo</div>
+        <p class="note">Juan Pablo del Peral, Huerta Tipográfica (Argentina). De raíz caligráfica, con versalitas reales: aporta voz y origen.</p>
+      </div>
+      <div>
+        <span class="meta">Texto · Alegreya Sans 400</span>
+        <p style="font-family:'Alegreya Sans',sans-serif;font-size:18px;line-height:1.5">La superfamilia comparte esqueleto entre serif y sans, así que titulares y texto conviven sin choques aunque se mezclen en la misma línea.</p>
+        <p class="note">Misma fundición. Libre en Google Fonts.</p>
+      </div>
+    </div>
+
+    <div class="apps">
+      <figure><div class="square" data-app="C-post"></div><figcaption>Post de LinkedIn: el gráfico es la apacheta</figcaption></figure>
+      <figure><div class="card" data-app="C-card"></div><figcaption>Tarjeta · frente</figcaption></figure>
+    </div>
+
+    <div class="eval">
+      <div><h3 class="label">Riesgo</h3><p>Dos serios. La apacheta es una práctica ritual andina: usarla como emblema corporativo sin vínculo con esas comunidades puede leerse como apropiación. Y las piedras apiladas derivan con facilidad hacia la estética de spa. Si gusta, sugiero conservar el gráfico de piedras sin nombrarlo apacheta en público.</p></div>
+      <div><h3 class="label">Autoevaluación</h3><ul class="scores" data-scores="4,4,4,4,3"></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= cierre ================= -->
+<section class="wrap closing" id="reco">
+  <div style="display:grid;gap:12px">
+    <span class="label muted">Recomendación</span>
+    <h2>Ir por B, Marcas de sendero, y usar A como nombre del método</h2>
+  </div>
+  <div class="reco">
+    <div>
+      <p><b>Por qué B.</b> Es el único territorio que entrega un sistema completo y no solo un logo. Las señales de "seguí", "girá" y "por acá no" sirven para escribir propuestas, informes y presentaciones, y las puede aplicar cualquiera del equipo en Google Slides. Además sale directo del nombre: es la señalética de una senda.</p>
+      <p><b>Qué se rescata de A.</b> "Líneas de deseo" es la mejor historia comercial de las tres. Funciona muy bien como nombre del servicio de investigación de mercado ("Diagnóstico de líneas de deseo") dentro de la identidad B.</p>
+      <p><b>Qué se pierde.</b> La calidez tipográfica de C y la elegancia de la diagonal de A. B es más seco; la calidez tiene que venir del tono de voz.</p>
+    </div>
+    <div>
+      <span class="label muted">Preguntas para la ronda 2</span>
+      <ol>
+        <li>¿Quién es el cliente ideal en concreto (rubro, tamaño, cargo de quien contrata)?</li>
+        <li>¿Cuál de los tres focos va a traer más facturación el primer año?</li>
+        <li>¿Senda firma como equipo o va a haber caras visibles?</li>
+        <li>Tres consultoras o marcas que admires, y tres que sean exactamente lo que no querés ser.</li>
+        <li>¿Qué territorio te hizo reaccionar primero, para bien o para mal?</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  let uid = 0;
+
+  /* ----- símbolos ----- */
+  function symA(o){
+    const id = 'mA' + (++uid), h = o.h, sym = o.sym || '#3D5634', cut = o.cut;
+    // Cuadrado de 40 con una senda curva de 6 de ancho, de la esquina inferior izquierda a la superior derecha.
+    const d = 'M3 42 C 14 28, 22 24, 42 4';
+    const fillCut = cut ? `<path d="${d}" stroke="${cut}" stroke-width="3" fill="none" stroke-dasharray="0.1 4.6" stroke-linecap="round"/>` : '';
+    return `<svg viewBox="0 0 40 40" width="${h}" height="${h}" aria-hidden="true"><defs><mask id="${id}"><rect width="40" height="40" fill="#fff"/><path d="${d}" stroke="#000" stroke-width="7" fill="none"/></mask></defs><rect width="40" height="40" fill="${sym}" mask="url(#${id})"/>${fillCut}</svg>`;
+  }
+  function symB(o){
+    const h = o.h, top = o.top || '#24221F', bot = o.bot || '#F0B323';
+    // Dos franjas de 36×9 separadas 4: proporción de una marca pintada.
+    const size = typeof h === 'string' ? `style="height:${h};width:${(parseFloat(h)*36/22).toFixed(3)}em"` : `height="${h}" width="${h*36/22}"`;
+    return `<svg viewBox="0 0 36 22" ${size} aria-hidden="true"><rect width="36" height="9" fill="${top}"/><rect y="13" width="36" height="9" fill="${bot}"/></svg>`;
+  }
+  function symC(o){
+    const h = o.h, sym = o.sym || '#22397F', top = o.top || '#B9842F';
+    const stones = [[1,33,38],[6,25,28],[3,17,26],[10,9,18],[15,1,10]];
+    const r = stones.map((s,i)=>`<rect x="${s[0]}" y="${s[1]}" width="${s[2]}" height="6" rx="3" fill="${i===4?top:sym}"/>`).join('');
+    return `<svg viewBox="0 0 40 40" width="${h}" height="${h}" aria-hidden="true">${r}</svg>`;
+  }
+  const SYM = {A:symA, B:symB, C:symC};
+
+  /* ----- lockups ----- */
+  function lock(t, el){
+    const d = el.dataset, ink = d.ink;
+    const opts = {sym:d.sym, cut:d.cut, top:d.top, bot:d.bot};
+    if (t==='A') return `<span class="lock a-word" style="font-size:${d.size};color:${ink};gap:.32em">${symA({...opts,h:'0.86em'})}senda</span>`;
+    if (t==='B') return `<span class="lock b-word" style="font-size:${d.size};color:${ink};gap:.34em">${symB({...opts,h:'0.62em'})}Senda</span>`;
+    if (t==='C') return `<span class="lock c-word" style="font-size:${d.size};color:${ink};gap:.3em">${symC({...opts,h:'0.95em'})}Senda</span>`;
+  }
+  document.querySelectorAll('[data-lock]').forEach(el=>{ el.innerHTML = lock(el.dataset.lock, el); el.setAttribute('role','img'); el.setAttribute('aria-label','Logo Senda, territorio ' + el.dataset.lock); });
+  document.querySelectorAll('[data-sym-only]').forEach(el=>{
+    const d = el.dataset; el.innerHTML = SYM[d.symOnly]({h: parseInt(d.size), sym:d.sym, cut:d.cut, top:d.top, bot:d.bot});
+  });
+
+  /* ----- prueba de tamaños (usa el color de texto del cromo) ----- */
+  document.querySelectorAll('[data-sizes]').forEach(el=>{
+    const t = el.dataset.sizes;
+    const ink = getComputedStyle(document.body).color;
+    el.innerHTML = [16,24,48].map(s=>{
+      const sym = t==='A' ? symA({h:s, sym:'#3D5634'}) : t==='B' ? symB({h:s*22/36*1.4, top:ink}) : symC({h:s});
+      return `<figure>${sym}<figcaption>${s} px</figcaption></figure>`;
+    }).join('') + `<figure>${t==='A'?symA({h:16,sym:ink}):t==='B'?symB({h:16*22/36*1.4,top:ink,bot:ink}):symC({h:16,sym:ink,top:ink})}<figcaption>1 color</figcaption></figure>`;
+  });
+
+  /* ----- autoevaluación ----- */
+  const crit = ['Propiedad','Idea','Reducción','Sistema','Viabilidad'];
+  document.querySelectorAll('[data-scores]').forEach(el=>{
+    const v = el.dataset.scores.split(',').map(Number);
+    el.innerHTML = v.map((n,i)=>`<li><span>${crit[i]}</span><span class="bar" aria-hidden="true">${[1,2,3,4,5].map(k=>`<i class="${k<=n?'on':''}"></i>`).join('')}</span><b>${n}</b></li>`).join('');
+  });
+
+  /* ----- A: recurso gráfico ----- */
+  const asys = document.querySelector('[data-asys]');
+  if (asys){
+    let g = '';
+    for (let x=0;x<=16;x++) g += `<line x1="${x*10}" y1="0" x2="${x*10}" y2="70" stroke="#B8BAB1" stroke-width=".4"/>`;
+    for (let y=0;y<=7;y++) g += `<line x1="0" y1="${y*10}" x2="160" y2="${y*10}" stroke="#B8BAB1" stroke-width=".4"/>`;
+    asys.innerHTML = `<svg viewBox="0 0 160 70" width="100%" height="100%" preserveAspectRatio="none" aria-label="Grilla ortogonal con una diagonal que conecta dos puntos">${g}
+      <path d="M10 60 H70 V20 H150" stroke="#3D5634" stroke-width="1.6" fill="none"/>
+      <path d="M10 60 C 50 44, 92 34, 150 20" stroke="#A0703F" stroke-width="2.2" fill="none" stroke-dasharray="0.1 3.2" stroke-linecap="round"/>
+      <circle cx="10" cy="60" r="2.4" fill="#1D221E"/><circle cx="150" cy="20" r="2.4" fill="#1D221E"/>
+      <text x="74" y="16" font-family="Overpass Mono, monospace" font-size="4" fill="#3D5634">recorrido diseñado</text>
+      <text x="96" y="46" font-family="Overpass Mono, monospace" font-size="4" fill="#7A5530">recorrido real</text></svg>`;
+  }
+
+  /* ----- B: señales ----- */
+  const bs = document.querySelector('[data-bsigns]');
+  if (bs){
+    const C='#F3F2EC', Y='#F0B323';
+    const signs = [
+      [`<svg viewBox="0 0 36 22" height="30" aria-hidden="true"><rect width="36" height="9" fill="${C}"/><rect y="13" width="36" height="9" fill="${Y}"/></svg>`,'Seguí','paso del plan · viñeta'],
+      [`<svg viewBox="0 0 40 30" height="30" aria-hidden="true"><path d="M0 4.5 H24 L34 18" stroke="${C}" stroke-width="9" fill="none" stroke-linejoin="miter"/><path d="M0 17.5 H17 L25 29" stroke="${Y}" stroke-width="9" fill="none"/></svg>`,'Girá','decisión · cambio de rumbo'],
+      [`<svg viewBox="0 0 30 30" height="30" aria-hidden="true"><path d="M3 3 L27 27" stroke="${C}" stroke-width="7"/><path d="M27 3 L3 27" stroke="${Y}" stroke-width="7"/></svg>`,'Por acá no','riesgo · lo que no hacer'],
+      [`<svg viewBox="0 0 36 22" height="30" aria-hidden="true"><rect width="36" height="9" fill="${Y}"/><rect y="13" width="36" height="9" fill="${Y}"/></svg>`,'Llegaste','resultado · objetivo cumplido'],
+    ];
+    bs.innerHTML = signs.map(s=>`<figure>${s[0]}<figcaption>${s[1]}<small>${s[2]}</small></figcaption></figure>`).join('');
+  }
+
+  /* ----- aplicaciones ----- */
+  const apps = {
+    'A-card': `<div style="position:absolute;inset:0;background:#3D5634;display:grid;align-content:space-between;padding:7%">
+        <div style="font-size:clamp(20px,6vw,30px)">${lock('A',{dataset:{size:'1em',ink:'#D7D8D2',sym:'#D7D8D2',cut:'#C08A55'}})}</div>
+        <div style="font-family:'Newsreader',serif;color:#D7D8D2;font-size:clamp(12px,3.4vw,15px);line-height:1.3;max-width:24ch">Investigación de mercado, desarrollo comercial y automatización.</div></div>`,
+    'A-post': `<div style="position:absolute;inset:0;background:#D7D8D2;padding:8%;display:grid;align-content:space-between">
+        <svg viewBox="0 0 100 60" style="position:absolute;inset:0;width:100%;height:100%" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 C 45 58, 72 44, 100 0" stroke="#A0703F" stroke-width="2.4" fill="none" stroke-dasharray="0.1 3" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+        <div class="label" style="color:#3D5634;position:relative">Líneas de deseo · 01</div>
+        <div style="position:relative;font-family:'Archivo',sans-serif;font-stretch:112%;font-weight:640;color:#1D221E;font-size:clamp(22px,6.5vw,34px);line-height:1.02;letter-spacing:-.015em;max-width:12ch">¿Por dónde llegan realmente tus clientes?</div>
+        <div style="position:relative;font-size:16px">${lock('A',{dataset:{size:'1em',ink:'#1D221E',sym:'#3D5634'}})}</div></div>`,
+    'B-card': `<div style="position:absolute;inset:0;background:#24221F;color:#F3F2EC;display:grid;grid-template-columns:auto 1fr;gap:7%;padding:8%">
+        <svg viewBox="0 0 9 60" style="height:100%;width:auto" aria-hidden="true"><rect width="9" height="27" fill="#F3F2EC"/><rect y="33" width="9" height="27" fill="#F0B323"/></svg>
+        <div style="display:grid;align-content:space-between;font-family:'Overpass',sans-serif;min-width:0">
+          <div><div style="font-weight:800;font-size:clamp(17px,4.6vw,22px);line-height:1.1">Tu nombre</div><div style="font-size:clamp(12px,3.2vw,14px);color:#B9B6AD">Desarrollo comercial</div></div>
+          <div style="font-family:'Overpass Mono',monospace;font-size:clamp(10px,2.8vw,12px);line-height:1.6;color:#F3F2EC">hola@senda.com.ar<br>+54 9 11 0000 0000</div>
+        </div></div>`,
+    'B-cover': `<div style="position:absolute;inset:0;background:#F3F2EC;color:#24221F;padding:10% 9%;display:grid;grid-template-rows:auto 1fr auto;font-family:'Overpass',sans-serif">
+        <div style="font-size:15px">${lock('B',{dataset:{size:'1em',ink:'#24221F',top:'#24221F'}})}</div>
+        <div style="align-self:center;display:grid;gap:10px">
+          <div style="font-family:'Overpass Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#5C5A54">Propuesta · octubre 2026</div>
+          <div style="font-weight:900;font-size:clamp(22px,6vw,30px);line-height:1">Diagnóstico de líneas de deseo</div>
+          <div style="font-size:13px;line-height:1.4;color:#5C5A54">Investigación de los canales por donde llegan y se pierden los clientes.</div>
+        </div>
+        <div style="display:grid;gap:7px;font-size:12px;font-weight:600">
+          ${['Relevamiento','Ruta comercial','Automatización'].map((s,i)=>`<div style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 36 22" width="22" aria-hidden="true"><rect width="36" height="9" fill="#24221F"/><rect y="13" width="36" height="9" fill="${i===2?'#24221F':'#F0B323'}"/></svg>${i+1}. ${s}</div>`).join('')}
+        </div></div>`,
+    'C-post': `<div style="position:absolute;inset:0;background:#ECEEEA;color:#2B2A2E;padding:8%;display:grid;grid-template-rows:auto 1fr auto;gap:6%">
+        <div style="font-family:'Alegreya SC',serif;font-weight:700;font-size:clamp(20px,5.6vw,28px);line-height:1.1;letter-spacing:.02em;color:#22397F">Cinco fuentes,<br>un rumbo</div>
+        <svg viewBox="0 0 100 52" style="width:100%;height:100%" aria-label="Gráfico de barras apiladas con forma de apacheta">
+          ${[[0,44,62,'Encuestas'],[6,33,50,'Entrevistas'],[2,22,46,'Datos de venta'],[10,11,32,'Competencia'],[16,0,16,'Tu equipo']].map((s,i)=>`<rect x="${s[0]}" y="${s[1]}" width="${s[2]}" height="8" rx="4" fill="${i===4?'#B9842F':'#22397F'}"/><text x="${s[0]+s[2]+2}" y="${s[1]+6}" font-family="Alegreya Sans, sans-serif" font-size="4.6" fill="#2B2A2E">${s[3]}</text>`).join('')}
+        </svg>
+        <div style="font-size:15px">${lock('C',{dataset:{size:'1em',ink:'#22397F',sym:'#22397F',top:'#B9842F'}})}</div></div>`,
+    'C-card': `<div style="position:absolute;inset:0;background:#22397F;display:grid;place-items:center">
+        <div style="font-size:clamp(22px,6vw,30px)">${lock('C',{dataset:{size:'1em',ink:'#ECEEEA',sym:'#ECEEEA',top:'#D9C27A'}})}</div></div>`,
+  };
+  document.querySelectorAll('[data-app]').forEach(el=>{ el.innerHTML = apps[el.dataset.app] || ''; });
+})();
+</script>
