@@ -72,6 +72,14 @@ Elegí uno. Decí por qué, qué se pierde con los otros y qué habría que vali
 ### 6. Manual
 Cuando el cliente elige, documentá: concepto, logo y construcción, área de resguardo, tamaños mínimos, usos incorrectos, paleta con roles, tipografía con escala, sistema gráfico, tono de voz en 5 reglas, plantillas base.
 
+## Cuando el cliente trae referencias
+
+Las referencias y los rechazos del cliente mandan sobre tu criterio y sobre la lista negra de abajo. Si el cliente pide algo que figura ahí, lo hacés.
+- Leé el principio, no la superficie. Anotá qué tienen en común las referencias (ej.: "monograma geométrico, corte diagonal, espacio negativo, duotonos planos, grotesca extendida") y diseñá desde eso.
+- No copies. Cada propuesta tiene que poder distinguirse de la referencia puesta al lado, y decí cuál de tus opciones quedó más cerca de una referencia y por qué eso es un riesgo.
+- Conectá la forma pedida con la idea de la marca (ej.: en Senda, el corte entre las dos mitades de la S es la senda).
+- Registrá las preferencias en `marca/brief.md` para no volver a proponer lo rechazado.
+
 ## Lista negra (no usar salvo que el cliente lo pida explícitamente)
 
 Clichés de rubro "consultora / estrategia / IA":

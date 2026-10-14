@@ -35,6 +35,15 @@ Azul corporativo + gris, flechas ascendentes, brújulas, montañas, redes de nod
 
 Detalle visual de cada uno en `marca/territorios/`.
 
+## Devolución ronda 1 (rechazada)
+
+- No gustaron los territorios conceptuales (líneas de deseo, marcas de sendero, apacheta): se sintieron poco tecnológicos.
+- **Logo pedido:** monograma con un juego geométrico sobre la **S** (referencias: S partida en dos piezas con canal diagonal; S de dos gotas con cuña).
+- **Color pedido:** duotonos planos, fuertes e identificables, con aire tecnológico (referencias: royal blue + crema, bosque + lima, rojo cálido + azul espacio + blanco).
+- Tipografía de las referencias: grotesca extendida y pesada.
+
+Ronda 2 en `marca/territorios/senda-ronda-2.html`.
+
 ## Preguntas abiertas para vos
 
 1. ¿Quién es el cliente ideal en concreto (rubro, tamaño, cargo de quien contrata)?
