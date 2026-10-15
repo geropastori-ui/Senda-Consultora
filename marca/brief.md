@@ -53,6 +53,17 @@ Ronda 2 en `marca/territorios/senda-ronda-2.html`.
 
 Ronda 4 en `marca/territorios/senda-ronda-4.html`.
 
+## Decisiones (ronda 4)
+
+- S: **Bisel**.
+- Nombre: **Senda** (mayúscula inicial).
+- Descriptor: **CONSULTORA** debajo, en mayúsculas, Red Hat Display Regular, mismo ancho que "Senda".
+- Tipografía: **Red Hat Display** (Red Hat Text para textos largos).
+- Paleta: **Señal**, con dudas sobre el rojo (se lee naranja). En ronda 5 se proponen Rojo puro, Carmín y Granate.
+- La S tiene que medir el alto del bloque de texto completo.
+
+Geometría del logo en `marca/logo/geometria.json`, generada con `marca/herramientas/construir_logo.py`.
+
 ## Preguntas abiertas para vos
 
 1. ¿Quién es el cliente ideal en concreto (rubro, tamaño, cargo de quien contrata)?

@@ -1,0 +1,271 @@
+<title>Senda · Logo final</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Red+Hat+Display:wght@400;500;700;800;900&family=Red+Hat+Text:wght@400;500;600&display=swap">
+<style>
+/* Layout: hoja de construcción de marca. El logo final arriba con sus medidas, después las versiones y al final el rojo como única decisión abierta. Ya usa la tipografía de la marca. */
+:root{
+  --bg:#F6F6F4; --fg:#0F1430; --muted:#5A5F75; --line:#DADBE0; --panel:#FFFFFF; --chip:#EBECEF;
+  --red:#FF4D3A; --orbita:#0F1430; --blanco:#F6F6F4; --acero:#8B91A8; --guide:#1E8CFF;
+  --f-display:"Red Hat Display", system-ui, sans-serif;
+  --f-text:"Red Hat Text", system-ui, sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, Menlo, monospace;
+  --max:1180px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0B0E22; --fg:#ECEDF2; --muted:#9EA3B8; --line:#24284A; --panel:#121634; --chip:#1B1F40; --guide:#4FA8FF; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#0B0E22; --fg:#ECEDF2; --muted:#9EA3B8; --line:#24284A; --panel:#121634; --chip:#1B1F40; --guide:#4FA8FF; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-text);font-size:17px;line-height:1.55;margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--f-display)}
+p{margin:0;max-width:64ch}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+button{font:inherit;color:inherit}
+
+.intro{padding-block:52px 28px;display:grid;gap:18px}
+.intro h1{font-weight:800;font-size:clamp(40px,7vw,80px);line-height:1;letter-spacing:-.015em}
+.intro .lead{font-size:19px}
+.decided{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));border-top:1px solid var(--line)}
+.decided div{padding:12px 14px 12px 0;border-bottom:1px solid var(--line);display:grid;gap:2px;min-width:0}
+.decided b{font-family:var(--f-display);font-weight:700;font-size:18px}
+.decided span.label{font-size:11px}
+
+.section{padding-block:40px;display:grid;gap:20px}
+.section-head{display:grid;gap:6px}
+.section-head h2{font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-.01em}
+
+/* construcción */
+.build{background:var(--panel);border:1px solid var(--line);padding:clamp(24px,6vw,72px) clamp(16px,5vw,64px);display:grid;gap:22px}
+.build-art{position:relative}
+.build-art svg{display:block;width:100%;height:auto;overflow:visible}
+.toggle{justify-self:start;border:1px solid var(--fg);background:transparent;padding:8px 14px;border-radius:999px;cursor:pointer;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.toggle[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.toggle:focus-visible,.pick:focus-visible{outline:2px solid var(--guide);outline-offset:2px}
+.g{display:none}
+.show .g{display:inline}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:14px 28px;margin:0;padding:0;list-style:none;counter-reset:r}
+.rules li{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:15px;counter-increment:r}
+.rules li::before{content:counter(r);font-family:var(--f-mono);font-size:12px;width:24px;height:24px;border:1px solid var(--guide);color:var(--guide);display:grid;place-items:center;border-radius:50%}
+
+/* versiones */
+.versions{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.versions figure{margin:0;display:grid;gap:8px;min-width:0;align-content:start}
+.versions figcaption{display:grid;gap:2px}
+.versions figcaption b{font-family:var(--f-display);font-weight:700;font-size:16px}
+.versions figcaption span{font-size:14px;color:var(--muted)}
+.v-box{display:grid;place-items:center;padding:clamp(24px,4vw,44px);aspect-ratio:16/9;max-width:100%}
+.v-box svg{width:100%;height:auto;max-height:100%}
+.v1{grid-column:span 7}.v2{grid-column:span 5}.v3{grid-column:span 4}.v4{grid-column:span 4}.v5{grid-column:span 4}
+@media (max-width:860px){ .v1,.v2,.v3,.v4,.v5{grid-column:span 12} }
+.minsize{display:flex;flex-wrap:wrap;align-items:flex-end;gap:22px 34px;padding:20px 0;border-top:1px solid var(--line)}
+.minsize figure{margin:0;display:grid;gap:8px}
+.minsize figcaption{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+
+/* rojo */
+.reds{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:12px}
+.red{border:1px solid var(--line);background:var(--panel);padding:0;cursor:pointer;text-align:left;display:grid;grid-template-rows:auto 1fr;min-width:0}
+.red[aria-checked="true"]{outline:2px solid var(--fg);outline-offset:2px}
+.red .chip{height:112px;display:flex;align-items:flex-end;justify-content:space-between;padding:12px 14px;font-family:var(--f-display);font-weight:800;font-size:22px}
+.red .chip small{font-family:var(--f-mono);font-weight:400;font-size:11px}
+.red .info{padding:12px 14px 16px;display:grid;gap:6px;align-content:start}
+.red .info b{font-family:var(--f-display);font-weight:700;font-size:17px}
+.red .info p{font-size:14px;line-height:1.45}
+.red dl{display:grid;grid-template-columns:1fr auto;gap:2px 10px;margin:4px 0 0;font-size:13px}
+.red dt{color:var(--muted)}
+.red dd{margin:0;font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums}
+
+.apps{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.apps figure{margin:0;min-width:0;display:grid;gap:6px;align-content:start}
+.apps figcaption{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.a-web{grid-column:span 8}.a-post{grid-column:span 4}.a-card{grid-column:span 6}.a-card2{grid-column:span 6}
+@media (max-width:860px){ .a-web,.a-post,.a-card,.a-card2{grid-column:span 12} .a-post .frame{max-width:440px} }
+.frame{position:relative;overflow:hidden;max-width:100%;box-shadow:0 1px 2px rgba(0,0,0,.1),0 10px 30px rgba(0,0,0,.08)}
+.r-web{aspect-ratio:16/10}.r-post{aspect-ratio:4/5}.r-card{aspect-ratio:85/55}
+
+.closing{padding-block:48px 80px;display:grid;gap:22px;border-top:1px solid var(--line)}
+.closing h2{font-weight:800;font-size:clamp(28px,4vw,44px)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:28px}
+.cols > div{display:grid;gap:12px;align-content:start;min-width:0}
+.cols ol{margin:0;padding-left:1.2em;display:grid;gap:8px}
+</style>
+
+<header class="wrap intro">
+  <div class="label">Senda Consultora · Identidad · Ronda 5</div>
+  <h1>El logo, construido</h1>
+  <p class="lead">Ya con lo que decidiste. Ajusté las proporciones: la S ahora mide lo mismo que las dos líneas de texto juntas y "CONSULTORA" ocupa exactamente el ancho de "Senda". Las letras están convertidas en vectores, así que el logo se ve igual en cualquier computadora. Queda una sola duda abierta: el tono del rojo.</p>
+  <div class="decided">
+    <div><span class="label">S</span><b>Bisel</b></div>
+    <div><span class="label">Nombre</span><b>Senda</b></div>
+    <div><span class="label">Descriptor</span><b>CONSULTORA, debajo</b></div>
+    <div><span class="label">Tipografía</span><b>Red Hat Display</b></div>
+    <div><span class="label">Paleta</span><b>Señal · rojo a definir</b></div>
+  </div>
+</header>
+
+<section class="wrap section">
+  <div class="section-head"><span class="label">1 · Construcción</span><h2>Logo principal</h2></div>
+  <div class="build">
+    <div class="build-art" id="build"></div>
+    <button class="toggle" id="guides" type="button" aria-pressed="true">Ocultar medidas</button>
+    <ol class="rules">
+      <li><span><b>Alto de la S</b> = desde el tope de la "S" de Senda hasta la base de "CONSULTORA". La S ocupa exactamente el bloque de texto.</span></li>
+      <li><span><b>Espacio entre la S y el texto</b> = el grosor de la barra del Bisel. La misma medida se repite como margen mínimo alrededor del logo.</span></li>
+      <li><span><b>"CONSULTORA"</b> va en Red Hat Display Regular, al 24,5% del tamaño de "Senda", con el interletrado calculado para que mida lo mismo que "Senda" de punta a punta.</span></li>
+      <li><span><b>Separación entre líneas</b>: el espacio entre "Senda" y "CONSULTORA" es el 70% de la altura de las mayúsculas de "CONSULTORA".</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><span class="label">2 · Versiones</span><h2>Una para cada tamaño</h2>
+    <p class="muted">"CONSULTORA" es fina a propósito, así que debajo de 160 px de ancho deja de leerse. Por eso hay una versión sin descriptor y una con la S sola.</p></div>
+  <div class="versions" id="versions"></div>
+  <div class="minsize" id="minsize"></div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><span class="label">3 · El rojo</span><h2>Cuatro tonos para decidir</h2>
+    <p class="muted">El rojo actual tira a naranja porque es cálido y muy claro. Los otros tres van hacia un rojo más puro y más profundo: cuanto más oscuro, más formal y mejor se lee el texto blanco encima. El azul órbita y el blanco no cambian. Elegí uno y todas las piezas de la página se actualizan, incluido el logo de arriba.</p></div>
+  <div class="reds" id="reds" role="radiogroup" aria-label="Tono de rojo"></div>
+  <div class="apps" id="apps"></div>
+</section>
+
+<section class="wrap closing">
+  <span class="label">Mi lectura del rojo</span>
+  <h2>Carmín</h2>
+  <div class="cols">
+    <div>
+      <p>Si el naranja es lo que te hace dudar, <b>Carmín</b> resuelve eso sin perder energía. Es un rojo puro con una punta fría que combina mejor con el azul órbita, y el texto blanco encima se lee bien (5,1:1), cosa que con el rojo actual no pasaba.</p>
+      <p><b>Granate</b> es la opción más formal y elegante, y acompaña muy bien a Red Hat Display. Pero pierde el aire tecnológico y en pantalla se acerca al bordó de las marcas tradicionales.</p>
+      <p>Si después de verlo aplicado ninguno te cierra, puede ser que la duda no sea el tono sino el rojo en sí. En ese caso conviene volver a mirar Bosque con este mismo logo.</p>
+    </div>
+    <div>
+      <span class="label">Siguiente paso: manual de marca</span>
+      <ol>
+        <li>Elegí el rojo (o pedime ver el logo final en Bosque para comparar).</li>
+        <li>Con eso genero los archivos finales del logo en SVG y PNG, en todas las versiones y colores.</li>
+        <li>Y armo el manual: construcción, márgenes, tamaños mínimos, usos incorrectos, paleta, tipografía y plantillas para LinkedIn y presentaciones.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+const LOGO = {"full": {"mark": "M810.74,0.00 L286.14,0.00 L131.15,154.99 L131.15,345.76 L286.14,500.75 L381.52,500.75 L381.52,250.38 L810.74,250.38 Z M0.00,1001.50 L524.60,1001.50 L679.59,846.51 L679.59,655.74 L524.60,500.75 L429.21,500.75 L429.21,751.12 L0.00,751.12 Z", "word": "M1371.11 720Q1286.11 720 1205.11 688.5Q1124.11 657 1061.11 599L1144.11 495Q1206.11 548 1262.11 572.5Q1318.11 597 1381.11 597Q1425.11 597 1457.11 586.5Q1489.11 576 1506.61 556Q1524.11 536 1524.11 509Q1524.11 473 1498.11 453.5Q1472.11 434 1409.11 423L1270.11 400Q1181.11 384 1134.61 336Q1088.11 288 1088.11 212Q1088.11 147 1121.61 99Q1155.11 51 1216.61 25.5Q1278.11 0 1363.11 0Q1440.11 0 1517.11 26Q1594.11 52 1652.11 98L1574.11 206Q1464.11 122 1354.11 122Q1314.11 122 1285.11 132Q1256.11 142 1240.61 159.5Q1225.11 177 1225.11 201Q1225.11 233 1248.61 250.5Q1272.11 268 1325.11 277L1457.11 299Q1562.11 316 1614.61 365.5Q1667.11 415 1667.11 496Q1667.11 564 1630.61 614.5Q1594.11 665 1527.61 692.5Q1461.11 720 1371.11 720Z M2009.11 720Q1931.11 720 1867.61 684Q1804.11 648 1767.11 587Q1730.11 526 1730.11 450Q1730.11 374 1765.61 313Q1801.11 252 1862.11 216Q1923.11 180 1998.11 180Q2073.11 180 2131.11 216.5Q2189.11 253 2222.61 316.5Q2256.11 380 2256.11 460V496H1870.11Q1879.11 527 1899.61 552Q1920.11 577 1950.61 590.5Q1981.11 604 2016.11 604Q2051.11 604 2080.61 593.5Q2110.11 583 2131.11 563L2221.11 645Q2173.11 684 2122.61 702Q2072.11 720 2009.11 720ZM1868.11 398H2121.11Q2114.11 367 2095.61 343.5Q2077.11 320 2051.61 306.5Q2026.11 293 1995.11 293Q1964.11 293 1938.11 306Q1912.11 319 1894.11 342.5Q1876.11 366 1868.11 398Z M2340.11 710V189H2477.11V231Q2537.11 179 2623.11 179Q2684.11 179 2730.61 205Q2777.11 231 2803.11 278Q2829.11 325 2829.11 387V710H2692.11V407Q2692.11 356 2663.11 326.5Q2634.11 297 2584.11 297Q2549.11 297 2522.61 310.5Q2496.11 324 2477.11 349V710Z M3175.11 717Q3101.11 717 3040.61 681.5Q2980.11 646 2945.11 585Q2910.11 524 2910.11 449Q2910.11 374 2945.61 313.5Q2981.11 253 3042.11 217.5Q3103.11 182 3179.11 182Q3217.11 182 3253.61 192.5Q3290.11 203 3321.11 223V10L3458.11 -13V710H3323.11V667Q3259.11 717 3175.11 717ZM3197.11 600Q3235.11 600 3266.61 587Q3298.11 574 3321.11 550V347Q3298.11 324 3266.11 311Q3234.11 298 3197.11 298Q3154.11 298 3119.61 317.5Q3085.11 337 3065.11 371.5Q3045.11 406 3045.11 449Q3045.11 492 3065.11 526Q3085.11 560 3120.11 580Q3155.11 600 3197.11 600Z M3732.11 719Q3676.11 719 3633.11 698.5Q3590.11 678 3566.11 642Q3542.11 606 3542.11 559Q3542.11 484 3598.61 442.5Q3655.11 401 3754.11 401Q3822.11 401 3882.11 422V384Q3882.11 339 3854.11 316.5Q3826.11 294 3772.11 294Q3739.11 294 3701.11 304Q3663.11 314 3613.11 336L3563.11 235Q3625.11 206 3681.61 192.5Q3738.11 179 3795.11 179Q3901.11 179 3959.11 229.5Q4017.11 280 4017.11 372V710H3882.11V673Q3850.11 697 3813.11 708Q3776.11 719 3732.11 719ZM3672.11 556Q3672.11 586 3698.11 603.5Q3724.11 621 3768.11 621Q3801.11 621 3830.11 612.5Q3859.11 604 3882.11 586V511Q3857.11 501 3830.11 496Q3803.11 491 3772.11 491Q3725.11 491 3698.61 508.5Q3672.11 526 3672.11 556Z", "desc": "M1150.05 1004.2Q1131.43 1004.2 1115.26 997.46Q1099.09 990.72 1086.84 978.59Q1074.59 966.47 1067.85 950.42Q1061.11 934.37 1061.11 915.75Q1061.11 897.13 1067.85 881.08Q1074.59 865.03 1086.84 852.91Q1099.09 840.78 1115.26 834.04Q1131.43 827.31 1150.05 827.31Q1163.52 827.31 1175.9 830.61Q1188.27 833.92 1198.93 840.17Q1209.58 846.41 1217.91 855.48L1205.42 868.71Q1195.37 857.19 1180.67 850.95Q1165.97 844.7 1150.05 844.7Q1135.1 844.7 1122.36 850.09Q1109.62 855.48 1100.19 865.16Q1090.76 874.84 1085.49 887.7Q1080.22 900.56 1080.22 915.75Q1080.22 930.7 1085.49 943.68Q1090.76 956.66 1100.31 966.34Q1109.87 976.02 1122.73 981.41Q1135.59 986.8 1150.54 986.8Q1166.46 986.8 1180.92 980.55Q1195.37 974.3 1205.17 963.28L1217.42 976.02Q1208.85 984.84 1198.19 991.21Q1187.53 997.58 1175.28 1000.89Q1163.03 1004.2 1150.05 1004.2Z M1469.89 1004.2Q1451.27 1004.2 1435.22 997.46Q1419.18 990.72 1407.05 978.59Q1394.92 966.47 1388.18 950.42Q1381.45 934.37 1381.45 915.75Q1381.45 897.13 1388.18 881.08Q1394.92 865.03 1407.05 852.91Q1419.18 840.78 1435.22 834.04Q1451.27 827.31 1469.89 827.31Q1488.27 827.31 1504.31 834.04Q1520.36 840.78 1532.49 852.91Q1544.62 865.03 1551.35 881.08Q1558.09 897.13 1558.09 915.75Q1558.09 934.37 1551.35 950.42Q1544.62 966.47 1532.49 978.59Q1520.36 990.72 1504.31 997.46Q1488.27 1004.2 1469.89 1004.2ZM1469.89 986.8Q1484.59 986.8 1497.09 981.41Q1509.58 976.02 1519.01 966.34Q1528.45 956.66 1533.71 943.68Q1538.98 930.7 1538.98 915.75Q1538.98 900.56 1533.71 887.7Q1528.45 874.84 1519.01 865.16Q1509.58 855.48 1497.09 850.09Q1484.59 844.7 1469.89 844.7Q1455.19 844.7 1442.57 850.09Q1429.96 855.48 1420.52 865.16Q1411.09 874.84 1405.82 887.7Q1400.56 900.56 1400.56 915.75Q1400.56 930.7 1405.82 943.68Q1411.09 956.66 1420.52 966.34Q1429.96 976.02 1442.57 981.41Q1455.19 986.8 1469.89 986.8Z M1734.85 1001.5V830H1753.72L1856.86 969.16V830H1874.75V1001.5H1858.09L1752.74 858.66V1001.5Z M2115.21 1003.95Q2094.87 1003.95 2076.25 995.74Q2057.63 987.53 2043.42 972.1L2055.92 959.12Q2069.15 973.33 2084.22 980.43Q2099.28 987.53 2115.94 987.53Q2129.42 987.53 2139.83 983.25Q2150.24 978.96 2156.12 971.24Q2162 963.52 2162 953.73Q2162 940.5 2152.82 933.39Q2143.63 926.28 2122.56 922.86L2097.81 918.93Q2073.07 914.77 2061.31 904.24Q2049.55 893.7 2049.55 875.57Q2049.55 861.36 2057.14 850.58Q2064.74 839.8 2078.34 833.8Q2091.93 827.8 2109.82 827.8Q2127.95 827.8 2145.47 833.68Q2162.98 839.56 2177.44 850.58L2166.66 865.28Q2138.48 843.97 2109.08 843.97Q2096.83 843.97 2087.52 847.76Q2078.21 851.56 2073.07 858.3Q2067.92 865.03 2067.92 874.1Q2067.92 886.11 2076.01 892.48Q2084.09 898.85 2102.71 901.78L2127.21 905.71Q2155.39 910.36 2168.13 921.51Q2180.87 932.65 2180.87 952.75Q2180.87 967.69 2172.54 979.33Q2164.21 990.97 2149.39 997.46Q2134.56 1003.95 2115.21 1003.95Z M2421.09 1004.2Q2399.28 1004.2 2383.36 995.01Q2367.43 985.82 2358.86 968.91Q2350.28 952.01 2350.28 928.98V830H2369.15V928.98Q2369.15 946.62 2375.52 959.61Q2381.89 972.59 2393.65 979.69Q2405.41 986.8 2421.09 986.8Q2437.01 986.8 2448.65 979.69Q2460.29 972.59 2466.66 959.61Q2473.03 946.62 2473.03 928.98V830H2491.89V928.98Q2491.89 952.01 2483.19 968.91Q2474.5 985.82 2458.69 995.01Q2442.89 1004.2 2421.09 1004.2Z M2673.31 1001.5V830H2692.17V984.6H2794.34V1001.5Z M2978.94 1001.5V846.9H2916.96V830H3059.79V846.9H2997.81V1001.5Z M3298.05 1004.2Q3279.43 1004.2 3263.38 997.46Q3247.33 990.72 3235.21 978.59Q3223.08 966.47 3216.34 950.42Q3209.6 934.37 3209.6 915.75Q3209.6 897.13 3216.34 881.08Q3223.08 865.03 3235.21 852.91Q3247.33 840.78 3263.38 834.04Q3279.43 827.31 3298.05 827.31Q3316.42 827.31 3332.47 834.04Q3348.52 840.78 3360.65 852.91Q3372.77 865.03 3379.51 881.08Q3386.25 897.13 3386.25 915.75Q3386.25 934.37 3379.51 950.42Q3372.77 966.47 3360.65 978.59Q3348.52 990.72 3332.47 997.46Q3316.42 1004.2 3298.05 1004.2ZM3298.05 986.8Q3312.75 986.8 3325.24 981.41Q3337.74 976.02 3347.17 966.34Q3356.6 956.66 3361.87 943.68Q3367.14 930.7 3367.14 915.75Q3367.14 900.56 3361.87 887.7Q3356.6 874.84 3347.17 865.16Q3337.74 855.48 3325.24 850.09Q3312.75 844.7 3298.05 844.7Q3283.35 844.7 3270.73 850.09Q3258.11 855.48 3248.68 865.16Q3239.25 874.84 3233.98 887.7Q3228.71 900.56 3228.71 915.75Q3228.71 930.7 3233.98 943.68Q3239.25 956.66 3248.68 966.34Q3258.11 976.02 3270.73 981.41Q3283.35 986.8 3298.05 986.8Z M3563.01 1001.5V830H3636.51Q3653.42 830 3665.91 836.12Q3678.41 842.25 3685.39 853.27Q3692.37 864.3 3692.37 879.25Q3692.37 896.15 3682.45 908.28Q3672.53 920.4 3655.87 925.31L3694.33 1001.5H3673.51L3636.76 927.75H3581.88V1001.5ZM3581.88 911.83H3635.29Q3652.68 911.83 3663.09 903.01Q3673.51 894.19 3673.51 879.25Q3673.51 864.55 3663.09 855.73Q3652.68 846.9 3635.29 846.9H3581.88Z M3852.72 1001.5 3923.77 830H3946.55L4017.11 1001.5H3996.53L3974.97 947.6H3894.12L3872.32 1001.5ZM3900.74 931.43H3968.36L3934.55 847.39Z", "viewBox": [0, -13.0, 4017.11, 1014.5]}, "short": {"mark": "M747.19,0.00 L263.71,0.00 L120.87,142.85 L120.87,318.65 L263.71,461.50 L351.62,461.50 L351.62,230.75 L747.19,230.75 Z M0.00,923.00 L483.48,923.00 L626.32,780.15 L626.32,604.35 L483.48,461.50 L395.57,461.50 L395.57,692.25 L0.00,692.25 Z", "word": "M1287.94 826.5Q1202.94 826.5 1121.94 795Q1040.94 763.5 977.94 705.5L1060.94 601.5Q1122.94 654.5 1178.94 679Q1234.94 703.5 1297.94 703.5Q1341.94 703.5 1373.94 693Q1405.94 682.5 1423.44 662.5Q1440.94 642.5 1440.94 615.5Q1440.94 579.5 1414.94 560Q1388.94 540.5 1325.94 529.5L1186.94 506.5Q1097.94 490.5 1051.44 442.5Q1004.94 394.5 1004.94 318.5Q1004.94 253.5 1038.44 205.5Q1071.94 157.5 1133.44 132Q1194.94 106.5 1279.94 106.5Q1356.94 106.5 1433.94 132.5Q1510.94 158.5 1568.94 204.5L1490.94 312.5Q1380.94 228.5 1270.94 228.5Q1230.94 228.5 1201.94 238.5Q1172.94 248.5 1157.44 266Q1141.94 283.5 1141.94 307.5Q1141.94 339.5 1165.44 357Q1188.94 374.5 1241.94 383.5L1373.94 405.5Q1478.94 422.5 1531.44 472Q1583.94 521.5 1583.94 602.5Q1583.94 670.5 1547.44 721Q1510.94 771.5 1444.44 799Q1377.94 826.5 1287.94 826.5Z M1925.94 826.5Q1847.94 826.5 1784.44 790.5Q1720.94 754.5 1683.94 693.5Q1646.94 632.5 1646.94 556.5Q1646.94 480.5 1682.44 419.5Q1717.94 358.5 1778.94 322.5Q1839.94 286.5 1914.94 286.5Q1989.94 286.5 2047.94 323Q2105.94 359.5 2139.44 423Q2172.94 486.5 2172.94 566.5V602.5H1786.94Q1795.94 633.5 1816.44 658.5Q1836.94 683.5 1867.44 697Q1897.94 710.5 1932.94 710.5Q1967.94 710.5 1997.44 700Q2026.94 689.5 2047.94 669.5L2137.94 751.5Q2089.94 790.5 2039.44 808.5Q1988.94 826.5 1925.94 826.5ZM1784.94 504.5H2037.94Q2030.94 473.5 2012.44 450Q1993.94 426.5 1968.44 413Q1942.94 399.5 1911.94 399.5Q1880.94 399.5 1854.94 412.5Q1828.94 425.5 1810.94 449Q1792.94 472.5 1784.94 504.5Z M2256.94 816.5V295.5H2393.94V337.5Q2453.94 285.5 2539.94 285.5Q2600.94 285.5 2647.44 311.5Q2693.94 337.5 2719.94 384.5Q2745.94 431.5 2745.94 493.5V816.5H2608.94V513.5Q2608.94 462.5 2579.94 433Q2550.94 403.5 2500.94 403.5Q2465.94 403.5 2439.44 417Q2412.94 430.5 2393.94 455.5V816.5Z M3091.94 823.5Q3017.94 823.5 2957.44 788Q2896.94 752.5 2861.94 691.5Q2826.94 630.5 2826.94 555.5Q2826.94 480.5 2862.44 420Q2897.94 359.5 2958.94 324Q3019.94 288.5 3095.94 288.5Q3133.94 288.5 3170.44 299Q3206.94 309.5 3237.94 329.5V116.5L3374.94 93.5V816.5H3239.94V773.5Q3175.94 823.5 3091.94 823.5ZM3113.94 706.5Q3151.94 706.5 3183.44 693.5Q3214.94 680.5 3237.94 656.5V453.5Q3214.94 430.5 3182.94 417.5Q3150.94 404.5 3113.94 404.5Q3070.94 404.5 3036.44 424Q3001.94 443.5 2981.94 478Q2961.94 512.5 2961.94 555.5Q2961.94 598.5 2981.94 632.5Q3001.94 666.5 3036.94 686.5Q3071.94 706.5 3113.94 706.5Z M3648.94 825.5Q3592.94 825.5 3549.94 805Q3506.94 784.5 3482.94 748.5Q3458.94 712.5 3458.94 665.5Q3458.94 590.5 3515.44 549Q3571.94 507.5 3670.94 507.5Q3738.94 507.5 3798.94 528.5V490.5Q3798.94 445.5 3770.94 423Q3742.94 400.5 3688.94 400.5Q3655.94 400.5 3617.94 410.5Q3579.94 420.5 3529.94 442.5L3479.94 341.5Q3541.94 312.5 3598.44 299Q3654.94 285.5 3711.94 285.5Q3817.94 285.5 3875.94 336Q3933.94 386.5 3933.94 478.5V816.5H3798.94V779.5Q3766.94 803.5 3729.94 814.5Q3692.94 825.5 3648.94 825.5ZM3588.94 662.5Q3588.94 692.5 3614.94 710Q3640.94 727.5 3684.94 727.5Q3717.94 727.5 3746.94 719Q3775.94 710.5 3798.94 692.5V617.5Q3773.94 607.5 3746.94 602.5Q3719.94 597.5 3688.94 597.5Q3641.94 597.5 3615.44 615Q3588.94 632.5 3588.94 662.5Z", "viewBox": [0, 0, 3933.94, 923.0]}, "vertical": {"mark": "M1894.70,0.00 L1355.44,0.00 L1196.11,159.33 L1196.11,355.42 L1355.44,514.75 L1453.49,514.75 L1453.49,257.38 L1894.70,257.38 Z M1061.30,1029.50 L1600.56,1029.50 L1759.89,870.17 L1759.89,674.08 L1600.56,514.75 L1502.51,514.75 L1502.51,772.12 L1061.30,772.12 Z", "word": "M310 2058.35Q225 2058.35 144 2026.85Q63 1995.35 0 1937.35L83 1833.35Q145 1886.35 201 1910.85Q257 1935.35 320 1935.35Q364 1935.35 396 1924.85Q428 1914.35 445.5 1894.35Q463 1874.35 463 1847.35Q463 1811.35 437 1791.85Q411 1772.35 348 1761.35L209 1738.35Q120 1722.35 73.5 1674.35Q27 1626.35 27 1550.35Q27 1485.35 60.5 1437.35Q94 1389.35 155.5 1363.85Q217 1338.35 302 1338.35Q379 1338.35 456 1364.35Q533 1390.35 591 1436.35L513 1544.35Q403 1460.35 293 1460.35Q253 1460.35 224 1470.35Q195 1480.35 179.5 1497.85Q164 1515.35 164 1539.35Q164 1571.35 187.5 1588.85Q211 1606.35 264 1615.35L396 1637.35Q501 1654.35 553.5 1703.85Q606 1753.35 606 1834.35Q606 1902.35 569.5 1952.85Q533 2003.35 466.5 2030.85Q400 2058.35 310 2058.35Z M948 2058.35Q870 2058.35 806.5 2022.35Q743 1986.35 706 1925.35Q669 1864.35 669 1788.35Q669 1712.35 704.5 1651.35Q740 1590.35 801 1554.35Q862 1518.35 937 1518.35Q1012 1518.35 1070 1554.85Q1128 1591.35 1161.5 1654.85Q1195 1718.35 1195 1798.35V1834.35H809Q818 1865.35 838.5 1890.35Q859 1915.35 889.5 1928.85Q920 1942.35 955 1942.35Q990 1942.35 1019.5 1931.85Q1049 1921.35 1070 1901.35L1160 1983.35Q1112 2022.35 1061.5 2040.35Q1011 2058.35 948 2058.35ZM807 1736.35H1060Q1053 1705.35 1034.5 1681.85Q1016 1658.35 990.5 1644.85Q965 1631.35 934 1631.35Q903 1631.35 877 1644.35Q851 1657.35 833 1680.85Q815 1704.35 807 1736.35Z M1279 2048.35V1527.35H1416V1569.35Q1476 1517.35 1562 1517.35Q1623 1517.35 1669.5 1543.35Q1716 1569.35 1742 1616.35Q1768 1663.35 1768 1725.35V2048.35H1631V1745.35Q1631 1694.35 1602 1664.85Q1573 1635.35 1523 1635.35Q1488 1635.35 1461.5 1648.85Q1435 1662.35 1416 1687.35V2048.35Z M2114 2055.35Q2040 2055.35 1979.5 2019.85Q1919 1984.35 1884 1923.35Q1849 1862.35 1849 1787.35Q1849 1712.35 1884.5 1651.85Q1920 1591.35 1981 1555.85Q2042 1520.35 2118 1520.35Q2156 1520.35 2192.5 1530.85Q2229 1541.35 2260 1561.35V1348.35L2397 1325.35V2048.35H2262V2005.35Q2198 2055.35 2114 2055.35ZM2136 1938.35Q2174 1938.35 2205.5 1925.35Q2237 1912.35 2260 1888.35V1685.35Q2237 1662.35 2205 1649.35Q2173 1636.35 2136 1636.35Q2093 1636.35 2058.5 1655.85Q2024 1675.35 2004 1709.85Q1984 1744.35 1984 1787.35Q1984 1830.35 2004 1864.35Q2024 1898.35 2059 1918.35Q2094 1938.35 2136 1938.35Z M2671 2057.35Q2615 2057.35 2572 2036.85Q2529 2016.35 2505 1980.35Q2481 1944.35 2481 1897.35Q2481 1822.35 2537.5 1780.85Q2594 1739.35 2693 1739.35Q2761 1739.35 2821 1760.35V1722.35Q2821 1677.35 2793 1654.85Q2765 1632.35 2711 1632.35Q2678 1632.35 2640 1642.35Q2602 1652.35 2552 1674.35L2502 1573.35Q2564 1544.35 2620.5 1530.85Q2677 1517.35 2734 1517.35Q2840 1517.35 2898 1567.85Q2956 1618.35 2956 1710.35V2048.35H2821V2011.35Q2789 2035.35 2752 2046.35Q2715 2057.35 2671 2057.35ZM2611 1894.35Q2611 1924.35 2637 1941.85Q2663 1959.35 2707 1959.35Q2740 1959.35 2769 1950.85Q2798 1942.35 2821 1924.35V1849.35Q2796 1839.35 2769 1834.35Q2742 1829.35 2711 1829.35Q2664 1829.35 2637.5 1846.85Q2611 1864.35 2611 1894.35Z", "desc": "M88.94 2342.55Q70.31 2342.55 54.14 2335.81Q37.98 2329.07 25.73 2316.94Q13.47 2304.82 6.74 2288.77Q0 2272.72 0 2254.1Q0 2235.48 6.74 2219.43Q13.47 2203.38 25.73 2191.26Q37.98 2179.13 54.14 2172.39Q70.31 2165.65 88.94 2165.65Q102.41 2165.65 114.78 2168.96Q127.16 2172.27 137.81 2178.52Q148.47 2184.76 156.8 2193.83L144.31 2207.06Q134.26 2195.55 119.56 2189.3Q104.86 2183.05 88.94 2183.05Q73.99 2183.05 61.25 2188.44Q48.51 2193.83 39.08 2203.51Q29.64 2213.18 24.38 2226.05Q19.11 2238.91 19.11 2254.1Q19.11 2269.05 24.38 2282.03Q29.64 2295.01 39.2 2304.69Q48.75 2314.37 61.62 2319.76Q74.48 2325.15 89.42 2325.15Q105.35 2325.15 119.8 2318.9Q134.26 2312.65 144.06 2301.63L156.31 2314.37Q147.73 2323.19 137.08 2329.56Q126.42 2335.93 114.17 2339.24Q101.92 2342.55 88.94 2342.55Z M408.78 2342.55Q390.16 2342.55 374.11 2335.81Q358.06 2329.07 345.93 2316.94Q333.81 2304.82 327.07 2288.77Q320.33 2272.72 320.33 2254.1Q320.33 2235.48 327.07 2219.43Q333.81 2203.38 345.93 2191.26Q358.06 2179.13 374.11 2172.39Q390.16 2165.65 408.78 2165.65Q427.15 2165.65 443.2 2172.39Q459.25 2179.13 471.37 2191.26Q483.5 2203.38 490.24 2219.43Q496.98 2235.48 496.98 2254.1Q496.98 2272.72 490.24 2288.77Q483.5 2304.82 471.37 2316.94Q459.25 2329.07 443.2 2335.81Q427.15 2342.55 408.78 2342.55ZM408.78 2325.15Q423.48 2325.15 435.97 2319.76Q448.47 2314.37 457.9 2304.69Q467.33 2295.01 472.6 2282.03Q477.87 2269.05 477.87 2254.1Q477.87 2238.91 472.6 2226.05Q467.33 2213.18 457.9 2203.51Q448.47 2193.83 435.97 2188.44Q423.48 2183.05 408.78 2183.05Q394.08 2183.05 381.46 2188.44Q368.84 2193.83 359.41 2203.51Q349.98 2213.18 344.71 2226.05Q339.44 2238.91 339.44 2254.1Q339.44 2269.05 344.71 2282.03Q349.98 2295.01 359.41 2304.69Q368.84 2314.37 381.46 2319.76Q394.08 2325.15 408.78 2325.15Z M673.74 2339.85V2168.35H692.6L795.75 2307.51V2168.35H813.63V2339.85H796.97L691.62 2197.01V2339.85Z M1054.1 2342.3Q1033.76 2342.3 1015.14 2334.09Q996.52 2325.88 982.31 2310.45L994.81 2297.46Q1008.04 2311.67 1023.1 2318.78Q1038.17 2325.88 1054.83 2325.88Q1068.31 2325.88 1078.72 2321.6Q1089.13 2317.31 1095.01 2309.59Q1100.89 2301.88 1100.89 2292.07Q1100.89 2278.84 1091.7 2271.74Q1082.52 2264.63 1061.45 2261.2L1036.7 2257.28Q1011.96 2253.12 1000.2 2242.59Q988.44 2232.05 988.44 2213.92Q988.44 2199.71 996.03 2188.93Q1003.63 2178.15 1017.22 2172.15Q1030.82 2166.14 1048.71 2166.14Q1066.84 2166.14 1084.35 2172.02Q1101.87 2177.9 1116.33 2188.93L1105.55 2203.63Q1077.37 2182.32 1047.97 2182.32Q1035.72 2182.32 1026.41 2186.11Q1017.1 2189.91 1011.96 2196.65Q1006.81 2203.38 1006.81 2212.45Q1006.81 2224.45 1014.9 2230.82Q1022.98 2237.19 1041.6 2240.13L1066.1 2244.05Q1094.28 2248.71 1107.02 2259.86Q1119.76 2271.01 1119.76 2291.09Q1119.76 2306.04 1111.43 2317.68Q1103.1 2329.32 1088.27 2335.81Q1073.45 2342.3 1054.1 2342.3Z M1359.97 2342.55Q1338.17 2342.55 1322.24 2333.36Q1306.32 2324.17 1297.74 2307.27Q1289.17 2290.36 1289.17 2267.33V2168.35H1308.03V2267.33Q1308.03 2284.97 1314.4 2297.95Q1320.77 2310.94 1332.53 2318.05Q1344.29 2325.15 1359.97 2325.15Q1375.9 2325.15 1387.54 2318.05Q1399.17 2310.94 1405.54 2297.95Q1411.91 2284.97 1411.91 2267.33V2168.35H1430.78V2267.33Q1430.78 2290.36 1422.08 2307.27Q1413.38 2324.17 1397.58 2333.36Q1381.78 2342.55 1359.97 2342.55Z M1612.2 2339.85V2168.35H1631.06V2322.94H1733.23V2339.85Z M1917.83 2339.85V2185.26H1855.84V2168.35H1998.68V2185.26H1936.69V2339.85Z M2236.94 2342.55Q2218.32 2342.55 2202.27 2335.81Q2186.22 2329.07 2174.09 2316.94Q2161.97 2304.82 2155.23 2288.77Q2148.49 2272.72 2148.49 2254.1Q2148.49 2235.48 2155.23 2219.43Q2161.97 2203.38 2174.09 2191.26Q2186.22 2179.13 2202.27 2172.39Q2218.32 2165.65 2236.94 2165.65Q2255.31 2165.65 2271.36 2172.39Q2287.41 2179.13 2299.53 2191.26Q2311.66 2203.38 2318.4 2219.43Q2325.14 2235.48 2325.14 2254.1Q2325.14 2272.72 2318.4 2288.77Q2311.66 2304.82 2299.53 2316.94Q2287.41 2329.07 2271.36 2335.81Q2255.31 2342.55 2236.94 2342.55ZM2236.94 2325.15Q2251.64 2325.15 2264.13 2319.76Q2276.63 2314.37 2286.06 2304.69Q2295.49 2295.01 2300.76 2282.03Q2306.03 2269.05 2306.03 2254.1Q2306.03 2238.91 2300.76 2226.05Q2295.49 2213.18 2286.06 2203.51Q2276.63 2193.83 2264.13 2188.44Q2251.64 2183.05 2236.94 2183.05Q2222.24 2183.05 2209.62 2188.44Q2197 2193.83 2187.57 2203.51Q2178.14 2213.18 2172.87 2226.05Q2167.6 2238.91 2167.6 2254.1Q2167.6 2269.05 2172.87 2282.03Q2178.14 2295.01 2187.57 2304.69Q2197 2314.37 2209.62 2319.76Q2222.24 2325.15 2236.94 2325.15Z M2501.9 2339.85V2168.35H2575.4Q2592.3 2168.35 2604.8 2174.47Q2617.29 2180.6 2624.28 2191.62Q2631.26 2202.65 2631.26 2217.59Q2631.26 2234.5 2621.34 2246.63Q2611.41 2258.76 2594.75 2263.65L2633.22 2339.85H2612.39L2575.64 2266.11H2520.76V2339.85ZM2520.76 2250.18H2574.17Q2591.57 2250.18 2601.98 2241.36Q2612.39 2232.54 2612.39 2217.59Q2612.39 2202.89 2601.98 2194.07Q2591.57 2185.26 2574.17 2185.26H2520.76Z M2791.6 2339.85 2862.65 2168.35H2885.44L2956 2339.85H2935.42L2913.86 2285.95H2833.01L2811.2 2339.85ZM2839.62 2269.78H2907.24L2873.43 2185.74Z", "viewBox": [0, 0, 2956.0, 2342.55]}, "rules": {"descSize": 245, "tracking": 147.12, "gapLines": 120, "markHeight": 1001.5, "markGap": 250.38, "inkWidth": 2956.0}};
+(function(){
+  const REDS = {
+    actual:{ name:'Rojo señal', hex:'#FF4D3A', note:'El actual. Cálido y luminoso; es el que se lee como naranja.', white:3.04, navy:5.48 },
+    rojo:{ name:'Rojo puro', hex:'#E5242B', note:'Rojo neutro, sin tirar a naranja ni a rosa. Directo y comercial.', white:4.20, navy:3.97 },
+    carmin:{ name:'Carmín', hex:'#D0103A', note:'Rojo con una punta fría. Combina mejor con el azul órbita y se ve más sofisticado.', white:5.08, navy:3.28 },
+    granate:{ name:'Granate', hex:'#9B1B30', note:'El más profundo y formal. Elegante, pero menos tecnológico.', white:7.48, navy:2.23 },
+  };
+  const ORDER = ['actual','rojo','carmin','granate'];
+  let red = 'carmin';
+  try{ const r = localStorage.getItem('senda-r5'); if (REDS[r]) red = r; }catch(e){}
+
+  const B='#F6F6F4', N='#0F1430';
+  const onRed = k => REDS[k].white >= 4.5 ? B : N;   // color legible sobre el rojo
+
+  function logo(kind, mark, ink, opts={}){
+    const o = LOGO[kind], vb = o.viewBox.join(' ');
+    const desc = o.desc && opts.desc !== false ? `<path d="${o.desc}" fill="${ink}"/>` : '';
+    const title = opts.label || 'Senda Consultora';
+    return `<svg viewBox="${vb}" role="img" aria-label="${title}" ${opts.attrs||''}><path d="${o.mark}" fill="${mark}"/><path d="${o.word}" fill="${ink}"/>${desc}${opts.extra||''}</svg>`;
+  }
+  function mono(color, size){
+    // S sola, en su caja exacta
+    const o = LOGO.full, h = LOGO.rules.markHeight, w = h*68/84;
+    return `<svg viewBox="0 0 ${w} ${h}" ${size?`width="${size*68/84}" height="${size}"`:''} aria-hidden="true"><path d="${o.mark}" fill="${color}"/></svg>`;
+  }
+
+  /* ---------- construcción con medidas ---------- */
+  function guides(){
+    const R = LOGO.rules, H = R.markHeight, mw = H*68/84, gap = R.markGap, x1 = mw+gap, x2 = x1+R.inkWidth;
+    const capD = 700*R.descSize/1000, baseS = H - R.gapLines - capD, topD = H - capD;
+    const c='var(--guide)', sw=5, fs=58;
+    const hl = (y,t)=>`<line x1="-120" y1="${y}" x2="${x2+120}" y2="${y}" stroke="${c}" stroke-width="${sw}" stroke-dasharray="18 14"/><text x="${x2+150}" y="${y+18}" fill="${c}" font-size="${fs}" font-family="Geist Mono, monospace">${t}</text>`;
+    const vl = (x)=>`<line x1="${x}" y1="-160" x2="${x}" y2="${H+160}" stroke="${c}" stroke-width="${sw}" stroke-dasharray="18 14"/>`;
+    const dim = (xa,xb,y,t)=>`<line x1="${xa}" y1="${y}" x2="${xb}" y2="${y}" stroke="${c}" stroke-width="${sw}"/><line x1="${xa}" y1="${y-24}" x2="${xa}" y2="${y+24}" stroke="${c}" stroke-width="${sw}"/><line x1="${xb}" y1="${y-24}" x2="${xb}" y2="${y+24}" stroke="${c}" stroke-width="${sw}"/><text x="${(xa+xb)/2}" y="${y-36}" text-anchor="middle" fill="${c}" font-size="${fs}" font-family="Geist Mono, monospace">${t}</text>`;
+    const vdim = (ya,yb,x,t)=>`<line x1="${x}" y1="${ya}" x2="${x}" y2="${yb}" stroke="${c}" stroke-width="${sw}"/><line x1="${x-24}" y1="${ya}" x2="${x+24}" y2="${ya}" stroke="${c}" stroke-width="${sw}"/><line x1="${x-24}" y1="${yb}" x2="${x+24}" y2="${yb}" stroke="${c}" stroke-width="${sw}"/><text x="${x-40}" y="${(ya+yb)/2+20}" text-anchor="end" fill="${c}" font-size="${fs}" font-family="Geist Mono, monospace">${t}</text>`;
+    return `<g class="g">${hl(0,'tope S')}${hl(baseS,'base Senda')}${hl(topD,'tope CONSULTORA')}${hl(H,'base')}${vl(mw)}${vl(x1)}${vl(x2)}
+      ${dim(mw,x1,-100,'a')}${vdim(0,H*21/84,-60,'a')}${dim(x1,x2,H+120,'mismo ancho')}${vdim(0,H,-260,'1')}</g>`;
+  }
+  function build(){
+    const k = red, vb = LOGO.full.viewBox;
+    const pad = [-520, -260, 1250, 520]; // espacio para las medidas
+    const v = [vb[0]+pad[0], vb[1]+pad[1], vb[2]-pad[0]+pad[2]-vb[0], vb[3]-pad[1]+pad[3]];
+    document.getElementById('build').innerHTML = logo('full', REDS[k].hex, 'var(--fg)', {extra: guides()})
+      .replace(/viewBox="[^"]*"/, `viewBox="${v.join(' ')}"`);
+  }
+  const gb = document.getElementById('guides'), ba = document.getElementById('build');
+  ba.classList.add('show');
+  gb.addEventListener('click', ()=>{ const on = gb.getAttribute('aria-pressed')!=='true'; gb.setAttribute('aria-pressed',on); gb.textContent = on?'Ocultar medidas':'Ver medidas'; ba.classList.toggle('show',on); });
+
+  /* ---------- versiones ---------- */
+  function versions(){
+    const r = REDS[red].hex, on = onRed(red);
+    document.getElementById('versions').innerHTML = `
+      <figure class="v1"><div class="v-box" style="background:${B}">${logo('full', r, N)}</div><figcaption><b>Principal</b><span>Web, propuestas, presentaciones, firma de mail grande.</span></figcaption></figure>
+      <figure class="v2"><div class="v-box" style="background:${N}">${logo('full', r, B)}</div><figcaption><b>Principal en negativo</b><span>Sobre azul órbita, la S mantiene el rojo.</span></figcaption></figure>
+      <figure class="v3"><div class="v-box" style="background:${r}">${logo('short', on, on)}</div><figcaption><b>Corta, sin descriptor</b><span>Encabezados chicos, pie de diapositiva, redes.</span></figcaption></figure>
+      <figure class="v4"><div class="v-box" style="background:${B}">${logo('vertical', r, N).replace('<svg','<svg style="max-width:62%"')}</div><figcaption><b>Vertical</b><span>Formatos cuadrados y altos, portadas, merchandising.</span></figcaption></figure>
+      <figure class="v5"><div class="v-box" style="background:${r}">${mono(on).replace('<svg','<svg style="height:62%;width:auto"')}</div><figcaption><b>Monograma</b><span>Avatar, favicon, ícono de app. La S sola.</span></figcaption></figure>`;
+    document.getElementById('minsize').innerHTML = `
+      <figure><div style="width:160px">${logo('full', r, 'currentColor')}</div><figcaption>Principal · mínimo 160 px / 40 mm</figcaption></figure>
+      <figure><div style="width:96px">${logo('short', r, 'currentColor')}</div><figcaption>Corta · mínimo 96 px / 22 mm</figcaption></figure>
+      <figure><div style="display:flex;gap:10px;align-items:flex-end">${mono(r,32)}${mono(r,16)}</div><figcaption>Monograma · desde 16 px</figcaption></figure>`;
+  }
+
+  /* ---------- rojos ---------- */
+  function reds(){
+    document.getElementById('reds').innerHTML = ORDER.map(k=>{const R=REDS[k], t=onRed(k);
+      return `<button type="button" class="red" role="radio" aria-checked="${red===k}" data-red="${k}">
+        <div class="chip" style="background:${R.hex};color:${t}"><span>Senda</span><small>${R.hex}</small></div>
+        <div class="info"><b>${R.name}</b><p>${R.note}</p>
+          <dl><dt>Texto blanco encima</dt><dd>${R.white.toFixed(2)}:1 ${R.white>=4.5?'· OK':'· solo títulos'}</dd><dt>Texto azul encima</dt><dd>${R.navy.toFixed(2)}:1 ${R.navy>=4.5?'· OK':R.navy>=3?'· solo títulos':'· no'}</dd></dl></div></button>`;}).join('');
+  }
+  document.getElementById('reds').addEventListener('click', e=>{const b=e.target.closest('[data-red]'); if(!b) return; red=b.dataset.red; try{localStorage.setItem('senda-r5',red);}catch(x){} render();});
+
+  function apps(){
+    const r = REDS[red].hex, on = onRed(red);
+    document.getElementById('apps').innerHTML = `
+      <figure class="a-web"><div class="frame r-web" style="background:${B};color:${N}">
+        <div style="position:absolute;inset:0;padding:4% 5%;display:grid;grid-template-rows:auto 1fr auto">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:clamp(10px,1.2vw,13px)">
+            <div style="width:clamp(110px,17vw,190px)">${logo('full', r, N)}</div>
+            <span style="display:flex;gap:2em;align-items:center"><span>Servicios</span><span>Casos</span><span style="background:${r};color:${on};padding:.55em 1.1em;font-weight:600;font-family:var(--f-display)">Agendá una charla</span></span>
+          </div>
+          <div style="align-self:center;display:grid;gap:1em;max-width:80%">
+            <div style="font-family:var(--f-display);font-weight:800;font-size:clamp(22px,3.8vw,48px);line-height:1.02;letter-spacing:-.015em">Estrategia comercial con la precisión de los datos.</div>
+            <div style="font-size:clamp(11px,1.35vw,15px);line-height:1.5;opacity:.8;max-width:46ch">Investigación de mercado, desarrollo comercial y automatización con IA para empresas que quieren crecer con método.</div>
+          </div>
+          <div style="height:5px;display:grid;grid-template-columns:6fr 3fr 1fr;gap:5px"><i style="background:${r}"></i><i style="background:${N}"></i><i style="background:#8B91A8"></i></div>
+        </div></div><figcaption>Portada del sitio web</figcaption></figure>
+      <figure class="a-post"><div class="frame r-post" style="background:${r}">
+        <div style="position:absolute;inset:9%;display:grid;grid-template-rows:auto 1fr auto;color:${on}">
+          <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.85">Investigación de mercado</span>
+          <div style="align-self:center;font-family:var(--f-display);font-weight:800;font-size:clamp(26px,3.3vw,40px);line-height:1.04;letter-spacing:-.01em">Antes de vender más, entendé por qué te compran.</div>
+          <div style="width:44%">${logo('short', on, on)}</div>
+        </div></div><figcaption>Post de LinkedIn · 4:5</figcaption></figure>
+      <figure class="a-card"><div class="frame r-card" style="background:${N}">
+        <div style="position:absolute;inset:0;display:grid;place-items:center"><div style="width:58%">${logo('full', r, B)}</div></div>
+        </div><figcaption>Tarjeta · frente</figcaption></figure>
+      <figure class="a-card2"><div class="frame r-card" style="background:${B};color:${N}">
+        <div style="position:absolute;right:7%;top:12%;height:30%">${mono(r).replace('<svg','<svg style="height:100%;width:auto"')}</div>
+        <div style="position:absolute;left:8%;bottom:11%;display:grid;gap:3px">
+          <span style="font-family:var(--f-display);font-weight:800;font-size:clamp(16px,2.1vw,22px)">Tu nombre</span>
+          <span style="font-size:clamp(11px,1.3vw,14px);opacity:.75">Socio · Desarrollo comercial</span>
+          <span style="font-family:var(--f-mono);font-size:clamp(10px,1.2vw,12px);margin-top:8px">hola@senda.com.ar</span>
+          <span style="font-family:var(--f-mono);font-size:clamp(10px,1.2vw,12px)">+54 9 11 0000 0000</span>
+        </div></div><figcaption>Tarjeta · dorso</figcaption></figure>`;
+  }
+
+  function render(){ build(); versions(); reds(); apps(); }
+  render();
+})();
+</script>

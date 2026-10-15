@@ -1,0 +1,271 @@
+<title>Senda · Logo final</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Red+Hat+Display:wght@400;500;700;800;900&family=Red+Hat+Text:wght@400;500;600&display=swap">
+<style>
+/* Layout: hoja de construcción de marca. El logo final arriba con sus medidas, después las versiones y al final el rojo como única decisión abierta. Ya usa la tipografía de la marca. */
+:root{
+  --bg:#F6F6F4; --fg:#0F1430; --muted:#5A5F75; --line:#DADBE0; --panel:#FFFFFF; --chip:#EBECEF;
+  --red:#FF4D3A; --orbita:#0F1430; --blanco:#F6F6F4; --acero:#8B91A8; --guide:#1E8CFF;
+  --f-display:"Red Hat Display", system-ui, sans-serif;
+  --f-text:"Red Hat Text", system-ui, sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, Menlo, monospace;
+  --max:1180px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0B0E22; --fg:#ECEDF2; --muted:#9EA3B8; --line:#24284A; --panel:#121634; --chip:#1B1F40; --guide:#4FA8FF; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#0B0E22; --fg:#ECEDF2; --muted:#9EA3B8; --line:#24284A; --panel:#121634; --chip:#1B1F40; --guide:#4FA8FF; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-text);font-size:17px;line-height:1.55;margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--f-display)}
+p{margin:0;max-width:64ch}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+button{font:inherit;color:inherit}
+
+.intro{padding-block:52px 28px;display:grid;gap:18px}
+.intro h1{font-weight:800;font-size:clamp(40px,7vw,80px);line-height:1;letter-spacing:-.015em}
+.intro .lead{font-size:19px}
+.decided{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));border-top:1px solid var(--line)}
+.decided div{padding:12px 14px 12px 0;border-bottom:1px solid var(--line);display:grid;gap:2px;min-width:0}
+.decided b{font-family:var(--f-display);font-weight:700;font-size:18px}
+.decided span.label{font-size:11px}
+
+.section{padding-block:40px;display:grid;gap:20px}
+.section-head{display:grid;gap:6px}
+.section-head h2{font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-.01em}
+
+/* construcción */
+.build{background:var(--panel);border:1px solid var(--line);padding:clamp(24px,6vw,72px) clamp(16px,5vw,64px);display:grid;gap:22px}
+.build-art{position:relative}
+.build-art svg{display:block;width:100%;height:auto;overflow:visible}
+.toggle{justify-self:start;border:1px solid var(--fg);background:transparent;padding:8px 14px;border-radius:999px;cursor:pointer;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.toggle[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.toggle:focus-visible,.pick:focus-visible{outline:2px solid var(--guide);outline-offset:2px}
+.g{display:none}
+.show .g{display:inline}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:14px 28px;margin:0;padding:0;list-style:none;counter-reset:r}
+.rules li{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:15px;counter-increment:r}
+.rules li::before{content:counter(r);font-family:var(--f-mono);font-size:12px;width:24px;height:24px;border:1px solid var(--guide);color:var(--guide);display:grid;place-items:center;border-radius:50%}
+
+/* versiones */
+.versions{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.versions figure{margin:0;display:grid;gap:8px;min-width:0;align-content:start}
+.versions figcaption{display:grid;gap:2px}
+.versions figcaption b{font-family:var(--f-display);font-weight:700;font-size:16px}
+.versions figcaption span{font-size:14px;color:var(--muted)}
+.v-box{display:grid;place-items:center;padding:clamp(24px,4vw,44px);aspect-ratio:16/9;max-width:100%}
+.v-box svg{width:100%;height:auto;max-height:100%}
+.v1{grid-column:span 7}.v2{grid-column:span 5}.v3{grid-column:span 4}.v4{grid-column:span 4}.v5{grid-column:span 4}
+@media (max-width:860px){ .v1,.v2,.v3,.v4,.v5{grid-column:span 12} }
+.minsize{display:flex;flex-wrap:wrap;align-items:flex-end;gap:22px 34px;padding:20px 0;border-top:1px solid var(--line)}
+.minsize figure{margin:0;display:grid;gap:8px}
+.minsize figcaption{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+
+/* rojo */
+.reds{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:12px}
+.red{border:1px solid var(--line);background:var(--panel);padding:0;cursor:pointer;text-align:left;display:grid;grid-template-rows:auto 1fr;min-width:0}
+.red[aria-checked="true"]{outline:2px solid var(--fg);outline-offset:2px}
+.red .chip{height:112px;display:flex;align-items:flex-end;justify-content:space-between;padding:12px 14px;font-family:var(--f-display);font-weight:800;font-size:22px}
+.red .chip small{font-family:var(--f-mono);font-weight:400;font-size:11px}
+.red .info{padding:12px 14px 16px;display:grid;gap:6px;align-content:start}
+.red .info b{font-family:var(--f-display);font-weight:700;font-size:17px}
+.red .info p{font-size:14px;line-height:1.45}
+.red dl{display:grid;grid-template-columns:1fr auto;gap:2px 10px;margin:4px 0 0;font-size:13px}
+.red dt{color:var(--muted)}
+.red dd{margin:0;font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums}
+
+.apps{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.apps figure{margin:0;min-width:0;display:grid;gap:6px;align-content:start}
+.apps figcaption{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.a-web{grid-column:span 8}.a-post{grid-column:span 4}.a-card{grid-column:span 6}.a-card2{grid-column:span 6}
+@media (max-width:860px){ .a-web,.a-post,.a-card,.a-card2{grid-column:span 12} .a-post .frame{max-width:440px} }
+.frame{position:relative;overflow:hidden;max-width:100%;box-shadow:0 1px 2px rgba(0,0,0,.1),0 10px 30px rgba(0,0,0,.08)}
+.r-web{aspect-ratio:16/10}.r-post{aspect-ratio:4/5}.r-card{aspect-ratio:85/55}
+
+.closing{padding-block:48px 80px;display:grid;gap:22px;border-top:1px solid var(--line)}
+.closing h2{font-weight:800;font-size:clamp(28px,4vw,44px)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:28px}
+.cols > div{display:grid;gap:12px;align-content:start;min-width:0}
+.cols ol{margin:0;padding-left:1.2em;display:grid;gap:8px}
+</style>
+
+<header class="wrap intro">
+  <div class="label">Senda Consultora · Identidad · Ronda 5</div>
+  <h1>El logo, construido</h1>
+  <p class="lead">Ya con lo que decidiste. Ajusté las proporciones: la S ahora mide lo mismo que las dos líneas de texto juntas y "CONSULTORA" ocupa exactamente el ancho de "Senda". Las letras están convertidas en vectores, así que el logo se ve igual en cualquier computadora. Queda una sola duda abierta: el tono del rojo.</p>
+  <div class="decided">
+    <div><span class="label">S</span><b>Bisel</b></div>
+    <div><span class="label">Nombre</span><b>Senda</b></div>
+    <div><span class="label">Descriptor</span><b>CONSULTORA, debajo</b></div>
+    <div><span class="label">Tipografía</span><b>Red Hat Display</b></div>
+    <div><span class="label">Paleta</span><b>Señal · rojo a definir</b></div>
+  </div>
+</header>
+
+<section class="wrap section">
+  <div class="section-head"><span class="label">1 · Construcción</span><h2>Logo principal</h2></div>
+  <div class="build">
+    <div class="build-art" id="build"></div>
+    <button class="toggle" id="guides" type="button" aria-pressed="true">Ocultar medidas</button>
+    <ol class="rules">
+      <li><span><b>Alto de la S</b> = desde el tope de la "S" de Senda hasta la base de "CONSULTORA". La S ocupa exactamente el bloque de texto.</span></li>
+      <li><span><b>Espacio entre la S y el texto</b> = el grosor de la barra del Bisel. La misma medida se repite como margen mínimo alrededor del logo.</span></li>
+      <li><span><b>"CONSULTORA"</b> va en Red Hat Display Regular, al 24,5% del tamaño de "Senda", con el interletrado calculado para que mida lo mismo que "Senda" de punta a punta.</span></li>
+      <li><span><b>Separación entre líneas</b>: el espacio entre "Senda" y "CONSULTORA" es el 70% de la altura de las mayúsculas de "CONSULTORA".</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><span class="label">2 · Versiones</span><h2>Una para cada tamaño</h2>
+    <p class="muted">"CONSULTORA" es fina a propósito, así que debajo de 160 px de ancho deja de leerse. Por eso hay una versión sin descriptor y una con la S sola.</p></div>
+  <div class="versions" id="versions"></div>
+  <div class="minsize" id="minsize"></div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><span class="label">3 · El rojo</span><h2>Cuatro tonos para decidir</h2>
+    <p class="muted">El rojo actual tira a naranja porque es cálido y muy claro. Los otros tres van hacia un rojo más puro y más profundo: cuanto más oscuro, más formal y mejor se lee el texto blanco encima. El azul órbita y el blanco no cambian. Elegí uno y todas las piezas de la página se actualizan, incluido el logo de arriba.</p></div>
+  <div class="reds" id="reds" role="radiogroup" aria-label="Tono de rojo"></div>
+  <div class="apps" id="apps"></div>
+</section>
+
+<section class="wrap closing">
+  <span class="label">Mi lectura del rojo</span>
+  <h2>Carmín</h2>
+  <div class="cols">
+    <div>
+      <p>Si el naranja es lo que te hace dudar, <b>Carmín</b> resuelve eso sin perder energía. Es un rojo puro con una punta fría que combina mejor con el azul órbita, y el texto blanco encima se lee bien (5,1:1), cosa que con el rojo actual no pasaba.</p>
+      <p><b>Granate</b> es la opción más formal y elegante, y acompaña muy bien a Red Hat Display. Pero pierde el aire tecnológico y en pantalla se acerca al bordó de las marcas tradicionales.</p>
+      <p>Si después de verlo aplicado ninguno te cierra, puede ser que la duda no sea el tono sino el rojo en sí. En ese caso conviene volver a mirar Bosque con este mismo logo.</p>
+    </div>
+    <div>
+      <span class="label">Siguiente paso: manual de marca</span>
+      <ol>
+        <li>Elegí el rojo (o pedime ver el logo final en Bosque para comparar).</li>
+        <li>Con eso genero los archivos finales del logo en SVG y PNG, en todas las versiones y colores.</li>
+        <li>Y armo el manual: construcción, márgenes, tamaños mínimos, usos incorrectos, paleta, tipografía y plantillas para LinkedIn y presentaciones.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+const LOGO = __LOGO__;
+(function(){
+  const REDS = {
+    actual:{ name:'Rojo señal', hex:'#FF4D3A', note:'El actual. Cálido y luminoso; es el que se lee como naranja.', white:3.04, navy:5.48 },
+    rojo:{ name:'Rojo puro', hex:'#E5242B', note:'Rojo neutro, sin tirar a naranja ni a rosa. Directo y comercial.', white:4.20, navy:3.97 },
+    carmin:{ name:'Carmín', hex:'#D0103A', note:'Rojo con una punta fría. Combina mejor con el azul órbita y se ve más sofisticado.', white:5.08, navy:3.28 },
+    granate:{ name:'Granate', hex:'#9B1B30', note:'El más profundo y formal. Elegante, pero menos tecnológico.', white:7.48, navy:2.23 },
+  };
+  const ORDER = ['actual','rojo','carmin','granate'];
+  let red = 'carmin';
+  try{ const r = localStorage.getItem('senda-r5'); if (REDS[r]) red = r; }catch(e){}
+
+  const B='#F6F6F4', N='#0F1430';
+  const onRed = k => REDS[k].white >= 4.5 ? B : N;   // color legible sobre el rojo
+
+  function logo(kind, mark, ink, opts={}){
+    const o = LOGO[kind], vb = o.viewBox.join(' ');
+    const desc = o.desc && opts.desc !== false ? `<path d="${o.desc}" fill="${ink}"/>` : '';
+    const title = opts.label || 'Senda Consultora';
+    return `<svg viewBox="${vb}" role="img" aria-label="${title}" ${opts.attrs||''}><path d="${o.mark}" fill="${mark}"/><path d="${o.word}" fill="${ink}"/>${desc}${opts.extra||''}</svg>`;
+  }
+  function mono(color, size){
+    // S sola, en su caja exacta
+    const o = LOGO.full, h = LOGO.rules.markHeight, w = h*68/84;
+    return `<svg viewBox="0 0 ${w} ${h}" ${size?`width="${size*68/84}" height="${size}"`:''} aria-hidden="true"><path d="${o.mark}" fill="${color}"/></svg>`;
+  }
+
+  /* ---------- construcción con medidas ---------- */
+  function guides(){
+    const R = LOGO.rules, H = R.markHeight, mw = H*68/84, gap = R.markGap, x1 = mw+gap, x2 = x1+R.inkWidth;
+    const capD = 700*R.descSize/1000, baseS = H - R.gapLines - capD, topD = H - capD;
+    const c='var(--guide)', sw=5, fs=58;
+    const hl = (y,t)=>`<line x1="-120" y1="${y}" x2="${x2+120}" y2="${y}" stroke="${c}" stroke-width="${sw}" stroke-dasharray="18 14"/><text x="${x2+150}" y="${y+18}" fill="${c}" font-size="${fs}" font-family="Geist Mono, monospace">${t}</text>`;
+    const vl = (x)=>`<line x1="${x}" y1="-160" x2="${x}" y2="${H+160}" stroke="${c}" stroke-width="${sw}" stroke-dasharray="18 14"/>`;
+    const dim = (xa,xb,y,t)=>`<line x1="${xa}" y1="${y}" x2="${xb}" y2="${y}" stroke="${c}" stroke-width="${sw}"/><line x1="${xa}" y1="${y-24}" x2="${xa}" y2="${y+24}" stroke="${c}" stroke-width="${sw}"/><line x1="${xb}" y1="${y-24}" x2="${xb}" y2="${y+24}" stroke="${c}" stroke-width="${sw}"/><text x="${(xa+xb)/2}" y="${y-36}" text-anchor="middle" fill="${c}" font-size="${fs}" font-family="Geist Mono, monospace">${t}</text>`;
+    const vdim = (ya,yb,x,t)=>`<line x1="${x}" y1="${ya}" x2="${x}" y2="${yb}" stroke="${c}" stroke-width="${sw}"/><line x1="${x-24}" y1="${ya}" x2="${x+24}" y2="${ya}" stroke="${c}" stroke-width="${sw}"/><line x1="${x-24}" y1="${yb}" x2="${x+24}" y2="${yb}" stroke="${c}" stroke-width="${sw}"/><text x="${x-40}" y="${(ya+yb)/2+20}" text-anchor="end" fill="${c}" font-size="${fs}" font-family="Geist Mono, monospace">${t}</text>`;
+    return `<g class="g">${hl(0,'tope S')}${hl(baseS,'base Senda')}${hl(topD,'tope CONSULTORA')}${hl(H,'base')}${vl(mw)}${vl(x1)}${vl(x2)}
+      ${dim(mw,x1,-100,'a')}${vdim(0,H*21/84,-60,'a')}${dim(x1,x2,H+120,'mismo ancho')}${vdim(0,H,-260,'1')}</g>`;
+  }
+  function build(){
+    const k = red, vb = LOGO.full.viewBox;
+    const pad = [-520, -260, 1250, 520]; // espacio para las medidas
+    const v = [vb[0]+pad[0], vb[1]+pad[1], vb[2]-pad[0]+pad[2]-vb[0], vb[3]-pad[1]+pad[3]];
+    document.getElementById('build').innerHTML = logo('full', REDS[k].hex, 'var(--fg)', {extra: guides()})
+      .replace(/viewBox="[^"]*"/, `viewBox="${v.join(' ')}"`);
+  }
+  const gb = document.getElementById('guides'), ba = document.getElementById('build');
+  ba.classList.add('show');
+  gb.addEventListener('click', ()=>{ const on = gb.getAttribute('aria-pressed')!=='true'; gb.setAttribute('aria-pressed',on); gb.textContent = on?'Ocultar medidas':'Ver medidas'; ba.classList.toggle('show',on); });
+
+  /* ---------- versiones ---------- */
+  function versions(){
+    const r = REDS[red].hex, on = onRed(red);
+    document.getElementById('versions').innerHTML = `
+      <figure class="v1"><div class="v-box" style="background:${B}">${logo('full', r, N)}</div><figcaption><b>Principal</b><span>Web, propuestas, presentaciones, firma de mail grande.</span></figcaption></figure>
+      <figure class="v2"><div class="v-box" style="background:${N}">${logo('full', r, B)}</div><figcaption><b>Principal en negativo</b><span>Sobre azul órbita, la S mantiene el rojo.</span></figcaption></figure>
+      <figure class="v3"><div class="v-box" style="background:${r}">${logo('short', on, on)}</div><figcaption><b>Corta, sin descriptor</b><span>Encabezados chicos, pie de diapositiva, redes.</span></figcaption></figure>
+      <figure class="v4"><div class="v-box" style="background:${B}">${logo('vertical', r, N).replace('<svg','<svg style="max-width:62%"')}</div><figcaption><b>Vertical</b><span>Formatos cuadrados y altos, portadas, merchandising.</span></figcaption></figure>
+      <figure class="v5"><div class="v-box" style="background:${r}">${mono(on).replace('<svg','<svg style="height:62%;width:auto"')}</div><figcaption><b>Monograma</b><span>Avatar, favicon, ícono de app. La S sola.</span></figcaption></figure>`;
+    document.getElementById('minsize').innerHTML = `
+      <figure><div style="width:160px">${logo('full', r, 'currentColor')}</div><figcaption>Principal · mínimo 160 px / 40 mm</figcaption></figure>
+      <figure><div style="width:96px">${logo('short', r, 'currentColor')}</div><figcaption>Corta · mínimo 96 px / 22 mm</figcaption></figure>
+      <figure><div style="display:flex;gap:10px;align-items:flex-end">${mono(r,32)}${mono(r,16)}</div><figcaption>Monograma · desde 16 px</figcaption></figure>`;
+  }
+
+  /* ---------- rojos ---------- */
+  function reds(){
+    document.getElementById('reds').innerHTML = ORDER.map(k=>{const R=REDS[k], t=onRed(k);
+      return `<button type="button" class="red" role="radio" aria-checked="${red===k}" data-red="${k}">
+        <div class="chip" style="background:${R.hex};color:${t}"><span>Senda</span><small>${R.hex}</small></div>
+        <div class="info"><b>${R.name}</b><p>${R.note}</p>
+          <dl><dt>Texto blanco encima</dt><dd>${R.white.toFixed(2)}:1 ${R.white>=4.5?'· OK':'· solo títulos'}</dd><dt>Texto azul encima</dt><dd>${R.navy.toFixed(2)}:1 ${R.navy>=4.5?'· OK':R.navy>=3?'· solo títulos':'· no'}</dd></dl></div></button>`;}).join('');
+  }
+  document.getElementById('reds').addEventListener('click', e=>{const b=e.target.closest('[data-red]'); if(!b) return; red=b.dataset.red; try{localStorage.setItem('senda-r5',red);}catch(x){} render();});
+
+  function apps(){
+    const r = REDS[red].hex, on = onRed(red);
+    document.getElementById('apps').innerHTML = `
+      <figure class="a-web"><div class="frame r-web" style="background:${B};color:${N}">
+        <div style="position:absolute;inset:0;padding:4% 5%;display:grid;grid-template-rows:auto 1fr auto">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:clamp(10px,1.2vw,13px)">
+            <div style="width:clamp(110px,17vw,190px)">${logo('full', r, N)}</div>
+            <span style="display:flex;gap:2em;align-items:center"><span>Servicios</span><span>Casos</span><span style="background:${r};color:${on};padding:.55em 1.1em;font-weight:600;font-family:var(--f-display)">Agendá una charla</span></span>
+          </div>
+          <div style="align-self:center;display:grid;gap:1em;max-width:80%">
+            <div style="font-family:var(--f-display);font-weight:800;font-size:clamp(22px,3.8vw,48px);line-height:1.02;letter-spacing:-.015em">Estrategia comercial con la precisión de los datos.</div>
+            <div style="font-size:clamp(11px,1.35vw,15px);line-height:1.5;opacity:.8;max-width:46ch">Investigación de mercado, desarrollo comercial y automatización con IA para empresas que quieren crecer con método.</div>
+          </div>
+          <div style="height:5px;display:grid;grid-template-columns:6fr 3fr 1fr;gap:5px"><i style="background:${r}"></i><i style="background:${N}"></i><i style="background:#8B91A8"></i></div>
+        </div></div><figcaption>Portada del sitio web</figcaption></figure>
+      <figure class="a-post"><div class="frame r-post" style="background:${r}">
+        <div style="position:absolute;inset:9%;display:grid;grid-template-rows:auto 1fr auto;color:${on}">
+          <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.85">Investigación de mercado</span>
+          <div style="align-self:center;font-family:var(--f-display);font-weight:800;font-size:clamp(26px,3.3vw,40px);line-height:1.04;letter-spacing:-.01em">Antes de vender más, entendé por qué te compran.</div>
+          <div style="width:44%">${logo('short', on, on)}</div>
+        </div></div><figcaption>Post de LinkedIn · 4:5</figcaption></figure>
+      <figure class="a-card"><div class="frame r-card" style="background:${N}">
+        <div style="position:absolute;inset:0;display:grid;place-items:center"><div style="width:58%">${logo('full', r, B)}</div></div>
+        </div><figcaption>Tarjeta · frente</figcaption></figure>
+      <figure class="a-card2"><div class="frame r-card" style="background:${B};color:${N}">
+        <div style="position:absolute;right:7%;top:12%;height:30%">${mono(r).replace('<svg','<svg style="height:100%;width:auto"')}</div>
+        <div style="position:absolute;left:8%;bottom:11%;display:grid;gap:3px">
+          <span style="font-family:var(--f-display);font-weight:800;font-size:clamp(16px,2.1vw,22px)">Tu nombre</span>
+          <span style="font-size:clamp(11px,1.3vw,14px);opacity:.75">Socio · Desarrollo comercial</span>
+          <span style="font-family:var(--f-mono);font-size:clamp(10px,1.2vw,12px);margin-top:8px">hola@senda.com.ar</span>
+          <span style="font-family:var(--f-mono);font-size:clamp(10px,1.2vw,12px)">+54 9 11 0000 0000</span>
+        </div></div><figcaption>Tarjeta · dorso</figcaption></figure>`;
+  }
+
+  function render(){ build(); versions(); reds(); apps(); }
+  render();
+})();
+</script>
