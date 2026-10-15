@@ -44,6 +44,15 @@ Detalle visual de cada uno en `marca/territorios/`.
 
 Ronda 2 en `marca/territorios/senda-ronda-2.html`.
 
+## Devolución ronda 3
+
+- S favoritas: **Bisel** y **Contrapeso**.
+- Paletas: **Bosque** primero, **Señal** segunda. Sin decidir todavía.
+- Escritura del nombre: probar **SENDA** y **Senda**.
+- Tipografía pedida: **bold, elegante y formal**. En ronda 4 se proponen Spectral, Bodoni Moda, Red Hat Display e Instrument Sans (condensada).
+
+Ronda 4 en `marca/territorios/senda-ronda-4.html`.
+
 ## Preguntas abiertas para vos
 
 1. ¿Quién es el cliente ideal en concreto (rubro, tamaño, cargo de quien contrata)?
