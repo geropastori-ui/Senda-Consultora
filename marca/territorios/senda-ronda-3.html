@@ -1,0 +1,323 @@
+<title>Senda · Seis S</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&display=swap">
+<style>
+/* Layout: cuaderno de estudio. Primero las seis S en igualdad de condiciones, después la matriz S × paleta, después cada paleta aplicada a piezas reales. */
+:root{
+  --bg:#F2F2F0; --fg:#0D0F14; --muted:#5B5E66; --line:#D2D3D6; --panel:#FFFFFF; --chip:#E6E7EA; --stage:#0A0F2C; --stage-ink:#F4F2EE;
+  --f-display:"Archivo", "Arial Black", system-ui, sans-serif;
+  --f-text:"Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --max:1180px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0C0D11; --fg:#ECEDEF; --muted:#9A9DA6; --line:#262830; --panel:#14161B; --chip:#1E2027; --stage:#05070F; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#0C0D11; --fg:#ECEDEF; --muted:#9A9DA6; --line:#262830; --panel:#14161B; --chip:#1E2027; --stage:#05070F; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-text);font-size:17px;line-height:1.55;margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0;max-width:64ch}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.display{font-family:var(--f-display);font-stretch:125%;font-weight:900;letter-spacing:-.02em;line-height:.92}
+.muted{color:var(--muted)}
+
+.intro{padding-block:56px 28px;display:grid;gap:22px}
+.intro h1{font-size:clamp(44px,9vw,104px)}
+.intro .lead{font-size:20px;line-height:1.45;max-width:60ch}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));border-top:1px solid var(--line)}
+.rules div{padding:14px 16px 14px 0;border-bottom:1px solid var(--line);display:grid;gap:2px;min-width:0}
+.rules b{font-weight:600}
+.rules span{color:var(--muted);font-size:15px}
+
+.section{padding-block:44px;display:grid;gap:22px}
+.section-head{display:grid;gap:8px}
+.section-head h2{font-size:clamp(30px,4.6vw,52px)}
+
+/* fichas de S */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);display:grid;grid-template-rows:auto 1fr;min-width:0}
+.card .art{background:var(--stage);aspect-ratio:4/3;display:grid;grid-template-columns:1fr auto;align-items:center;padding:0 22px 0 0;position:relative}
+.card .art .big{display:grid;place-items:center;height:100%}
+.card .art .big svg{width:62%;max-width:210px;height:auto}
+.card .art .tests{display:grid;gap:10px;justify-items:center;align-content:center;color:var(--stage-ink)}
+.card .art .tests span{font-family:var(--f-mono);font-size:10px;opacity:.6}
+.card .num{position:absolute;left:14px;top:12px;font-family:var(--f-mono);font-size:11px;color:var(--stage-ink);opacity:.55}
+.card .txt{padding:16px 18px 20px;display:grid;gap:10px;align-content:start}
+.card h3{font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:24px;letter-spacing:-.01em}
+.card .tag{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.card p{font-size:15px;line-height:1.5}
+.scores{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:5px}
+.scores li{display:grid;grid-template-columns:118px 1fr 14px;gap:10px;align-items:center;font-size:13px}
+.scores .bar{display:flex;gap:3px}
+.scores .bar i{flex:1;height:6px;background:var(--chip)}
+.scores .bar i.on{background:var(--fg)}
+.scores b{font-family:var(--f-mono);font-weight:500;font-size:12px;text-align:right}
+
+/* matriz */
+.matrix-scroll{overflow-x:auto}
+.matrix{display:grid;grid-template-columns:140px repeat(3,minmax(200px,1fr));gap:10px;min-width:780px}
+.matrix .h{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);align-self:end;padding-bottom:4px;display:flex;gap:8px;align-items:center}
+.matrix .h i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.matrix .rowname{font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:17px;align-self:center}
+.cell{display:grid;grid-template-columns:auto 1fr;min-height:110px}
+.cell .ico{aspect-ratio:1/1;height:110px;display:grid;place-items:center}
+.cell .ico svg{width:56%;height:56%}
+.cell .lk{display:grid;place-items:center;padding:0 10px;font-size:26px;overflow:hidden}
+
+/* paletas aplicadas */
+.palsec{padding-block:56px;display:grid;gap:26px}
+.palsec .head{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:24px 40px;align-items:end}
+.palsec h2{font-size:clamp(44px,8vw,96px)}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.sw{display:grid;gap:4px;min-width:120px;flex:1}
+.sw i{display:block;height:54px;border:1px solid rgba(127,127,127,.25)}
+.sw b{font-weight:600;font-size:14px}
+.sw span{font-family:var(--f-mono);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.examples{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.examples > figure{margin:0;min-width:0;display:grid;gap:6px;align-content:start}
+.examples figcaption{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.e-web{grid-column:span 8}.e-post{grid-column:span 4}.e-card{grid-column:span 5}.e-slide{grid-column:span 7}
+.frame{position:relative;overflow:hidden;max-width:100%;box-shadow:0 1px 2px rgba(0,0,0,.1),0 10px 30px rgba(0,0,0,.08)}
+.r-web{aspect-ratio:16/9}.r-post{aspect-ratio:4/5}.r-card{aspect-ratio:85/55}.r-slide{aspect-ratio:16/9}
+@media (max-width:820px){ .e-web,.e-post,.e-card,.e-slide{grid-column:span 12} .e-post .frame{max-width:420px} }
+.analysis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:20px 32px;border-top:1px solid var(--line);padding-top:22px}
+.analysis > div{display:grid;gap:8px;align-content:start;min-width:0}
+.analysis h3{font-size:13px}
+.analysis p,.analysis li{font-size:15px}
+.analysis ul{margin:0;padding-left:1.1em;display:grid;gap:4px}
+
+.lockup{display:inline-flex;align-items:center;gap:.28em;line-height:1;white-space:nowrap}
+.lockup svg{height:1.05em;width:1.05em;flex:none}
+.lockup .w{font-family:var(--f-display);font-stretch:125%;font-weight:800;letter-spacing:-.03em}
+
+.closing{padding-block:56px 80px;display:grid;gap:26px;border-top:1px solid var(--line)}
+.closing h2{font-size:clamp(30px,4.6vw,52px)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:28px}
+.cols > div{display:grid;gap:12px;align-content:start;min-width:0}
+.cols ol{margin:0;padding-left:1.2em;display:grid;gap:8px}
+</style>
+
+<header class="wrap intro">
+  <div class="label">Senda Consultora · Identidad · Ronda 3</div>
+  <h1 class="display">Seis S<br>nuevas</h1>
+  <p class="lead">Partí de cero. Tramo, Desvío y Cuña quedaron afuera porque estaban demasiado cerca de tus referencias. De esas referencias conservé las reglas y no las formas:</p>
+  <div class="rules">
+    <div><b>Pocas piezas</b><span>Cada S se arma con dos a seis formas simples.</span></div>
+    <div><b>Geometría a la vista</b><span>Círculo, cuadrado, recta y diagonal, sin trazos a mano.</span></div>
+    <div><b>Un vacío que trabaja</b><span>El espacio entre las piezas es la senda.</span></div>
+    <div><b>Un solo color</b><span>Cada S funciona en una tinta, para que la paleta haga el resto.</span></div>
+  </div>
+</header>
+
+<section class="wrap section">
+  <div class="section-head">
+    <span class="label">Parte 1</span>
+    <h2 class="display">Las seis S</h2>
+    <p class="muted">Cada ficha muestra la S grande y a 24 y 16 px, que es el tamaño de un favicon. El puntaje va de 1 a 5.</p>
+  </div>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head">
+    <span class="label">Parte 2</span>
+    <h2 class="display">Matriz S × paleta</h2>
+    <p class="muted">Cada S en las tres paletas: ícono sobre el color principal y logo completo sobre el fondo claro. Sirve para ver qué combinaciones se refuerzan y cuáles se pelean.</p>
+  </div>
+  <div class="matrix-scroll"><div class="matrix" id="matrix"></div></div>
+</section>
+
+<div id="pals"></div>
+
+<section class="wrap closing">
+  <span class="label">Recomendación</span>
+  <h2 class="display">Módulos + Cobalto. Bisel como alternativa.</h2>
+  <div class="cols">
+    <div>
+      <p><b>Módulos</b> es la que mejor junta las tres cosas que pediste: se lee como S de inmediato, es claramente tecnológica (parece un carácter de pantalla) y tiene una idea propia. Las seis piezas son los módulos del trabajo de Senda, y la cruz de canales entre ellas es la senda. Además se puede desarmar: una sola pieza sirve de recurso gráfico, de viñeta o de patrón.</p>
+      <p><b>Bisel</b> es la alternativa si querés algo más duro y angular. <b>Enlace</b> se lee perfecto, pero es la más parecida a cualquier S; la descartaría.</p>
+      <p>En color, <b>Cobalto</b> es la más segura para lo tecnológico. <b>Bosque</b> es la más diferente del mercado y la que yo probaría si el cliente ideal resulta ser pyme industrial o agro.</p>
+    </div>
+    <div>
+      <span class="label">Para pasar al manual necesito</span>
+      <ol>
+        <li>Tus dos S favoritas (o una y qué le cambiarías).</li>
+        <li>La paleta, o si querés ver la S elegida en las tres antes de decidir.</li>
+        <li>Si "senda" va en minúscula, como acá, o en mayúscula.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  let uid = 0;
+  const ROT = 'transform="rotate(180 50 50)"';
+
+  /* ===== las seis S, en una grilla de 100 × 100 ===== */
+  function modulos(){
+    const s=26, g=4, x0=50-s-g/2, y0=50-1.5*s-g;
+    const cell=(c,r,k)=>{const x=x0+c*(s+g), y=y0+r*(s+g); return {
+      tl:`M${x} ${y+s} A${s} ${s} 0 0 1 ${x+s} ${y} V${y+s} Z`,
+      tr:`M${x} ${y} A${s} ${s} 0 0 1 ${x+s} ${y+s} H${x} Z`,
+      bl:`M${x} ${y} H${x+s} V${y+s} A${s} ${s} 0 0 1 ${x} ${y} Z`,
+      br:`M${x} ${y} H${x+s} A${s} ${s} 0 0 1 ${x} ${y+s} Z`,
+      sq:`M${x} ${y} h${s} v${s} h-${s} Z`}[k];};
+    return `<path d="${[cell(0,0,'tl'),cell(1,0,'sq'),cell(0,1,'bl'),cell(1,1,'tr'),cell(0,2,'sq'),cell(1,2,'br')].join(' ')}"/>`;
+  }
+  const LOGOS = {
+    modulos:{ name:'Módulos', tag:'6 piezas · grilla de 2 × 3 · canal de 4',
+      text:'Seis cuadrados de 26 unidades, cuatro de ellos con una esquina redondeada. Parece un carácter de pantalla y se arma como el trabajo de Senda: por módulos. La cruz de canales entre las piezas es la senda.',
+      draw:()=>modulos(), scores:[5,4,4,4,5] },
+    bisel:{ name:'Bisel', tag:'2 piezas · chaflanes a 45°',
+      text:'Dos piezas iguales, una girada 180°, con las curvas reemplazadas por cortes a 45°. Es la versión angular y dura, como un chip o una pieza mecanizada. El canal horizontal del medio es la senda.',
+      draw:()=>{const p='84,8 40,8 27,21 27,37 40,50 48,50 48,29 84,29'; return `<polygon points="${p}"/><g ${ROT}><polygon points="${p}"/></g>`;}, scores:[4,4,4,3,5] },
+    contrapeso:{ name:'Contrapeso', tag:'2 piezas · medio círculo + barra',
+      text:'Dos medios círculos que se equilibran, cada uno con su barra. Es la más rotunda y la que mejor se lee de lejos. La senda es el escalón entre las dos mitades.',
+      draw:()=>{const p='M48 8 H84 V29 H48 Z M48 8 A21 21 0 0 0 48 50 Z'; return `<path d="${p}"/><g ${ROT}><path d="${p}"/></g>`;}, scores:[5,3,5,4,3] },
+    trescuartos:{ name:'Tres cuartos', tag:'2 piezas · círculos sin un cuadrante',
+      text:'Dos círculos a los que les falta un cuarto, apilados. Las dos piezas casi se tocan en un solo punto: el lugar donde el problema del cliente y la solución se encuentran. Es la más geométrica pura.',
+      draw:()=>{const p='M50 27.5 V49.5 A22 22 0 1 1 72 27.5 Z'; return `<path d="${p}"/><g ${ROT}><path d="${p}"/></g>`;}, scores:[4,4,3,4,3] },
+    enlace:{ name:'Enlace', tag:'2 trazos · arcos de 270°',
+      text:'Dos ganchos de trazo grueso que se enganchan en el centro, como eslabones. Habla de integrar sistemas, que es lo que hace la automatización. Se lee perfecto, pero es la más común de las seis.',
+      draw:(c)=>`<g fill="none" stroke="${c}" stroke-width="13"><path d="M70 20 A20 20 0 1 0 50 52"/><path d="M30 80 A20 20 0 1 0 50 48"/></g>`, scores:[5,2,5,3,3] },
+    senal:{ name:'Señal', tag:'5 cápsulas · filas de datos',
+      text:'La S dibujada con cinco filas, como una lectura de datos o una barra de carga. Es la más tecnológica, pero a 16 px las filas se empastan y la S se pierde. Funciona mejor como recurso gráfico que como logo principal.',
+      draw:()=>[[36,84],[16,40],[16,84],[60,84],[16,64]].map((r,i)=>`<rect x="${r[0]}" y="${(8+i*17.2).toFixed(1)}" width="${r[1]-r[0]}" height="14" rx="7"/>`).join(''), scores:[3,4,2,4,5] },
+  };
+  const ORDER = ['modulos','bisel','contrapeso','trescuartos','enlace','senal'];
+  const CRIT = ['Se lee como S','Es propia','Funciona a 16 px','Idea de senda','Tecnológica'];
+
+  function svgS(key, color, size){
+    const sz = size ? `width="${size}" height="${size}"` : '';
+    return `<svg viewBox="0 0 100 100" ${sz} fill="${color}" aria-hidden="true">${LOGOS[key].draw(color)}</svg>`;
+  }
+  function lockup(key, mark, ink){
+    return `<span class="lockup">${svgS(key, mark)}<span class="w" style="color:${ink}">senda</span></span>`;
+  }
+
+  /* ===== paletas (las tres de la ronda 2) ===== */
+  const PALS = {
+    cobalto:{ name:'Cobalto', P:['Cobalto','#1638E8'], L:['Hueso','#F4F2EE'], D:['Noche','#0A0F2C'], A:['Láser','#7DF2C8'], onP:'#F4F2EE', logo:'modulos' },
+    bosque: { name:'Bosque',  P:['Bosque','#0B3D2E'],  L:['Niebla','#EEF2EA'], D:['Grafito','#111613'], A:['Lima','#D9FF72'], onP:'#D9FF72', logo:'bisel' },
+    senal:  { name:'Señal',   P:['Rojo señal','#FF4D3A'], L:['Blanco','#F6F6F4'], D:['Órbita','#0F1430'], A:['Acero','#8B91A8'], onP:'#0F1430', logo:'contrapeso' },
+  };
+  const PAL_ORDER = ['cobalto','bosque','senal'];
+
+  /* ===== parte 1: fichas ===== */
+  document.getElementById('cards').innerHTML = ORDER.map((k,i)=>{
+    const L = LOGOS[k], ink = '#F4F2EE';
+    return `<article class="card">
+      <div class="art"><span class="num">S·${String(i+1).padStart(2,'0')}</span>
+        <div class="big">${svgS(k, ink)}</div>
+        <div class="tests">${svgS(k, ink, 24)}<span>24</span>${svgS(k, ink, 16)}<span>16</span></div></div>
+      <div class="txt"><h3>${L.name}</h3><span class="tag">${L.tag}</span><p>${L.text}</p>
+        <ul class="scores">${L.scores.map((n,j)=>`<li><span>${CRIT[j]}</span><span class="bar" aria-hidden="true">${[1,2,3,4,5].map(x=>`<i class="${x<=n?'on':''}"></i>`).join('')}</span><b>${n}</b></li>`).join('')}</ul></div>
+    </article>`;
+  }).join('');
+
+  /* ===== parte 2: matriz ===== */
+  const mx = document.getElementById('matrix');
+  let html = `<div></div>` + PAL_ORDER.map(p=>{const P=PALS[p]; return `<div class="h"><i style="background:${P.P[1]}"></i>${P.name}</div>`;}).join('');
+  ORDER.forEach(k=>{
+    html += `<div class="rowname">${LOGOS[k].name}</div>`;
+    PAL_ORDER.forEach(p=>{const P=PALS[p];
+      html += `<div class="cell"><div class="ico" style="background:${P.P[1]}">${svgS(k, P.onP)}</div><div class="lk" style="background:${P.L[1]}">${lockup(k, P.P[1], P.D[1])}</div></div>`;
+    });
+  });
+  mx.innerHTML = html;
+
+  /* ===== parte 3: cada paleta aplicada ===== */
+  const ANALYSIS = {
+    cobalto:{
+      says:'Tecnología, precisión y confianza. Es un azul eléctrico, no el azul marino de las consultoras tradicionales: esa saturación es lo que lo vuelve reconocible.',
+      good:['Es la que mejor dice "IA y automatización" sin caer en el violeta típico.','El hueso le saca frialdad; con blanco puro se vería como una app más.','El verde láser sirve para destacar cifras y resultados.'],
+      risk:['El azul es el color más usado en tecnología: la diferencia la tienen que hacer la S y el hueso, no el azul.','El cobalto no se puede reproducir en CMYK y en papel se apaga. Para impresos hay que pedir una tinta especial (referencia aproximada: Pantone 2728 C) y probar muestra.'],
+      fits:'Una consultora que quiere que se la asocie primero con IA y automatización.'
+    },
+    bosque:{
+      says:'Crecimiento sin flechas. Es un verde serio y profundo con un acento eléctrico que le da el aire tecnológico.',
+      good:['Es la más diferente del rubro: casi ninguna consultora comercial usa verde.','El lima sobre bosque es muy legible (10,7:1) y queda muy bien en redes.','Combina con fotos de equipo y de clientes reales, porque el verde es más cálido que el azul.'],
+      risk:['El lima puede sonar a fintech o cripto si se usa de más: tiene que quedarse en el 8%.','El verde oscuro se asocia a agro y finanzas, que puede ser bueno o malo según el cliente ideal.','El lima tampoco existe en CMYK: en impresos se reemplaza por un amarillo verdoso o una tinta flúor.'],
+      fits:'Pymes industriales, agro o de servicios, donde "crecer" es la promesa principal.'
+    },
+    senal:{
+      says:'Acción, urgencia y foco comercial. Es la más enérgica de las tres y la que más se recuerda.',
+      good:['Es la que más se destaca en el feed de LinkedIn.','El azul órbita la equilibra y le da seriedad.','Es ideal si lo que más se vende es desarrollo comercial.'],
+      risk:['En informes y tableros el rojo significa "error" o "alerta". Puede chocar con los gráficos de datos que entrega Senda.','El blanco sobre rojo apenas alcanza 3:1: solo sirve para títulos grandes.','Cansa rápido si se usa en grandes superficies.'],
+      fits:'Una consultora que se presenta primero como socio comercial y de ventas.'
+    }
+  };
+
+  const pals = document.getElementById('pals');
+  pals.innerHTML = PAL_ORDER.map((p,idx)=>{
+    const P = PALS[p], A = ANALYSIS[p], k = P.logo, L = LOGOS[k];
+    const [p1,l1,d1,a1] = [P.P[1],P.L[1],P.D[1],P.A[1]];
+    const sw = ['P','L','D','A'].map(r=>`<div class="sw"><i style="background:${P[r][1]}"></i><b>${P[r][0]}</b><span>${P[r][1]}</span></div>`).join('');
+    const accentOnD = p==='senal' ? p1 : a1;
+    return `<section class="wrap palsec" id="pal-${p}" style="border-top:1px solid var(--line)">
+      <div class="head">
+        <div style="display:grid;gap:10px"><span class="label">Parte 3 · Paleta ${idx+1} de 3 · ejemplares con ${L.name}</span><h2 class="display">${P.name}</h2></div>
+        <div class="swatches">${sw}</div>
+      </div>
+      <div class="examples">
+        <figure class="e-web"><div class="frame r-web" style="background:${l1}">
+          <div style="position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr;padding:3.5% 4.5%">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:clamp(11px,1.4vw,14px);color:${d1}">
+              <span style="font-size:clamp(16px,2.2vw,24px)">${lockup(k, p1, d1)}</span>
+              <span style="display:flex;gap:2.2em;opacity:.8">Servicios<span>Casos</span><span style="background:${d1};color:${l1};padding:.45em 1em;border-radius:99px;opacity:1">Agendá una charla</span></span>
+            </div>
+            <div style="display:grid;grid-template-columns:1.3fr 1fr;align-items:center;gap:4%">
+              <div style="display:grid;gap:1.2em">
+                <div style="font-family:var(--f-display);font-stretch:125%;font-weight:900;font-size:clamp(20px,4vw,48px);line-height:.95;letter-spacing:-.025em;color:${d1}">Vendé más.<br>Automatizá<br>el resto.</div>
+                <div style="font-size:clamp(10px,1.3vw,14px);color:${d1};opacity:.75;max-width:34ch">Investigación de mercado, desarrollo comercial y automatización con IA para pymes.</div>
+              </div>
+              <div style="aspect-ratio:1/1;background:${p1};display:grid;place-items:center;border-radius:4%">${svgS(k, P.onP).replace('<svg','<svg style="width:58%;height:58%"')}</div>
+            </div>
+          </div></div><figcaption>Portada del sitio web</figcaption></figure>
+
+        <figure class="e-post"><div class="frame r-post" style="background:${d1}">
+          <div style="position:absolute;inset:0;padding:9%;display:grid;grid-template-rows:auto 1fr auto;color:${l1}">
+            <div style="font-family:var(--f-mono);font-size:clamp(10px,1.1vw,12px);letter-spacing:.1em;text-transform:uppercase;color:${accentOnD}">Caso · Automatización</div>
+            <div style="align-self:center;display:grid;gap:.6em">
+              <div style="font-family:var(--f-display);font-stretch:125%;font-weight:900;font-size:clamp(44px,5.4vw,76px);line-height:.85;letter-spacing:-.04em;color:${accentOnD}">−72%</div>
+              <div style="font-family:var(--f-display);font-stretch:112%;font-weight:700;font-size:clamp(16px,2vw,22px);line-height:1.1">menos tiempo de respuesta a nuevos clientes.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:end"><span style="font-size:15px">${lockup(k, l1, l1)}</span><span style="font-family:var(--f-mono);font-size:10px;opacity:.55">Cifra de ejemplo</span></div>
+          </div></div><figcaption>Post de LinkedIn · 4:5</figcaption></figure>
+
+        <figure class="e-card"><div class="frame r-card" style="background:${p1}">
+          <div style="position:absolute;right:-12%;bottom:-30%;width:75%;opacity:${p==='bosque'?1:.95}">${svgS(k, p==='bosque'?'#145440':(p==='senal'?'#FF6A5A':'#2B4DF0'))}</div>
+          <div style="position:absolute;inset:8%;display:grid;align-content:space-between;color:${P.onP}">
+            <span style="font-size:clamp(16px,2.4vw,22px)">${lockup(k, P.onP, P.onP)}</span>
+            <div style="display:grid;gap:2px"><b style="font-family:var(--f-display);font-stretch:125%;font-size:clamp(13px,1.7vw,17px)">Tu nombre</b><span style="font-family:var(--f-mono);font-size:clamp(10px,1.2vw,12px);opacity:.85">hola@senda.com.ar</span></div>
+          </div></div><figcaption>Tarjeta · la S en tono sobre tono como textura</figcaption></figure>
+
+        <figure class="e-slide"><div class="frame r-slide" style="background:${l1}">
+          <div style="position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr">
+            <div style="padding:7% 8%;display:grid;align-content:space-between;color:${d1}">
+              <span style="font-family:var(--f-mono);font-size:clamp(9px,1vw,11px);letter-spacing:.1em;text-transform:uppercase;opacity:.7">Diagnóstico · 03</span>
+              <div style="font-family:var(--f-display);font-stretch:125%;font-weight:900;font-size:clamp(16px,2.6vw,30px);line-height:.98;letter-spacing:-.02em">¿Dónde se pierden los clientes?</div>
+              <span style="font-size:12px">${lockup(k, p1, d1)}</span>
+            </div>
+            <div style="background:${d1};padding:7% 8%;display:grid;align-content:center;gap:9%">
+              ${[['Consulta',100],['Primera respuesta',64],['Propuesta',38],['Venta',17]].map((r,i)=>`<div style="display:grid;gap:4px"><div style="display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:clamp(8px,1vw,11px);color:${l1};opacity:.85"><span>${r[0]}</span><span>${r[1]}</span></div><div style="height:clamp(6px,1vw,11px);width:${r[1]}%;background:${i===3?accentOnD:p1};${p==='senal'&&i<3?'background:'+P.A[1]:''}"></div></div>`).join('')}
+              <span style="font-family:var(--f-mono);font-size:9px;color:${l1};opacity:.5">Datos de ejemplo</span>
+            </div>
+          </div></div><figcaption>Diapositiva de informe con un gráfico</figcaption></figure>
+      </div>
+      <div class="analysis">
+        <div><h3 class="label">Qué comunica</h3><p>${A.says}</p></div>
+        <div><h3 class="label">A favor</h3><ul>${A.good.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        <div><h3 class="label">Riesgos</h3><ul>${A.risk.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        <div><h3 class="label">Para quién</h3><p>${A.fits}</p></div>
+      </div>
+    </section>`;
+  }).join('');
+})();
+</script>
