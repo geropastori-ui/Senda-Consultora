@@ -114,6 +114,18 @@ input[type=range]{width:100%;accent-color:var(--fg)}
 .tag{justify-self:start;font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:var(--fg);color:var(--bg);padding:2px 7px}
 .empty{border:1px dashed var(--line);padding:22px;color:var(--muted);font-size:15px}
 
+.palcmp{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:12px}
+.pc{border:1px solid var(--line);background:var(--panel);padding:0;cursor:pointer;text-align:left;display:grid;min-width:0}
+.pc[aria-current="true"]{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+.pc .pair{display:grid;grid-template-columns:1fr 1fr}
+.pc .pair > div{display:grid;place-items:center;padding:18px 12px;aspect-ratio:16/9}
+.pc .pair svg{width:100%;height:auto;max-height:100%}
+.pc .sw{display:flex;height:10px}
+.pc .sw i{flex:1}
+.pc .meta{padding:9px 12px 11px;display:grid;gap:2px}
+.pc .meta b{font-family:var(--f-display);font-size:15px}
+.pc .meta span{font-family:var(--f-mono);font-size:10.5px;color:var(--muted)}
+.pc .meta .new{justify-self:start;font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:#6B2138;color:#F3E7D7;padding:1px 6px}
 .starts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));gap:10px}
 .start{border:1px solid var(--line);background:var(--panel);padding:0;cursor:pointer;text-align:left;display:grid;min-width:0}
 .start .thumb{display:grid;place-items:center;padding:16px 14px;aspect-ratio:16/7}
@@ -182,6 +194,12 @@ input[type=range]{width:100%;accent-color:var(--fg)}
   </div>
 </section>
 
+<section class="wrap section" id="paletas">
+  <div class="section-head"><h2>Comparar paletas</h2><span class="label">La configuración actual en cada paleta</span></div>
+  <p class="muted">Para decidir solo el color: el logo que tienen armado arriba, en todas las paletas, sobre fondo claro y sobre fondo oscuro. Tocá una para aplicarla. Las tres de Vino son la misma paleta con los roles repartidos de distinta forma.</p>
+  <div class="palcmp" id="palcmp"></div>
+</section>
+
 <section class="wrap section">
   <div class="section-head"><h2>Así se ve en uso</h2><span class="label">Se actualiza con cada cambio</span></div>
   <div class="apps" id="apps"></div>
@@ -217,6 +235,10 @@ const G = __GLYPHS__;
     carmin:{ name:'Señal · Carmín', L:'#F6F6F4', ink:'#0F1430', mark:'#D0103A', dark:'#0F1430', onDark:'#F6F6F4', markDark:'#D0103A', acc:'#D0103A', onAcc:'#F6F6F4', extra:'#8B91A8' },
     granate:{ name:'Señal · Granate', L:'#F6F6F4', ink:'#0F1430', mark:'#9B1B30', dark:'#0F1430', onDark:'#F6F6F4', markDark:'#C2324A', acc:'#9B1B30', onAcc:'#F6F6F4', extra:'#8B91A8' },
     cadete:{ name:'Cadete', L:'#E6D5B7', ink:'#1E223D', mark:'#F54F1B', dark:'#1E223D', onDark:'#E6D5B7', markDark:'#F54F1B', acc:'#F54F1B', onAcc:'#1E223D', extra:'#1E223D' },
+    // Paleta Vino: vino #6B2138, pizarra #263343, crema #F3E7D7, celeste #B7D9FE, en tres repartos de roles.
+    vino:{ name:'Vino · crema y pizarra', L:'#F3E7D7', ink:'#263343', mark:'#6B2138', dark:'#263343', onDark:'#F3E7D7', markDark:'#B7D9FE', acc:'#6B2138', onAcc:'#F3E7D7', extra:'#B7D9FE', group:'vino' },
+    vinomono:{ name:'Vino · todo vino', L:'#F3E7D7', ink:'#6B2138', mark:'#6B2138', dark:'#6B2138', onDark:'#F3E7D7', markDark:'#B7D9FE', acc:'#263343', onAcc:'#F3E7D7', extra:'#B7D9FE', group:'vino' },
+    vinoceleste:{ name:'Vino · fondo celeste', L:'#B7D9FE', ink:'#263343', mark:'#6B2138', dark:'#263343', onDark:'#F3E7D7', markDark:'#B7D9FE', acc:'#6B2138', onAcc:'#F3E7D7', extra:'#F3E7D7', group:'vino' },
   };
   const ROT = 'transform="rotate(180 50 50)"';
   // Cada S en una grilla de 100 × 100, con su caja exacta [x0, y0, x1, y1].
@@ -248,6 +270,7 @@ const G = __GLYPHS__;
     { name:'Ronda 6 · C S protagonista', p:{ scale:1.65, track:-30, desc:185, sep:0.8 } },
     { name:'Ronda 5 · proporción original', p:{ scale:1, track:0, desc:245, sep:1 } },
     { name:'Bisel · Cadete', p:{ pal:'cadete' } },
+    { name:'Favorita · Vino', p:{ pal:'vino', descW:'500', lead:115 } },
     { name:'Contrapeso · Bosque · Spectral', p:{ mono:'contrapeso', pal:'bosque', font:'spectral', track:-10, scale:1.3 } },
     { name:'Bisel · Señal · SENDA', p:{ cas:'caps', track:60, pal:'actual' } },
     { name:'Bisel · Instrument condensada', p:{ font:'instrument', track:0, descW:'400' } },
@@ -330,7 +353,7 @@ const G = __GLYPHS__;
   function renderPanel(){
     const p = state, P = PALS[p.pal];
     $('c-mono').innerHTML = Object.entries(MARKS).map(([k,M])=>`<button type="button" class="mono" role="radio" aria-checked="${p.mono===k}" data-mono="${k}">${markSVG(k, 'currentColor')}<span>${M.name}</span></button>`).join('');
-    $('c-pal').innerHTML = opt(Object.fromEntries(Object.entries(PALS).map(([k,v])=>[k,v.name])), p.pal, 'data-pal', k=>`<i style="background:${PALS[k].mark}"></i><i style="background:${PALS[k].ink}"></i><i style="background:${PALS[k].L}"></i>`);
+    $('c-pal').innerHTML = opt(Object.fromEntries(Object.entries(PALS).sort((a,b)=>(!!b[1].group)-(!!a[1].group)).map(([k,v])=>[k,v.name])), p.pal, 'data-pal', k=>`<i style="background:${PALS[k].mark}"></i><i style="background:${PALS[k].ink}"></i><i style="background:${PALS[k].L}"></i>`);
     $('c-cas').innerHTML = opt(CASES, p.cas, 'data-cas');
     $('c-font').innerHTML = Object.entries(FONTS).map(([k,F])=>`<button type="button" class="pick" role="radio" aria-checked="${p.font===k}" data-font="${k}" style="font-family:${F.css};font-weight:${F.wt};font-stretch:${F.stretch}">${F.name}</button>`).join('');
     $('c-align').innerHTML = opt(ALIGNS, p.align, 'data-align');
@@ -398,7 +421,18 @@ const G = __GLYPHS__;
         </div><figcaption>Avatar, ícono y favicon</figcaption></figure>`;
   }
 
-  function render(){ LS('senda-estudio', JSON.stringify(state)); renderPanel(); renderView(); renderApps(); }
+  function renderPalCmp(){
+    const order = ['vino','vinomono','vinoceleste', ...Object.keys(PALS).filter(k=>!PALS[k].group)];
+    $('palcmp').innerHTML = order.map(k=>{ const P = PALS[k], p = Object.assign({}, state, {pal:k});
+      const sw = [...new Set([P.L, P.ink, P.mark, P.acc, P.extra, P.dark])];
+      return `<button type="button" class="pc" aria-current="${state.pal===k}" data-pc="${k}">
+        <div class="pair"><div style="background:${P.L}">${compose(p, P.mark, P.ink).svg}</div><div style="background:${P.dark}">${compose(p, P.markDark, P.onDark).svg}</div></div>
+        <div class="sw">${sw.map(c=>`<i style="background:${c}"></i>`).join('')}</div>
+        <div class="meta">${P.group?'<span class="new">Nueva</span>':''}<b>${esc(P.name)}</b><span>${sw.join(' · ')}</span></div></button>`; }).join('');
+  }
+  $('palcmp').addEventListener('click', e=>{ const b = e.target.closest('[data-pc]'); if(!b) return; state.pal = b.dataset.pc; render(); window.scrollTo({top: $('stage').getBoundingClientRect().top + scrollY - 20, behavior:'smooth'}); });
+
+  function render(){ LS('senda-estudio', JSON.stringify(state)); renderPanel(); renderView(); renderApps(); renderPalCmp(); }
 
   /* ================= controles ================= */
   const sliders = { track:'k-track', scale:'k-scale', sep:'k-sep', desc:'k-desc', descTrack:'k-dtrack', lead:'k-lead' };
