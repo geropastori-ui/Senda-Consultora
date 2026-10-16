@@ -1,0 +1,282 @@
+<title>Senda · Ajuste del logo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Red+Hat+Display:wght@400;500;700;800&family=Red+Hat+Text:wght@400;500;600&display=swap">
+<style>
+/* Layout: banco de ajuste. Arriba cuatro variantes fijas para comparar; abajo el constructor con controles y la vista aplicada. */
+:root{
+  --bg:#F6F6F4; --fg:#0F1430; --muted:#5A5F75; --line:#DADBE0; --panel:#FFFFFF; --chip:#EBECEF; --accent:#D0103A;
+  --f-display:"Red Hat Display", system-ui, sans-serif;
+  --f-text:"Red Hat Text", system-ui, sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, Menlo, monospace;
+  --max:1180px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0B0E22; --fg:#ECEDF2; --muted:#9EA3B8; --line:#24284A; --panel:#121634; --chip:#1B1F40; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#0B0E22; --fg:#ECEDF2; --muted:#9EA3B8; --line:#24284A; --panel:#121634; --chip:#1B1F40; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-text);font-size:17px;line-height:1.55;margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--f-display)}
+p{margin:0;max-width:64ch}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+button{font:inherit;color:inherit}
+
+.intro{padding-block:52px 24px;display:grid;gap:18px}
+.intro h1{font-weight:800;font-size:clamp(40px,7vw,80px);line-height:1;letter-spacing:-.015em}
+.intro .lead{font-size:19px}
+.changes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));border-top:1px solid var(--line)}
+.changes div{padding:12px 14px 12px 0;border-bottom:1px solid var(--line);display:grid;gap:2px;min-width:0}
+.changes b{font-family:var(--f-display);font-weight:700;font-size:18px}
+.changes span:not(.label){font-size:15px;color:var(--muted)}
+
+.section{padding-block:36px;display:grid;gap:18px}
+.section-head{display:grid;gap:6px}
+.section-head h2{font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-.01em}
+
+/* variantes fijas */
+.presets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr));gap:12px}
+.preset{border:1px solid var(--line);background:var(--panel);padding:0;cursor:pointer;text-align:left;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;min-width:0;width:100%}
+.preset[aria-current="true"]{outline:2px solid var(--fg);outline-offset:2px}
+.preset:focus-visible,.pick:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.preset .art{background:#F6F6F4;display:grid;place-items:center;padding:30px 22px;aspect-ratio:16/8;width:100%;min-width:0}
+.preset .art svg{width:100%;height:auto;max-height:100%}
+.preset .meta{padding:12px 14px 14px;display:grid;gap:4px}
+.preset .meta b{font-family:var(--f-display);font-weight:700;font-size:17px}
+.preset .meta span{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.preset .meta .tag{justify-self:start;font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:#fff;padding:2px 7px}
+
+/* constructor */
+.builder{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+@media (max-width:900px){ .builder{grid-template-columns:1fr} }
+.stage{background:#F6F6F4;border:1px solid var(--line);display:grid;place-items:center;padding:clamp(28px,6vw,72px) clamp(16px,4vw,56px);min-width:0;position:relative}
+.stage svg{width:100%;height:auto;overflow:visible}
+.panel{background:var(--panel);border:1px solid var(--line);padding:18px;display:grid;gap:18px;position:sticky;top:calc(env(safe-area-inset-top, 0px) + 12px)}
+@media (max-width:900px){ .panel{position:static} }
+.ctl{display:grid;gap:6px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ctl label{font-weight:600;font-size:15px;font-family:var(--f-display)}
+.ctl output{font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.ctl small{font-size:13px;color:var(--muted);line-height:1.35}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.pick{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:5px 12px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.pick[aria-checked="true"]{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+.pick i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.guides-on .g{display:inline}.g{display:none}
+.readout{font-family:var(--f-mono);font-size:12px;background:var(--chip);padding:10px 12px;line-height:1.6;white-space:pre-wrap;user-select:all}
+
+.apps{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.apps figure{margin:0;min-width:0;display:grid;gap:6px;align-content:start}
+.apps figcaption{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.a1{grid-column:span 6}.a2{grid-column:span 6}.a3{grid-column:span 8}.a4{grid-column:span 4}
+@media (max-width:860px){ .a1,.a2,.a3,.a4{grid-column:span 12} }
+.frame{position:relative;overflow:hidden;max-width:100%;box-shadow:0 1px 2px rgba(0,0,0,.1),0 10px 30px rgba(0,0,0,.08)}
+.r-card{aspect-ratio:85/55}.r-web{aspect-ratio:16/7}.r-sq{aspect-ratio:1/1}
+.sizes{display:flex;flex-wrap:wrap;align-items:flex-end;gap:22px 34px;padding:16px 18px;background:#F6F6F4;border:1px solid var(--line)}
+.sizes figure{margin:0;display:grid;gap:6px}
+.sizes figcaption{font-family:var(--f-mono);font-size:11px;color:#5A5F75}
+
+.closing{padding-block:44px 80px;display:grid;gap:18px;border-top:1px solid var(--line)}
+.closing h2{font-weight:800;font-size:clamp(28px,4vw,40px)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:28px}
+.cols > div{display:grid;gap:12px;align-content:start;min-width:0}
+.cols ol{margin:0;padding-left:1.2em;display:grid;gap:8px}
+</style>
+
+<header class="wrap intro">
+  <div class="label">Senda Consultora · Identidad · Ronda 6</div>
+  <h1>Ajuste fino del logo</h1>
+  <p class="lead">Apliqué tus tres cambios y dejé el logo armado como un constructor: arriba hay cuatro variantes fijas para comparar y abajo podés mover cada medida y ver el resultado al instante.</p>
+  <div class="changes">
+    <div><span class="label">Cambio 1</span><b>S más grande</b><span>Ya no queda limitada al alto del texto: lo supera y se centra sobre el bloque.</span></div>
+    <div><span class="label">Cambio 2</span><b>"Senda" más compacta</b><span>Menos espacio entre letras, así la palabra se lee como un bloque.</span></div>
+    <div><span class="label">Cambio 3</span><b>"CONSULTORA" más chica</b><span>Sigue midiendo el mismo ancho que "Senda", así que gana aire entre letras.</span></div>
+  </div>
+</header>
+
+<section class="wrap section">
+  <div class="section-head"><span class="label">1 · Comparar</span><h2>Cuatro variantes</h2>
+    <p class="muted">La primera es la de la ronda anterior, como referencia. Tocá cualquiera para cargarla en el constructor.</p></div>
+  <div class="presets" id="presets"></div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><span class="label">2 · Constructor</span><h2>Ajustalo a tu gusto</h2>
+    <p class="muted">Si encontrás la combinación que te cierra, copiame los valores del recuadro gris y genero los archivos finales con esas medidas exactas.</p></div>
+  <div class="builder">
+    <div style="display:grid;gap:14px;min-width:0">
+      <div class="stage" id="stage"></div>
+      <div class="sizes" id="sizes"></div>
+    </div>
+    <div class="panel">
+      <div class="ctl"><div class="row"><label for="k-scale">Tamaño de la S</label><output id="o-scale"></output></div>
+        <input type="range" id="k-scale" min="1" max="2" step="0.05"><small>Veces el alto del bloque de texto. 1× es como estaba.</small></div>
+      <div class="ctl"><div class="row"><label for="k-track">Interletrado de "Senda"</label><output id="o-track"></output></div>
+        <input type="range" id="k-track" min="-60" max="20" step="1"><small>En milésimas del tamaño de la letra. 0 es el espaciado original de la tipografía.</small></div>
+      <div class="ctl"><div class="row"><label for="k-desc">Tamaño de "CONSULTORA"</label><output id="o-desc"></output></div>
+        <input type="range" id="k-desc" min="150" max="260" step="5"><small>Porcentaje del tamaño de "Senda". Antes era 24,5%.</small></div>
+      <div class="ctl"><div class="row"><label for="k-sep">Separación S–texto</label><output id="o-sep"></output></div>
+        <input type="range" id="k-sep" min="0.5" max="1.6" step="0.05"><small>Veces el grosor de la barra de la S.</small></div>
+      <div class="ctl"><span class="label">Posición de la S</span><div class="opts" id="k-align" role="radiogroup" aria-label="Posición de la S"></div></div>
+      <div class="ctl"><span class="label">Rojo</span><div class="opts" id="k-red" role="radiogroup" aria-label="Rojo"></div></div>
+      <div class="ctl"><span class="label">Medidas</span><div class="opts"><button type="button" class="pick" id="k-guides" role="switch" aria-checked="false">Mostrar guías</button></div></div>
+      <div class="readout" id="readout" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><span class="label">3 · Aplicado</span><h2>Así se ve en uso</h2></div>
+  <div class="apps" id="apps"></div>
+</section>
+
+<section class="wrap closing">
+  <span class="label">Mi lectura</span>
+  <h2>Variante B: S a 1,4×, interletrado −25, CONSULTORA al 20%</h2>
+  <div class="cols">
+    <div>
+      <p>Con la S a 1,4× el símbolo pasa a mandar sin aplastar al nombre. Si la agrandás más allá de 1,6×, la S empieza a funcionar como un ícono pegado a una palabra y deja de leerse como una sola pieza con el texto.</p>
+      <p>Con un interletrado de −25, "Senda" queda compacta pero cada letra sigue respirando. Más allá de −40 la "n" y la "d" se empiezan a tocar.</p>
+      <p>"CONSULTORA" al 20% se lee como bajada, no como un segundo nombre. Por debajo del 17% deja de leerse en tamaños chicos.</p>
+    </div>
+    <div>
+      <span class="label">Cuando lo cierres</span>
+      <ol>
+        <li>Elegí una variante, o pasame los valores del constructor.</li>
+        <li>Decime el rojo. Hoy está en Carmín, mi recomendación.</li>
+        <li>Con eso genero los archivos finales del logo en SVG y PNG y arranco el manual de marca.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+const GLYPHS = {"senda": [{"d": "M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -215Q148 -162 204 -137.5Q260 -113 323 -113Q367 -113 399 -123.5Q431 -134 448.5 -154Q466 -174 466 -201Q466 -237 440 -256.5Q414 -276 351 -287L212 -310Q123 -326 76.5 -374Q30 -422 30 -498Q30 -563 63.5 -611Q97 -659 158.5 -684.5Q220 -710 305 -710Q382 -710 459 -684Q536 -658 594 -612L516 -504Q406 -588 296 -588Q256 -588 227 -578Q198 -568 182.5 -550.5Q167 -533 167 -509Q167 -477 190.5 -459.5Q214 -442 267 -433L399 -411Q504 -394 556.5 -344.5Q609 -295 609 -214Q609 -146 572.5 -95.5Q536 -45 469.5 -17.5Q403 10 313 10Z", "x": 0.0, "b": [3.0, -710.0, 609.0, 10.0]}, {"d": "M309 10Q231 10 167.5 -26Q104 -62 67 -123Q30 -184 30 -260Q30 -336 65.5 -397Q101 -458 162 -494Q223 -530 298 -530Q373 -530 431 -493.5Q489 -457 522.5 -393.5Q556 -330 556 -250V-214H170Q179 -183 199.5 -158Q220 -133 250.5 -119.5Q281 -106 316 -106Q351 -106 380.5 -116.5Q410 -127 431 -147L521 -65Q473 -26 422.5 -8Q372 10 309 10ZM168 -312H421Q414 -343 395.5 -366.5Q377 -390 351.5 -403.5Q326 -417 295 -417Q264 -417 238 -404Q212 -391 194 -367.5Q176 -344 168 -312Z", "x": 642.0, "b": [30.0, -530.0, 556.0, 10.0]}, {"d": "M54 0V-521H191V-479Q251 -531 337 -531Q398 -531 444.5 -505Q491 -479 517 -432Q543 -385 543 -323V0H406V-303Q406 -354 377 -383.5Q348 -413 298 -413Q263 -413 236.5 -399.5Q210 -386 191 -361V0Z", "x": 1228.0, "b": [54.0, -531.0, 543.0, 0.0]}, {"d": "M295 7Q221 7 160.5 -28.5Q100 -64 65 -125Q30 -186 30 -261Q30 -336 65.5 -396.5Q101 -457 162 -492.5Q223 -528 299 -528Q337 -528 373.5 -517.5Q410 -507 441 -487V-700L578 -723V0H443V-43Q379 7 295 7ZM317 -110Q355 -110 386.5 -123Q418 -136 441 -160V-363Q418 -386 386 -399Q354 -412 317 -412Q274 -412 239.5 -392.5Q205 -373 185 -338.5Q165 -304 165 -261Q165 -218 185 -184Q205 -150 240 -130Q275 -110 317 -110Z", "x": 1822.0, "b": [30.0, -723.0, 578.0, 7.0]}, {"d": "M220 9Q164 9 121 -11.5Q78 -32 54 -68Q30 -104 30 -151Q30 -226 86.5 -267.5Q143 -309 242 -309Q310 -309 370 -288V-326Q370 -371 342 -393.5Q314 -416 260 -416Q227 -416 189 -406Q151 -396 101 -374L51 -475Q113 -504 169.5 -517.5Q226 -531 283 -531Q389 -531 447 -480.5Q505 -430 505 -338V0H370V-37Q338 -13 301 -2Q264 9 220 9ZM160 -154Q160 -124 186 -106.5Q212 -89 256 -89Q289 -89 318 -97.5Q347 -106 370 -124V-199Q345 -209 318 -214Q291 -219 260 -219Q213 -219 186.5 -201.5Q160 -184 160 -154Z", "x": 2454.0, "b": [30.0, -531.0, 505.0, 9.0]}], "consultora": [{"d": "M407 11Q331 11 265 -16.5Q199 -44 149 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 149 -606.5Q199 -656 265 -683.5Q331 -711 407 -711Q462 -711 512.5 -697.5Q563 -684 606.5 -658.5Q650 -633 684 -596L633 -542Q592 -589 532 -614.5Q472 -640 407 -640Q346 -640 294 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 204 -143.5Q243 -104 295.5 -82Q348 -60 409 -60Q474 -60 533 -85.5Q592 -111 632 -156L682 -104Q647 -68 603.5 -42Q560 -16 510 -2.5Q460 11 407 11Z", "x": 0.0, "b": [44.0, -711.0, 684.0, 11.0]}, {"d": "M405 11Q329 11 263.5 -16.5Q198 -44 148.5 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 148.5 -606.5Q198 -656 263.5 -683.5Q329 -711 405 -711Q480 -711 545.5 -683.5Q611 -656 660.5 -606.5Q710 -557 737.5 -491.5Q765 -426 765 -350Q765 -274 737.5 -208.5Q710 -143 660.5 -93.5Q611 -44 545.5 -16.5Q480 11 405 11ZM405 -60Q465 -60 516 -82Q567 -104 605.5 -143.5Q644 -183 665.5 -236Q687 -289 687 -350Q687 -412 665.5 -464.5Q644 -517 605.5 -556.5Q567 -596 516 -618Q465 -640 405 -640Q345 -640 293.5 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 203.5 -143.5Q242 -104 293.5 -82Q345 -60 405 -60Z", "x": 707.0, "b": [44.0, -711.0, 765.0, 11.0]}, {"d": "M77 0V-700H154L575 -132V-700H648V0H580L150 -583V0Z", "x": 1516.0, "b": [77.0, -700.0, 648.0, 0.0]}, {"d": "M304 10Q221 10 145 -23.5Q69 -57 11 -120L62 -173Q116 -115 177.5 -86Q239 -57 307 -57Q362 -57 404.5 -74.5Q447 -92 471 -123.5Q495 -155 495 -195Q495 -249 457.5 -278Q420 -307 334 -321L233 -337Q132 -354 84 -397Q36 -440 36 -514Q36 -572 67 -616Q98 -660 153.5 -684.5Q209 -709 282 -709Q356 -709 427.5 -685Q499 -661 558 -616L514 -556Q399 -643 279 -643Q229 -643 191 -627.5Q153 -612 132 -584.5Q111 -557 111 -520Q111 -471 144 -445Q177 -419 253 -407L353 -391Q468 -372 520 -326.5Q572 -281 572 -199Q572 -138 538 -90.5Q504 -43 443.5 -16.5Q383 10 304 10Z", "x": 2241.0, "b": [11.0, -709.0, 572.0, 10.0]}, {"d": "M352 11Q263 11 198 -26.5Q133 -64 98 -133Q63 -202 63 -296V-700H140V-296Q140 -224 166 -171Q192 -118 240 -89Q288 -60 352 -60Q417 -60 464.5 -89Q512 -118 538 -171Q564 -224 564 -296V-700H641V-296Q641 -202 605.5 -133Q570 -64 505.5 -26.5Q441 11 352 11Z", "x": 2841.0, "b": [63.0, -700.0, 641.0, 11.0]}, {"d": "M77 0V-700H154V-69H571V0Z", "x": 3545.0, "b": [77.0, -700.0, 571.0, 0.0]}, {"d": "M270 0V-631H17V-700H600V-631H347V0Z", "x": 3999.0, "b": [17.0, -700.0, 600.0, 0.0]}, {"d": "M405 11Q329 11 263.5 -16.5Q198 -44 148.5 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 148.5 -606.5Q198 -656 263.5 -683.5Q329 -711 405 -711Q480 -711 545.5 -683.5Q611 -656 660.5 -606.5Q710 -557 737.5 -491.5Q765 -426 765 -350Q765 -274 737.5 -208.5Q710 -143 660.5 -93.5Q611 -44 545.5 -16.5Q480 11 405 11ZM405 -60Q465 -60 516 -82Q567 -104 605.5 -143.5Q644 -183 665.5 -236Q687 -289 687 -350Q687 -412 665.5 -464.5Q644 -517 605.5 -556.5Q567 -596 516 -618Q465 -640 405 -640Q345 -640 293.5 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 203.5 -143.5Q242 -104 293.5 -82Q345 -60 405 -60Z", "x": 4566.0, "b": [44.0, -711.0, 765.0, 11.0]}, {"d": "M77 0V-700H377Q446 -700 497 -675Q548 -650 576.5 -605Q605 -560 605 -499Q605 -430 564.5 -380.5Q524 -331 456 -311L613 0H528L378 -301H154V0ZM154 -366H372Q443 -366 485.5 -402Q528 -438 528 -499Q528 -559 485.5 -595Q443 -631 372 -631H154Z", "x": 5375.0, "b": [77.0, -700.0, 613.0, 0.0]}, {"d": "M4 0 294 -700H387L675 0H591L503 -220H173L84 0ZM200 -286H476L338 -629Z", "x": 6030.0, "b": [4.0, -700.0, 675.0, 0.0]}], "capHeight": 700};
+(function(){
+  const REDS = { actual:['Rojo señal','#FF4D3A'], rojo:['Rojo puro','#E5242B'], carmin:['Carmín','#D0103A'], granate:['Granate','#9B1B30'] };
+  const N = '#0F1430', B = '#F6F6F4';
+  const PRESETS = [
+    { id:'r5', name:'Ronda 5 (referencia)', scale:1.0, track:0, desc:245, sep:1, align:'center' },
+    { id:'a', name:'A · Sutil', scale:1.25, track:-15, desc:215, sep:0.9, align:'center' },
+    { id:'b', name:'B · Equilibrada', scale:1.4, track:-25, desc:200, sep:0.85, align:'center', tag:'Recomendada' },
+    { id:'c', name:'C · S protagonista', scale:1.65, track:-30, desc:185, sep:0.8, align:'center' },
+  ];
+  const ALIGNS = { center:'Centrada', base:'Apoyada en la base', top:'Colgada del tope' };
+  const state = Object.assign({ red:'carmin', guides:false }, PRESETS[2]);
+  try{ const s = JSON.parse(localStorage.getItem('senda-r6')||'null'); if (s) Object.assign(state, s); }catch(e){}
+
+  function compose(p, mark, ink, opts={}){
+    const S = GLYPHS.senda, C = GLYPHS.consultora, cap = GLYPHS.capHeight;
+    const t = p.track, n = S.length;
+    const inkL = S[0].x + S[0].b[0];
+    const inkR = S[n-1].x + (n-1)*t + S[n-1].b[2];
+    const W = inkR - inkL;
+    const sTop = S[0].b[1];
+    const top = Math.min(...S.map(g=>g.b[1]));
+    const k = p.desc/1000, m = C.length;
+    const c0 = (C[0].x + C[0].b[0]) * k;
+    const cw0 = (C[m-1].x + C[m-1].b[2]) * k - c0;
+    const tc = (W - cw0) / (m-1);
+    const capD = cap*k, gapL = 0.7*capD, descBase = gapL + capD;
+    const descBottom = descBase + Math.max(...C.map(g=>g.b[3]))*k;
+    const blockH = descBase - sTop;
+    const H = blockH * p.scale, mw = H*68/84;
+    const markTop = p.align==='top' ? sTop : p.align==='base' ? descBase - H : sTop + blockH/2 - H/2;
+    const gap = p.sep * blockH * 21/84;
+    const mx = mw + gap;
+    const sc = H/84;
+    const poly = pts => 'M' + pts.map(([a,b])=>`${((a-16)*sc).toFixed(1)},${(markTop+(b-8)*sc).toFixed(1)}`).join(' L') + ' Z';
+    const topP = [[84,8],[40,8],[27,21],[27,37],[40,50],[48,50],[48,29],[84,29]];
+    const markD = poly(topP) + ' ' + poly(topP.map(([a,b])=>[100-a,100-b]));
+    const word = S.map((g,i)=>`<path transform="translate(${(mx - inkL + g.x + i*t).toFixed(1)} 0)" d="${g.d}"/>`).join('');
+    const desc = opts.short ? '' : C.map((g,j)=>`<path transform="translate(${(mx + g.x*k - c0 + j*tc).toFixed(1)} ${descBase.toFixed(1)}) scale(${k})" d="${g.d}"/>`).join('');
+    const y0 = Math.min(markTop, top), y1 = Math.max(markTop+H, opts.short ? 0 : descBottom);
+    const x1 = mx + W;
+    let guides = '';
+    if (opts.guides){
+      const gc = '#1E8CFF', sw = Math.max(3, H/220);
+      const hl = y => `<line x1="${-H*0.15}" x2="${x1+H*0.15}" y1="${y}" y2="${y}" stroke="${gc}" stroke-width="${sw}" stroke-dasharray="${sw*4} ${sw*3}"/>`;
+      const vl = x => `<line y1="${y0-H*0.15}" y2="${y1+H*0.15}" x1="${x}" x2="${x}" stroke="${gc}" stroke-width="${sw}" stroke-dasharray="${sw*4} ${sw*3}"/>`;
+      guides = `<g>${hl(sTop)}${hl(0)}${hl(descBase-capD)}${hl(descBase)}${hl(markTop)}${hl(markTop+H)}${vl(mw)}${vl(mx)}${vl(x1)}</g>`;
+    }
+    const pad = opts.guides ? H*0.2 : 0;
+    const vb = [-pad, y0-pad, x1+2*pad, (y1-y0)+2*pad].map(v=>v.toFixed(1)).join(' ');
+    return { svg:`<svg viewBox="${vb}" role="img" aria-label="Senda Consultora" ${opts.attrs||''}><path d="${markD}" fill="${mark}"/><g fill="${ink}">${word}${desc}</g>${guides}</svg>`,
+             info:{ tc, W, H, blockH } , mark:{ d:markD, x:0, y:markTop, w:mw, h:H } };
+  }
+  function monogram(color, size){
+    const w = size*68/84, sc = size/84;
+    const topP = [[84,8],[40,8],[27,21],[27,37],[40,50],[48,50],[48,29],[84,29]];
+    const poly = pts => 'M' + pts.map(([a,b])=>`${((a-16)*sc).toFixed(2)},${((b-8)*sc).toFixed(2)}`).join(' L') + ' Z';
+    return `<svg width="${w.toFixed(1)}" height="${size}" viewBox="0 0 ${w.toFixed(2)} ${size}" aria-hidden="true"><path fill="${color}" d="${poly(topP)} ${poly(topP.map(([a,b])=>[100-a,100-b]))}"/></svg>`;
+  }
+
+  const red = () => REDS[state.red][1];
+
+  /* ---------- variantes fijas ---------- */
+  function presets(){
+    document.getElementById('presets').innerHTML = PRESETS.map(p=>{
+      const cur = ['scale','track','desc','sep','align'].every(k=>state[k]===p[k]);
+      return `<button type="button" class="preset" aria-current="${cur}" data-p="${p.id}">
+        <div class="art">${compose(p, red(), N).svg}</div>
+        <div class="meta">${p.tag?`<span class="tag">${p.tag}</span>`:''}<b>${p.name}</b><span>S ${p.scale.toFixed(2)}× · interletrado ${p.track} · CONSULTORA ${(p.desc/10).toFixed(1)}%</span></div></button>`;
+    }).join('');
+  }
+  document.getElementById('presets').addEventListener('click', e=>{const b=e.target.closest('[data-p]'); if(!b) return;
+    Object.assign(state, PRESETS.find(p=>p.id===b.dataset.p)); render(); document.getElementById('stage').scrollIntoView({behavior:'smooth', block:'center'});});
+
+  /* ---------- controles ---------- */
+  const $ = id => document.getElementById(id);
+  const sliders = { scale:'k-scale', track:'k-track', desc:'k-desc', sep:'k-sep' };
+  for (const [k,id] of Object.entries(sliders)) $(id).addEventListener('input', e=>{ state[k] = parseFloat(e.target.value); render(); });
+  $('k-align').addEventListener('click', e=>{const b=e.target.closest('[data-a]'); if(!b) return; state.align=b.dataset.a; render();});
+  $('k-red').addEventListener('click', e=>{const b=e.target.closest('[data-r]'); if(!b) return; state.red=b.dataset.r; render();});
+  $('k-guides').addEventListener('click', ()=>{ state.guides=!state.guides; render(); });
+
+  function controls(){
+    for (const [k,id] of Object.entries(sliders)) $(id).value = state[k];
+    $('o-scale').textContent = state.scale.toFixed(2)+'×';
+    $('o-track').textContent = (state.track>0?'+':'')+state.track;
+    $('o-desc').textContent = (state.desc/10).toFixed(1)+'%';
+    $('o-sep').textContent = state.sep.toFixed(2)+'×';
+    $('k-align').innerHTML = Object.entries(ALIGNS).map(([k,v])=>`<button type="button" class="pick" role="radio" aria-checked="${state.align===k}" data-a="${k}">${v}</button>`).join('');
+    $('k-red').innerHTML = Object.entries(REDS).map(([k,[n,h]])=>`<button type="button" class="pick" role="radio" aria-checked="${state.red===k}" data-r="${k}"><i style="background:${h}"></i>${n}</button>`).join('');
+    $('k-guides').setAttribute('aria-checked', state.guides); $('k-guides').textContent = state.guides ? 'Ocultar guías' : 'Mostrar guías';
+    $('readout').textContent = `S: ${state.scale.toFixed(2)}×  ·  posición: ${ALIGNS[state.align].toLowerCase()}\nInterletrado Senda: ${state.track}\nCONSULTORA: ${(state.desc/10).toFixed(1)}%\nSeparación: ${state.sep.toFixed(2)}×\nRojo: ${REDS[state.red][0]} ${red()}`;
+  }
+
+  function stage(){
+    $('stage').innerHTML = compose(state, red(), N, {guides: state.guides}).svg;
+    $('sizes').innerHTML = [320,200,160].map(w=>`<figure><div style="width:${w}px">${compose(state, red(), N).svg}</div><figcaption>${w} px</figcaption></figure>`).join('')
+      + `<figure><div style="width:110px">${compose(state, red(), N, {short:true}).svg}</div><figcaption>Corta · 110 px</figcaption></figure>`
+      + `<figure><div style="display:flex;gap:10px;align-items:flex-end">${monogram(red(),32)}${monogram(red(),16)}</div><figcaption>Monograma</figcaption></figure>`;
+  }
+
+  function apps(){
+    const r = red(), on = ['carmin','granate'].includes(state.red) ? B : N;
+    $('apps').innerHTML = `
+      <figure class="a1"><div class="frame r-card" style="background:${N};display:grid;place-items:center"><div style="width:62%">${compose(state, r, B).svg}</div></div><figcaption>Tarjeta · frente</figcaption></figure>
+      <figure class="a2"><div class="frame r-card" style="background:${r};display:grid;place-items:center"><div style="width:62%">${compose(state, on, on).svg}</div></div><figcaption>Sobre el rojo, en un solo color</figcaption></figure>
+      <figure class="a3"><div class="frame r-web" style="background:${B}">
+        <div style="position:absolute;inset:0;padding:3.5% 4.5%;display:grid;grid-template-rows:auto 1fr;color:${N}">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:clamp(10px,1.2vw,13px)">
+            <div style="width:clamp(120px,19vw,210px)">${compose(state, r, N).svg}</div>
+            <span style="display:flex;gap:2em;align-items:center"><span>Servicios</span><span>Casos</span><span style="background:${r};color:${on};padding:.55em 1.1em;font-weight:600;font-family:var(--f-display)">Agendá una charla</span></span>
+          </div>
+          <div style="align-self:center;font-family:var(--f-display);font-weight:800;font-size:clamp(20px,3.4vw,42px);line-height:1.04;letter-spacing:-.015em;max-width:20ch">Estrategia comercial con la precisión de los datos.</div>
+        </div></div><figcaption>Encabezado del sitio web</figcaption></figure>
+      <figure class="a4"><div class="frame r-sq" style="background:${N};display:grid;place-items:center"><div style="width:76%">${compose(state, r, B).svg}</div></div><figcaption>Portada de perfil</figcaption></figure>`;
+  }
+
+  function render(){
+    try{ localStorage.setItem('senda-r6', JSON.stringify(state)); }catch(e){}
+    presets(); controls(); stage(); apps();
+  }
+  render();
+})();
+</script>
