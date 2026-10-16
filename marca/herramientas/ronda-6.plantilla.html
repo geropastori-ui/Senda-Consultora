@@ -68,6 +68,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .pick[aria-checked="true"]{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
 .pick i{width:12px;height:12px;border-radius:50%;display:inline-block}
 .guides-on .g{display:inline}.g{display:none}
+.grp{border:1px solid var(--line);padding:12px 12px 14px;margin:0;display:grid;gap:14px}
+.grp legend{padding:0 6px}
+.dim{opacity:.4;pointer-events:none}
 .readout{font-family:var(--f-mono);font-size:12px;background:var(--chip);padding:10px 12px;line-height:1.6;white-space:pre-wrap;user-select:all}
 
 .apps{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
@@ -92,6 +95,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   <div class="label">Senda Consultora · Identidad · Ronda 6</div>
   <h1>Ajuste fino del logo</h1>
   <p class="lead">Apliqué tus tres cambios y dejé el logo armado como un constructor: arriba hay cuatro variantes fijas para comparar y abajo podés mover cada medida y ver el resultado al instante.</p>
+  <p class="lead"><b>Actualización:</b> el panel ahora tiene un grupo para la bajada "CONSULTORA" con peso, ancho (ajustada a "Senda" o libre), interletrado, alineación e interlineado con "Senda". También sumé la paleta <b>Cadete</b> (crema, azul y naranja). Tu configuración guardada se mantiene.</p>
   <div class="changes">
     <div><span class="label">Cambio 1</span><b>S más grande</b><span>Ya no queda limitada al alto del texto: lo supera y se centra sobre el bloque.</span></div>
     <div><span class="label">Cambio 2</span><b>"Senda" más compacta</b><span>Menos espacio entre letras, así la palabra se lee como un bloque.</span></div>
@@ -120,12 +124,22 @@ input[type=range]{width:100%;accent-color:var(--accent)}
         <input type="range" id="k-track" min="-60" max="20" step="1"><small>En milésimas del tamaño de la letra. 0 es el espaciado original de la tipografía.</small></div>
       <div class="ctl"><div class="row"><label for="k-desc">Tamaño de "CONSULTORA"</label><output id="o-desc"></output></div>
         <input type="range" id="k-desc" min="150" max="260" step="5"><small>Porcentaje del tamaño de "Senda". Antes era 24,5%.</small></div>
+      <fieldset class="grp"><legend class="label">Bajada "CONSULTORA"</legend>
+        <div class="ctl"><span class="label">Peso</span><div class="opts" id="k-dw" role="radiogroup" aria-label="Peso de CONSULTORA"></div></div>
+        <div class="ctl"><span class="label">Ancho</span><div class="opts" id="k-dmode" role="radiogroup" aria-label="Ancho de CONSULTORA"></div></div>
+        <div class="ctl" id="free-track"><div class="row"><label for="k-dtrack">Interletrado de "CONSULTORA"</label><output id="o-dtrack"></output></div>
+          <input type="range" id="k-dtrack" min="0" max="800" step="10"><small>En milésimas del tamaño de "CONSULTORA". Con "ajustada" se calcula sola.</small></div>
+        <div class="ctl" id="free-align"><span class="label">Alineación</span><div class="opts" id="k-dalign" role="radiogroup" aria-label="Alineación de CONSULTORA"></div></div>
+        <div class="ctl"><div class="row"><label for="k-lead">Interlineado con "Senda"</label><output id="o-lead"></output></div>
+          <input type="range" id="k-lead" min="20" max="220" step="5"><small>Espacio entre la base de "Senda" y el tope de "CONSULTORA", en % de la altura de sus mayúsculas. Antes era 70%.</small></div>
+      </fieldset>
       <div class="ctl"><div class="row"><label for="k-sep">Separación S–texto</label><output id="o-sep"></output></div>
         <input type="range" id="k-sep" min="0.5" max="1.6" step="0.05"><small>Veces el grosor de la barra de la S.</small></div>
       <div class="ctl"><span class="label">Posición de la S</span><div class="opts" id="k-align" role="radiogroup" aria-label="Posición de la S"></div></div>
-      <div class="ctl"><span class="label">Rojo</span><div class="opts" id="k-red" role="radiogroup" aria-label="Rojo"></div></div>
+      <div class="ctl"><span class="label">Paleta</span><div class="opts" id="k-red" role="radiogroup" aria-label="Paleta"></div></div>
       <div class="ctl"><span class="label">Medidas</span><div class="opts"><button type="button" class="pick" id="k-guides" role="switch" aria-checked="false">Mostrar guías</button></div></div>
       <div class="readout" id="readout" aria-live="polite"></div>
+      <button type="button" class="pick" id="k-copy" style="justify-self:start">Copiar valores</button>
     </div>
   </div>
 </section>
@@ -143,12 +157,14 @@ input[type=range]{width:100%;accent-color:var(--accent)}
       <p>Con la S a 1,4× el símbolo pasa a mandar sin aplastar al nombre. Si la agrandás más allá de 1,6×, la S empieza a funcionar como un ícono pegado a una palabra y deja de leerse como una sola pieza con el texto.</p>
       <p>Con un interletrado de −25, "Senda" queda compacta pero cada letra sigue respirando. Más allá de −40 la "n" y la "d" se empiezan a tocar.</p>
       <p>"CONSULTORA" al 20% se lee como bajada, no como un segundo nombre. Por debajo del 17% deja de leerse en tamaños chicos.</p>
+      <p><b>Bajada.</b> En modo libre, un interletrado de 250 a 350 con alineación a la izquierda da un logo más contemporáneo; ajustada a "Senda" queda más formal y simétrica. El interlineado funciona bien entre 60% y 100%: por debajo, "CONSULTORA" se pega a "Senda"; por encima, se despega y parece otro elemento. Si usás Light 300, conviene no bajar del 20% de tamaño.</p>
+      <p><b>Cadete.</b> Es la misma lógica que Señal (fondo claro, azul profundo y un acento cálido), pero con un fondo crema y un naranja más intenso. El naranja sobre el azul se lee bien en títulos (4,4:1). El crema sobre el naranja no alcanza para texto, así que sobre el naranja va siempre el azul.</p>
     </div>
     <div>
       <span class="label">Cuando lo cierres</span>
       <ol>
         <li>Elegí una variante, o pasame los valores del constructor.</li>
-        <li>Decime el rojo. Hoy está en Carmín, mi recomendación.</li>
+        <li>Decime la paleta: alguno de los rojos de Señal o Cadete.</li>
         <li>Con eso genero los archivos finales del logo en SVG y PNG y arranco el manual de marca.</li>
       </ol>
     </div>
@@ -158,8 +174,18 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 <script>
 const GLYPHS = __GLYPHS__;
 (function(){
-  const REDS = { actual:['Rojo señal','#FF4D3A'], rojo:['Rojo puro','#E5242B'], carmin:['Carmín','#D0103A'], granate:['Granate','#9B1B30'] };
-  const N = '#0F1430', B = '#F6F6F4';
+  // [nombre, acento, tinta oscura, fondo claro, color legible sobre el acento]
+  const REDS = {
+    actual:['Señal · Rojo señal','#FF4D3A','#0F1430','#F6F6F4','#0F1430'],
+    rojo:['Señal · Rojo puro','#E5242B','#0F1430','#F6F6F4','#0F1430'],
+    carmin:['Señal · Carmín','#D0103A','#0F1430','#F6F6F4','#F6F6F4'],
+    granate:['Señal · Granate','#9B1B30','#0F1430','#F6F6F4','#F6F6F4'],
+    cadete:['Cadete · crema, azul y naranja','#F54F1B','#1E223D','#E6D5B7','#1E223D'],
+  };
+  let N = '#0F1430', B = '#F6F6F4';
+  const WEIGHTS = { '300':'Light 300', '400':'Regular 400', '500':'Medium 500' };
+  const DMODES = { fit:'Ajustada a "Senda"', free:'Libre' };
+  const DALIGNS = { left:'Izquierda', center:'Centrada', right:'Derecha' };
   const PRESETS = [
     { id:'r5', name:'Ronda 5 (referencia)', scale:1.0, track:0, desc:245, sep:1, align:'center' },
     { id:'a', name:'A · Sutil', scale:1.25, track:-15, desc:215, sep:0.9, align:'center' },
@@ -167,11 +193,12 @@ const GLYPHS = __GLYPHS__;
     { id:'c', name:'C · S protagonista', scale:1.65, track:-30, desc:185, sep:0.8, align:'center' },
   ];
   const ALIGNS = { center:'Centrada', base:'Apoyada en la base', top:'Colgada del tope' };
-  const state = Object.assign({ red:'carmin', guides:false }, PRESETS[2]);
+  const state = Object.assign({ red:'carmin', guides:false, descW:'400', descMode:'fit', descTrack:300, descAlign:'left', lead:70 }, PRESETS[2]);
   try{ const s = JSON.parse(localStorage.getItem('senda-r6')||'null'); if (s) Object.assign(state, s); }catch(e){}
+  if (!REDS[state.red]) state.red = 'carmin';
 
   function compose(p, mark, ink, opts={}){
-    const S = GLYPHS.senda, C = GLYPHS.consultora, cap = GLYPHS.capHeight;
+    const S = GLYPHS.senda, C = (GLYPHS.consultoraPorPeso||{})[p.descW||'400'] || GLYPHS.consultora, cap = GLYPHS.capHeight;
     const t = p.track, n = S.length;
     const inkL = S[0].x + S[0].b[0];
     const inkR = S[n-1].x + (n-1)*t + S[n-1].b[2];
@@ -181,8 +208,11 @@ const GLYPHS = __GLYPHS__;
     const k = p.desc/1000, m = C.length;
     const c0 = (C[0].x + C[0].b[0]) * k;
     const cw0 = (C[m-1].x + C[m-1].b[2]) * k - c0;
-    const tc = (W - cw0) / (m-1);
-    const capD = cap*k, gapL = 0.7*capD, descBase = gapL + capD;
+    const free = p.descMode === 'free';
+    const tc = free ? (p.descTrack ?? 300) * k : (W - cw0) / (m-1);
+    const cw = cw0 + (m-1)*tc;
+    const dOff = !free ? 0 : p.descAlign==='center' ? (W-cw)/2 : p.descAlign==='right' ? W-cw : 0;
+    const capD = cap*k, gapL = ((p.lead ?? 70)/100)*capD, descBase = gapL + capD;
     const descBottom = descBase + Math.max(...C.map(g=>g.b[3]))*k;
     const blockH = descBase - sTop;
     const H = blockH * p.scale, mw = H*68/84;
@@ -194,20 +224,21 @@ const GLYPHS = __GLYPHS__;
     const topP = [[84,8],[40,8],[27,21],[27,37],[40,50],[48,50],[48,29],[84,29]];
     const markD = poly(topP) + ' ' + poly(topP.map(([a,b])=>[100-a,100-b]));
     const word = S.map((g,i)=>`<path transform="translate(${(mx - inkL + g.x + i*t).toFixed(1)} 0)" d="${g.d}"/>`).join('');
-    const desc = opts.short ? '' : C.map((g,j)=>`<path transform="translate(${(mx + g.x*k - c0 + j*tc).toFixed(1)} ${descBase.toFixed(1)}) scale(${k})" d="${g.d}"/>`).join('');
+    const desc = opts.short ? '' : C.map((g,j)=>`<path transform="translate(${(mx + dOff + g.x*k - c0 + j*tc).toFixed(1)} ${descBase.toFixed(1)}) scale(${k})" d="${g.d}"/>`).join('');
     const y0 = Math.min(markTop, top), y1 = Math.max(markTop+H, opts.short ? 0 : descBottom);
-    const x1 = mx + W;
+    const x1 = mx + (opts.short ? W : Math.max(W, dOff + cw));
     let guides = '';
     if (opts.guides){
       const gc = '#1E8CFF', sw = Math.max(3, H/220);
       const hl = y => `<line x1="${-H*0.15}" x2="${x1+H*0.15}" y1="${y}" y2="${y}" stroke="${gc}" stroke-width="${sw}" stroke-dasharray="${sw*4} ${sw*3}"/>`;
       const vl = x => `<line y1="${y0-H*0.15}" y2="${y1+H*0.15}" x1="${x}" x2="${x}" stroke="${gc}" stroke-width="${sw}" stroke-dasharray="${sw*4} ${sw*3}"/>`;
-      guides = `<g>${hl(sTop)}${hl(0)}${hl(descBase-capD)}${hl(descBase)}${hl(markTop)}${hl(markTop+H)}${vl(mw)}${vl(mx)}${vl(x1)}</g>`;
+      guides = `<g>${hl(sTop)}${hl(0)}${hl(descBase-capD)}${hl(descBase)}${hl(markTop)}${hl(markTop+H)}${vl(mw)}${vl(mx)}${vl(mx+W)}${opts.short?'':vl(mx+dOff)+vl(mx+dOff+cw)}</g>`;
     }
     const pad = opts.guides ? H*0.2 : 0;
-    const vb = [-pad, y0-pad, x1+2*pad, (y1-y0)+2*pad].map(v=>v.toFixed(1)).join(' ');
+    const xMin = Math.min(0, opts.short ? 0 : mx + dOff);
+    const vb = [xMin-pad, y0-pad, (x1-xMin)+2*pad, (y1-y0)+2*pad].map(v=>v.toFixed(1)).join(' ');
     return { svg:`<svg viewBox="${vb}" role="img" aria-label="Senda Consultora" ${opts.attrs||''}><path d="${markD}" fill="${mark}"/><g fill="${ink}">${word}${desc}</g>${guides}</svg>`,
-             info:{ tc, W, H, blockH } , mark:{ d:markD, x:0, y:markTop, w:mw, h:H } };
+             info:{ tc, W, H, blockH, k } , mark:{ d:markD, x:0, y:markTop, w:mw, h:H } };
   }
   function monogram(color, size){
     const w = size*68/84, sc = size/84;
@@ -217,13 +248,15 @@ const GLYPHS = __GLYPHS__;
   }
 
   const red = () => REDS[state.red][1];
+  const onAcc = () => REDS[state.red][4];
+  function syncPalette(){ N = REDS[state.red][2]; B = REDS[state.red][3]; }
 
   /* ---------- variantes fijas ---------- */
   function presets(){
     document.getElementById('presets').innerHTML = PRESETS.map(p=>{
       const cur = ['scale','track','desc','sep','align'].every(k=>state[k]===p[k]);
       return `<button type="button" class="preset" aria-current="${cur}" data-p="${p.id}">
-        <div class="art">${compose(p, red(), N).svg}</div>
+        <div class="art" style="background:${B}">${compose(Object.assign({}, state, p), red(), N).svg}</div>
         <div class="meta">${p.tag?`<span class="tag">${p.tag}</span>`:''}<b>${p.name}</b><span>S ${p.scale.toFixed(2)}× · interletrado ${p.track} · CONSULTORA ${(p.desc/10).toFixed(1)}%</span></div></button>`;
     }).join('');
   }
@@ -232,11 +265,20 @@ const GLYPHS = __GLYPHS__;
 
   /* ---------- controles ---------- */
   const $ = id => document.getElementById(id);
-  const sliders = { scale:'k-scale', track:'k-track', desc:'k-desc', sep:'k-sep' };
+  const sliders = { scale:'k-scale', track:'k-track', desc:'k-desc', sep:'k-sep', descTrack:'k-dtrack', lead:'k-lead' };
   for (const [k,id] of Object.entries(sliders)) $(id).addEventListener('input', e=>{ state[k] = parseFloat(e.target.value); render(); });
   $('k-align').addEventListener('click', e=>{const b=e.target.closest('[data-a]'); if(!b) return; state.align=b.dataset.a; render();});
   $('k-red').addEventListener('click', e=>{const b=e.target.closest('[data-r]'); if(!b) return; state.red=b.dataset.r; render();});
   $('k-guides').addEventListener('click', ()=>{ state.guides=!state.guides; render(); });
+  const radio = (id, attr, key) => $(id).addEventListener('click', e=>{const b=e.target.closest(`[${attr}]`); if(!b) return; state[key]=b.getAttribute(attr); render();});
+  radio('k-dw','data-w','descW'); radio('k-dmode','data-m','descMode'); radio('k-dalign','data-al','descAlign');
+  $('k-copy').addEventListener('click', ()=>{
+    const txt = $('readout').textContent, b = $('k-copy');
+    const done = ()=>{ b.textContent = 'Copiado'; setTimeout(()=>b.textContent='Copiar valores', 1600); };
+    try{ navigator.clipboard.writeText(txt).then(done, ()=>{ selectReadout(); b.textContent='Seleccionado: copialo con Ctrl+C'; }); }
+    catch(e){ selectReadout(); b.textContent='Seleccionado: copialo con Ctrl+C'; }
+  });
+  function selectReadout(){ const r = document.createRange(); r.selectNodeContents($('readout')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
 
   function controls(){
     for (const [k,id] of Object.entries(sliders)) $(id).value = state[k];
@@ -244,13 +286,24 @@ const GLYPHS = __GLYPHS__;
     $('o-track').textContent = (state.track>0?'+':'')+state.track;
     $('o-desc').textContent = (state.desc/10).toFixed(1)+'%';
     $('o-sep').textContent = state.sep.toFixed(2)+'×';
+    const opt = (map, cur, attr) => Object.entries(map).map(([k,v])=>`<button type="button" class="pick" role="radio" aria-checked="${cur===k}" ${attr}="${k}">${v}</button>`).join('');
+    $('k-dw').innerHTML = opt(WEIGHTS, state.descW, 'data-w');
+    $('k-dmode').innerHTML = opt(DMODES, state.descMode, 'data-m');
+    $('k-dalign').innerHTML = opt(DALIGNS, state.descAlign, 'data-al');
+    const free = state.descMode==='free';
+    const tcNow = compose(state, '#000', '#000').info;
+    if (!free) $('k-dtrack').value = Math.round(tcNow.tc / tcNow.k);
+    $('o-dtrack').textContent = free ? state.descTrack : Math.round(tcNow.tc / tcNow.k) + ' (auto)';
+    $('k-dtrack').disabled = !free; $('free-track').classList.toggle('dim', !free); $('free-align').classList.toggle('dim', !free);
+    $('o-lead').textContent = state.lead + '%';
     $('k-align').innerHTML = Object.entries(ALIGNS).map(([k,v])=>`<button type="button" class="pick" role="radio" aria-checked="${state.align===k}" data-a="${k}">${v}</button>`).join('');
-    $('k-red').innerHTML = Object.entries(REDS).map(([k,[n,h]])=>`<button type="button" class="pick" role="radio" aria-checked="${state.red===k}" data-r="${k}"><i style="background:${h}"></i>${n}</button>`).join('');
+    $('k-red').innerHTML = Object.entries(REDS).map(([k,[n,h,ink,light]])=>`<button type="button" class="pick" role="radio" aria-checked="${state.red===k}" data-r="${k}"><i style="background:${h}"></i>${k==='cadete'?`<i style="background:${ink}"></i><i style="background:${light};border:1px solid #0002"></i>`:''}${n}</button>`).join('');
     $('k-guides').setAttribute('aria-checked', state.guides); $('k-guides').textContent = state.guides ? 'Ocultar guías' : 'Mostrar guías';
-    $('readout').textContent = `S: ${state.scale.toFixed(2)}×  ·  posición: ${ALIGNS[state.align].toLowerCase()}\nInterletrado Senda: ${state.track}\nCONSULTORA: ${(state.desc/10).toFixed(1)}%\nSeparación: ${state.sep.toFixed(2)}×\nRojo: ${REDS[state.red][0]} ${red()}`;
+    $('readout').textContent = `S: ${state.scale.toFixed(2)}×  ·  posición: ${ALIGNS[state.align].toLowerCase()}\nInterletrado Senda: ${state.track}\nCONSULTORA: ${(state.desc/10).toFixed(1)}% · ${WEIGHTS[state.descW]}\nCONSULTORA ancho: ${DMODES[state.descMode]}${free?` · interletrado ${state.descTrack} · ${DALIGNS[state.descAlign].toLowerCase()}`:` · interletrado auto ${Math.round(tcNow.tc/tcNow.k)}`}\nInterlineado: ${state.lead}%\nSeparación: ${state.sep.toFixed(2)}×\nPaleta: ${REDS[state.red][0]} ${red()}`;
   }
 
   function stage(){
+    $('stage').style.background = B; $('sizes').style.background = B;
     $('stage').innerHTML = compose(state, red(), N, {guides: state.guides}).svg;
     $('sizes').innerHTML = [320,200,160].map(w=>`<figure><div style="width:${w}px">${compose(state, red(), N).svg}</div><figcaption>${w} px</figcaption></figure>`).join('')
       + `<figure><div style="width:110px">${compose(state, red(), N, {short:true}).svg}</div><figcaption>Corta · 110 px</figcaption></figure>`
@@ -258,10 +311,10 @@ const GLYPHS = __GLYPHS__;
   }
 
   function apps(){
-    const r = red(), on = ['carmin','granate'].includes(state.red) ? B : N;
+    const r = red(), on = onAcc();
     $('apps').innerHTML = `
       <figure class="a1"><div class="frame r-card" style="background:${N};display:grid;place-items:center"><div style="width:62%">${compose(state, r, B).svg}</div></div><figcaption>Tarjeta · frente</figcaption></figure>
-      <figure class="a2"><div class="frame r-card" style="background:${r};display:grid;place-items:center"><div style="width:62%">${compose(state, on, on).svg}</div></div><figcaption>Sobre el rojo, en un solo color</figcaption></figure>
+      <figure class="a2"><div class="frame r-card" style="background:${r};display:grid;place-items:center"><div style="width:62%">${compose(state, on, on).svg}</div></div><figcaption>Sobre el color de acento, en un solo color</figcaption></figure>
       <figure class="a3"><div class="frame r-web" style="background:${B}">
         <div style="position:absolute;inset:0;padding:3.5% 4.5%;display:grid;grid-template-rows:auto 1fr;color:${N}">
           <div style="display:flex;justify-content:space-between;align-items:center;font-size:clamp(10px,1.2vw,13px)">
@@ -275,7 +328,7 @@ const GLYPHS = __GLYPHS__;
 
   function render(){
     try{ localStorage.setItem('senda-r6', JSON.stringify(state)); }catch(e){}
-    presets(); controls(); stage(); apps();
+    syncPalette(); presets(); controls(); stage(); apps();
   }
   render();
 })();

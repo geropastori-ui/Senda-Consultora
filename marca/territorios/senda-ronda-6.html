@@ -68,6 +68,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .pick[aria-checked="true"]{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
 .pick i{width:12px;height:12px;border-radius:50%;display:inline-block}
 .guides-on .g{display:inline}.g{display:none}
+.grp{border:1px solid var(--line);padding:12px 12px 14px;margin:0;display:grid;gap:14px}
+.grp legend{padding:0 6px}
+.dim{opacity:.4;pointer-events:none}
 .readout{font-family:var(--f-mono);font-size:12px;background:var(--chip);padding:10px 12px;line-height:1.6;white-space:pre-wrap;user-select:all}
 
 .apps{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
@@ -92,6 +95,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   <div class="label">Senda Consultora · Identidad · Ronda 6</div>
   <h1>Ajuste fino del logo</h1>
   <p class="lead">Apliqué tus tres cambios y dejé el logo armado como un constructor: arriba hay cuatro variantes fijas para comparar y abajo podés mover cada medida y ver el resultado al instante.</p>
+  <p class="lead"><b>Actualización:</b> el panel ahora tiene un grupo para la bajada "CONSULTORA" con peso, ancho (ajustada a "Senda" o libre), interletrado, alineación e interlineado con "Senda". También sumé la paleta <b>Cadete</b> (crema, azul y naranja). Tu configuración guardada se mantiene.</p>
   <div class="changes">
     <div><span class="label">Cambio 1</span><b>S más grande</b><span>Ya no queda limitada al alto del texto: lo supera y se centra sobre el bloque.</span></div>
     <div><span class="label">Cambio 2</span><b>"Senda" más compacta</b><span>Menos espacio entre letras, así la palabra se lee como un bloque.</span></div>
@@ -120,12 +124,22 @@ input[type=range]{width:100%;accent-color:var(--accent)}
         <input type="range" id="k-track" min="-60" max="20" step="1"><small>En milésimas del tamaño de la letra. 0 es el espaciado original de la tipografía.</small></div>
       <div class="ctl"><div class="row"><label for="k-desc">Tamaño de "CONSULTORA"</label><output id="o-desc"></output></div>
         <input type="range" id="k-desc" min="150" max="260" step="5"><small>Porcentaje del tamaño de "Senda". Antes era 24,5%.</small></div>
+      <fieldset class="grp"><legend class="label">Bajada "CONSULTORA"</legend>
+        <div class="ctl"><span class="label">Peso</span><div class="opts" id="k-dw" role="radiogroup" aria-label="Peso de CONSULTORA"></div></div>
+        <div class="ctl"><span class="label">Ancho</span><div class="opts" id="k-dmode" role="radiogroup" aria-label="Ancho de CONSULTORA"></div></div>
+        <div class="ctl" id="free-track"><div class="row"><label for="k-dtrack">Interletrado de "CONSULTORA"</label><output id="o-dtrack"></output></div>
+          <input type="range" id="k-dtrack" min="0" max="800" step="10"><small>En milésimas del tamaño de "CONSULTORA". Con "ajustada" se calcula sola.</small></div>
+        <div class="ctl" id="free-align"><span class="label">Alineación</span><div class="opts" id="k-dalign" role="radiogroup" aria-label="Alineación de CONSULTORA"></div></div>
+        <div class="ctl"><div class="row"><label for="k-lead">Interlineado con "Senda"</label><output id="o-lead"></output></div>
+          <input type="range" id="k-lead" min="20" max="220" step="5"><small>Espacio entre la base de "Senda" y el tope de "CONSULTORA", en % de la altura de sus mayúsculas. Antes era 70%.</small></div>
+      </fieldset>
       <div class="ctl"><div class="row"><label for="k-sep">Separación S–texto</label><output id="o-sep"></output></div>
         <input type="range" id="k-sep" min="0.5" max="1.6" step="0.05"><small>Veces el grosor de la barra de la S.</small></div>
       <div class="ctl"><span class="label">Posición de la S</span><div class="opts" id="k-align" role="radiogroup" aria-label="Posición de la S"></div></div>
-      <div class="ctl"><span class="label">Rojo</span><div class="opts" id="k-red" role="radiogroup" aria-label="Rojo"></div></div>
+      <div class="ctl"><span class="label">Paleta</span><div class="opts" id="k-red" role="radiogroup" aria-label="Paleta"></div></div>
       <div class="ctl"><span class="label">Medidas</span><div class="opts"><button type="button" class="pick" id="k-guides" role="switch" aria-checked="false">Mostrar guías</button></div></div>
       <div class="readout" id="readout" aria-live="polite"></div>
+      <button type="button" class="pick" id="k-copy" style="justify-self:start">Copiar valores</button>
     </div>
   </div>
 </section>
@@ -143,12 +157,14 @@ input[type=range]{width:100%;accent-color:var(--accent)}
       <p>Con la S a 1,4× el símbolo pasa a mandar sin aplastar al nombre. Si la agrandás más allá de 1,6×, la S empieza a funcionar como un ícono pegado a una palabra y deja de leerse como una sola pieza con el texto.</p>
       <p>Con un interletrado de −25, "Senda" queda compacta pero cada letra sigue respirando. Más allá de −40 la "n" y la "d" se empiezan a tocar.</p>
       <p>"CONSULTORA" al 20% se lee como bajada, no como un segundo nombre. Por debajo del 17% deja de leerse en tamaños chicos.</p>
+      <p><b>Bajada.</b> En modo libre, un interletrado de 250 a 350 con alineación a la izquierda da un logo más contemporáneo; ajustada a "Senda" queda más formal y simétrica. El interlineado funciona bien entre 60% y 100%: por debajo, "CONSULTORA" se pega a "Senda"; por encima, se despega y parece otro elemento. Si usás Light 300, conviene no bajar del 20% de tamaño.</p>
+      <p><b>Cadete.</b> Es la misma lógica que Señal (fondo claro, azul profundo y un acento cálido), pero con un fondo crema y un naranja más intenso. El naranja sobre el azul se lee bien en títulos (4,4:1). El crema sobre el naranja no alcanza para texto, así que sobre el naranja va siempre el azul.</p>
     </div>
     <div>
       <span class="label">Cuando lo cierres</span>
       <ol>
         <li>Elegí una variante, o pasame los valores del constructor.</li>
-        <li>Decime el rojo. Hoy está en Carmín, mi recomendación.</li>
+        <li>Decime la paleta: alguno de los rojos de Señal o Cadete.</li>
         <li>Con eso genero los archivos finales del logo en SVG y PNG y arranco el manual de marca.</li>
       </ol>
     </div>
@@ -156,10 +172,20 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 </section>
 
 <script>
-const GLYPHS = {"senda": [{"d": "M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -215Q148 -162 204 -137.5Q260 -113 323 -113Q367 -113 399 -123.5Q431 -134 448.5 -154Q466 -174 466 -201Q466 -237 440 -256.5Q414 -276 351 -287L212 -310Q123 -326 76.5 -374Q30 -422 30 -498Q30 -563 63.5 -611Q97 -659 158.5 -684.5Q220 -710 305 -710Q382 -710 459 -684Q536 -658 594 -612L516 -504Q406 -588 296 -588Q256 -588 227 -578Q198 -568 182.5 -550.5Q167 -533 167 -509Q167 -477 190.5 -459.5Q214 -442 267 -433L399 -411Q504 -394 556.5 -344.5Q609 -295 609 -214Q609 -146 572.5 -95.5Q536 -45 469.5 -17.5Q403 10 313 10Z", "x": 0.0, "b": [3.0, -710.0, 609.0, 10.0]}, {"d": "M309 10Q231 10 167.5 -26Q104 -62 67 -123Q30 -184 30 -260Q30 -336 65.5 -397Q101 -458 162 -494Q223 -530 298 -530Q373 -530 431 -493.5Q489 -457 522.5 -393.5Q556 -330 556 -250V-214H170Q179 -183 199.5 -158Q220 -133 250.5 -119.5Q281 -106 316 -106Q351 -106 380.5 -116.5Q410 -127 431 -147L521 -65Q473 -26 422.5 -8Q372 10 309 10ZM168 -312H421Q414 -343 395.5 -366.5Q377 -390 351.5 -403.5Q326 -417 295 -417Q264 -417 238 -404Q212 -391 194 -367.5Q176 -344 168 -312Z", "x": 642.0, "b": [30.0, -530.0, 556.0, 10.0]}, {"d": "M54 0V-521H191V-479Q251 -531 337 -531Q398 -531 444.5 -505Q491 -479 517 -432Q543 -385 543 -323V0H406V-303Q406 -354 377 -383.5Q348 -413 298 -413Q263 -413 236.5 -399.5Q210 -386 191 -361V0Z", "x": 1228.0, "b": [54.0, -531.0, 543.0, 0.0]}, {"d": "M295 7Q221 7 160.5 -28.5Q100 -64 65 -125Q30 -186 30 -261Q30 -336 65.5 -396.5Q101 -457 162 -492.5Q223 -528 299 -528Q337 -528 373.5 -517.5Q410 -507 441 -487V-700L578 -723V0H443V-43Q379 7 295 7ZM317 -110Q355 -110 386.5 -123Q418 -136 441 -160V-363Q418 -386 386 -399Q354 -412 317 -412Q274 -412 239.5 -392.5Q205 -373 185 -338.5Q165 -304 165 -261Q165 -218 185 -184Q205 -150 240 -130Q275 -110 317 -110Z", "x": 1822.0, "b": [30.0, -723.0, 578.0, 7.0]}, {"d": "M220 9Q164 9 121 -11.5Q78 -32 54 -68Q30 -104 30 -151Q30 -226 86.5 -267.5Q143 -309 242 -309Q310 -309 370 -288V-326Q370 -371 342 -393.5Q314 -416 260 -416Q227 -416 189 -406Q151 -396 101 -374L51 -475Q113 -504 169.5 -517.5Q226 -531 283 -531Q389 -531 447 -480.5Q505 -430 505 -338V0H370V-37Q338 -13 301 -2Q264 9 220 9ZM160 -154Q160 -124 186 -106.5Q212 -89 256 -89Q289 -89 318 -97.5Q347 -106 370 -124V-199Q345 -209 318 -214Q291 -219 260 -219Q213 -219 186.5 -201.5Q160 -184 160 -154Z", "x": 2454.0, "b": [30.0, -531.0, 505.0, 9.0]}], "consultora": [{"d": "M407 11Q331 11 265 -16.5Q199 -44 149 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 149 -606.5Q199 -656 265 -683.5Q331 -711 407 -711Q462 -711 512.5 -697.5Q563 -684 606.5 -658.5Q650 -633 684 -596L633 -542Q592 -589 532 -614.5Q472 -640 407 -640Q346 -640 294 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 204 -143.5Q243 -104 295.5 -82Q348 -60 409 -60Q474 -60 533 -85.5Q592 -111 632 -156L682 -104Q647 -68 603.5 -42Q560 -16 510 -2.5Q460 11 407 11Z", "x": 0.0, "b": [44.0, -711.0, 684.0, 11.0]}, {"d": "M405 11Q329 11 263.5 -16.5Q198 -44 148.5 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 148.5 -606.5Q198 -656 263.5 -683.5Q329 -711 405 -711Q480 -711 545.5 -683.5Q611 -656 660.5 -606.5Q710 -557 737.5 -491.5Q765 -426 765 -350Q765 -274 737.5 -208.5Q710 -143 660.5 -93.5Q611 -44 545.5 -16.5Q480 11 405 11ZM405 -60Q465 -60 516 -82Q567 -104 605.5 -143.5Q644 -183 665.5 -236Q687 -289 687 -350Q687 -412 665.5 -464.5Q644 -517 605.5 -556.5Q567 -596 516 -618Q465 -640 405 -640Q345 -640 293.5 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 203.5 -143.5Q242 -104 293.5 -82Q345 -60 405 -60Z", "x": 707.0, "b": [44.0, -711.0, 765.0, 11.0]}, {"d": "M77 0V-700H154L575 -132V-700H648V0H580L150 -583V0Z", "x": 1516.0, "b": [77.0, -700.0, 648.0, 0.0]}, {"d": "M304 10Q221 10 145 -23.5Q69 -57 11 -120L62 -173Q116 -115 177.5 -86Q239 -57 307 -57Q362 -57 404.5 -74.5Q447 -92 471 -123.5Q495 -155 495 -195Q495 -249 457.5 -278Q420 -307 334 -321L233 -337Q132 -354 84 -397Q36 -440 36 -514Q36 -572 67 -616Q98 -660 153.5 -684.5Q209 -709 282 -709Q356 -709 427.5 -685Q499 -661 558 -616L514 -556Q399 -643 279 -643Q229 -643 191 -627.5Q153 -612 132 -584.5Q111 -557 111 -520Q111 -471 144 -445Q177 -419 253 -407L353 -391Q468 -372 520 -326.5Q572 -281 572 -199Q572 -138 538 -90.5Q504 -43 443.5 -16.5Q383 10 304 10Z", "x": 2241.0, "b": [11.0, -709.0, 572.0, 10.0]}, {"d": "M352 11Q263 11 198 -26.5Q133 -64 98 -133Q63 -202 63 -296V-700H140V-296Q140 -224 166 -171Q192 -118 240 -89Q288 -60 352 -60Q417 -60 464.5 -89Q512 -118 538 -171Q564 -224 564 -296V-700H641V-296Q641 -202 605.5 -133Q570 -64 505.5 -26.5Q441 11 352 11Z", "x": 2841.0, "b": [63.0, -700.0, 641.0, 11.0]}, {"d": "M77 0V-700H154V-69H571V0Z", "x": 3545.0, "b": [77.0, -700.0, 571.0, 0.0]}, {"d": "M270 0V-631H17V-700H600V-631H347V0Z", "x": 3999.0, "b": [17.0, -700.0, 600.0, 0.0]}, {"d": "M405 11Q329 11 263.5 -16.5Q198 -44 148.5 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 148.5 -606.5Q198 -656 263.5 -683.5Q329 -711 405 -711Q480 -711 545.5 -683.5Q611 -656 660.5 -606.5Q710 -557 737.5 -491.5Q765 -426 765 -350Q765 -274 737.5 -208.5Q710 -143 660.5 -93.5Q611 -44 545.5 -16.5Q480 11 405 11ZM405 -60Q465 -60 516 -82Q567 -104 605.5 -143.5Q644 -183 665.5 -236Q687 -289 687 -350Q687 -412 665.5 -464.5Q644 -517 605.5 -556.5Q567 -596 516 -618Q465 -640 405 -640Q345 -640 293.5 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 203.5 -143.5Q242 -104 293.5 -82Q345 -60 405 -60Z", "x": 4566.0, "b": [44.0, -711.0, 765.0, 11.0]}, {"d": "M77 0V-700H377Q446 -700 497 -675Q548 -650 576.5 -605Q605 -560 605 -499Q605 -430 564.5 -380.5Q524 -331 456 -311L613 0H528L378 -301H154V0ZM154 -366H372Q443 -366 485.5 -402Q528 -438 528 -499Q528 -559 485.5 -595Q443 -631 372 -631H154Z", "x": 5375.0, "b": [77.0, -700.0, 613.0, 0.0]}, {"d": "M4 0 294 -700H387L675 0H591L503 -220H173L84 0ZM200 -286H476L338 -629Z", "x": 6030.0, "b": [4.0, -700.0, 675.0, 0.0]}], "capHeight": 700};
+const GLYPHS = {"senda": [{"d": "M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -215Q148 -162 204 -137.5Q260 -113 323 -113Q367 -113 399 -123.5Q431 -134 448.5 -154Q466 -174 466 -201Q466 -237 440 -256.5Q414 -276 351 -287L212 -310Q123 -326 76.5 -374Q30 -422 30 -498Q30 -563 63.5 -611Q97 -659 158.5 -684.5Q220 -710 305 -710Q382 -710 459 -684Q536 -658 594 -612L516 -504Q406 -588 296 -588Q256 -588 227 -578Q198 -568 182.5 -550.5Q167 -533 167 -509Q167 -477 190.5 -459.5Q214 -442 267 -433L399 -411Q504 -394 556.5 -344.5Q609 -295 609 -214Q609 -146 572.5 -95.5Q536 -45 469.5 -17.5Q403 10 313 10Z", "x": 0.0, "b": [3.0, -710.0, 609.0, 10.0]}, {"d": "M309 10Q231 10 167.5 -26Q104 -62 67 -123Q30 -184 30 -260Q30 -336 65.5 -397Q101 -458 162 -494Q223 -530 298 -530Q373 -530 431 -493.5Q489 -457 522.5 -393.5Q556 -330 556 -250V-214H170Q179 -183 199.5 -158Q220 -133 250.5 -119.5Q281 -106 316 -106Q351 -106 380.5 -116.5Q410 -127 431 -147L521 -65Q473 -26 422.5 -8Q372 10 309 10ZM168 -312H421Q414 -343 395.5 -366.5Q377 -390 351.5 -403.5Q326 -417 295 -417Q264 -417 238 -404Q212 -391 194 -367.5Q176 -344 168 -312Z", "x": 642.0, "b": [30.0, -530.0, 556.0, 10.0]}, {"d": "M54 0V-521H191V-479Q251 -531 337 -531Q398 -531 444.5 -505Q491 -479 517 -432Q543 -385 543 -323V0H406V-303Q406 -354 377 -383.5Q348 -413 298 -413Q263 -413 236.5 -399.5Q210 -386 191 -361V0Z", "x": 1228.0, "b": [54.0, -531.0, 543.0, 0.0]}, {"d": "M295 7Q221 7 160.5 -28.5Q100 -64 65 -125Q30 -186 30 -261Q30 -336 65.5 -396.5Q101 -457 162 -492.5Q223 -528 299 -528Q337 -528 373.5 -517.5Q410 -507 441 -487V-700L578 -723V0H443V-43Q379 7 295 7ZM317 -110Q355 -110 386.5 -123Q418 -136 441 -160V-363Q418 -386 386 -399Q354 -412 317 -412Q274 -412 239.5 -392.5Q205 -373 185 -338.5Q165 -304 165 -261Q165 -218 185 -184Q205 -150 240 -130Q275 -110 317 -110Z", "x": 1822.0, "b": [30.0, -723.0, 578.0, 7.0]}, {"d": "M220 9Q164 9 121 -11.5Q78 -32 54 -68Q30 -104 30 -151Q30 -226 86.5 -267.5Q143 -309 242 -309Q310 -309 370 -288V-326Q370 -371 342 -393.5Q314 -416 260 -416Q227 -416 189 -406Q151 -396 101 -374L51 -475Q113 -504 169.5 -517.5Q226 -531 283 -531Q389 -531 447 -480.5Q505 -430 505 -338V0H370V-37Q338 -13 301 -2Q264 9 220 9ZM160 -154Q160 -124 186 -106.5Q212 -89 256 -89Q289 -89 318 -97.5Q347 -106 370 -124V-199Q345 -209 318 -214Q291 -219 260 -219Q213 -219 186.5 -201.5Q160 -184 160 -154Z", "x": 2454.0, "b": [30.0, -531.0, 505.0, 9.0]}], "consultora": [{"d": "M407 11Q331 11 265 -16.5Q199 -44 149 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 149 -606.5Q199 -656 265 -683.5Q331 -711 407 -711Q462 -711 512.5 -697.5Q563 -684 606.5 -658.5Q650 -633 684 -596L633 -542Q592 -589 532 -614.5Q472 -640 407 -640Q346 -640 294 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 204 -143.5Q243 -104 295.5 -82Q348 -60 409 -60Q474 -60 533 -85.5Q592 -111 632 -156L682 -104Q647 -68 603.5 -42Q560 -16 510 -2.5Q460 11 407 11Z", "x": 0.0, "b": [44.0, -711.0, 684.0, 11.0]}, {"d": "M405 11Q329 11 263.5 -16.5Q198 -44 148.5 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 148.5 -606.5Q198 -656 263.5 -683.5Q329 -711 405 -711Q480 -711 545.5 -683.5Q611 -656 660.5 -606.5Q710 -557 737.5 -491.5Q765 -426 765 -350Q765 -274 737.5 -208.5Q710 -143 660.5 -93.5Q611 -44 545.5 -16.5Q480 11 405 11ZM405 -60Q465 -60 516 -82Q567 -104 605.5 -143.5Q644 -183 665.5 -236Q687 -289 687 -350Q687 -412 665.5 -464.5Q644 -517 605.5 -556.5Q567 -596 516 -618Q465 -640 405 -640Q345 -640 293.5 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 203.5 -143.5Q242 -104 293.5 -82Q345 -60 405 -60Z", "x": 707.0, "b": [44.0, -711.0, 765.0, 11.0]}, {"d": "M77 0V-700H154L575 -132V-700H648V0H580L150 -583V0Z", "x": 1516.0, "b": [77.0, -700.0, 648.0, 0.0]}, {"d": "M304 10Q221 10 145 -23.5Q69 -57 11 -120L62 -173Q116 -115 177.5 -86Q239 -57 307 -57Q362 -57 404.5 -74.5Q447 -92 471 -123.5Q495 -155 495 -195Q495 -249 457.5 -278Q420 -307 334 -321L233 -337Q132 -354 84 -397Q36 -440 36 -514Q36 -572 67 -616Q98 -660 153.5 -684.5Q209 -709 282 -709Q356 -709 427.5 -685Q499 -661 558 -616L514 -556Q399 -643 279 -643Q229 -643 191 -627.5Q153 -612 132 -584.5Q111 -557 111 -520Q111 -471 144 -445Q177 -419 253 -407L353 -391Q468 -372 520 -326.5Q572 -281 572 -199Q572 -138 538 -90.5Q504 -43 443.5 -16.5Q383 10 304 10Z", "x": 2241.0, "b": [11.0, -709.0, 572.0, 10.0]}, {"d": "M352 11Q263 11 198 -26.5Q133 -64 98 -133Q63 -202 63 -296V-700H140V-296Q140 -224 166 -171Q192 -118 240 -89Q288 -60 352 -60Q417 -60 464.5 -89Q512 -118 538 -171Q564 -224 564 -296V-700H641V-296Q641 -202 605.5 -133Q570 -64 505.5 -26.5Q441 11 352 11Z", "x": 2841.0, "b": [63.0, -700.0, 641.0, 11.0]}, {"d": "M77 0V-700H154V-69H571V0Z", "x": 3545.0, "b": [77.0, -700.0, 571.0, 0.0]}, {"d": "M270 0V-631H17V-700H600V-631H347V0Z", "x": 3999.0, "b": [17.0, -700.0, 600.0, 0.0]}, {"d": "M405 11Q329 11 263.5 -16.5Q198 -44 148.5 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 148.5 -606.5Q198 -656 263.5 -683.5Q329 -711 405 -711Q480 -711 545.5 -683.5Q611 -656 660.5 -606.5Q710 -557 737.5 -491.5Q765 -426 765 -350Q765 -274 737.5 -208.5Q710 -143 660.5 -93.5Q611 -44 545.5 -16.5Q480 11 405 11ZM405 -60Q465 -60 516 -82Q567 -104 605.5 -143.5Q644 -183 665.5 -236Q687 -289 687 -350Q687 -412 665.5 -464.5Q644 -517 605.5 -556.5Q567 -596 516 -618Q465 -640 405 -640Q345 -640 293.5 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 203.5 -143.5Q242 -104 293.5 -82Q345 -60 405 -60Z", "x": 4566.0, "b": [44.0, -711.0, 765.0, 11.0]}, {"d": "M77 0V-700H377Q446 -700 497 -675Q548 -650 576.5 -605Q605 -560 605 -499Q605 -430 564.5 -380.5Q524 -331 456 -311L613 0H528L378 -301H154V0ZM154 -366H372Q443 -366 485.5 -402Q528 -438 528 -499Q528 -559 485.5 -595Q443 -631 372 -631H154Z", "x": 5375.0, "b": [77.0, -700.0, 613.0, 0.0]}, {"d": "M4 0 294 -700H387L675 0H591L503 -220H173L84 0ZM200 -286H476L338 -629Z", "x": 6030.0, "b": [4.0, -700.0, 675.0, 0.0]}], "consultoraPorPeso": {"300": [{"d": "M407 11Q331 11 265.5 -17Q200 -45 151.5 -94.5Q103 -144 75.5 -209.5Q48 -275 48 -350Q48 -425 75.5 -490.5Q103 -556 151.5 -605.5Q200 -655 265.5 -683Q331 -711 407 -711Q459 -711 507.5 -699Q556 -687 599 -663Q642 -639 677 -603L647 -568Q604 -615 539.5 -641.5Q475 -668 407 -668Q340 -668 283.5 -643.5Q227 -619 184.5 -575.5Q142 -532 118.5 -474.5Q95 -417 95 -350Q95 -283 118.5 -225.5Q142 -168 184.5 -124.5Q227 -81 283.5 -56.5Q340 -32 407 -32Q475 -32 539.5 -59Q604 -86 647 -132L677 -97Q642 -61 599 -37Q556 -13 507.5 -1Q459 11 407 11Z", "x": 0.0, "b": [48.0, -711.0, 677.0, 11.0]}, {"d": "M404 11Q330 11 265.5 -16.5Q201 -44 152 -93.5Q103 -143 75.5 -208.5Q48 -274 48 -350Q48 -426 75.5 -491.5Q103 -557 152 -606.5Q201 -656 265.5 -683.5Q330 -711 404 -711Q478 -711 542.5 -683.5Q607 -656 656 -606.5Q705 -557 732.5 -491.5Q760 -426 760 -350Q760 -274 732.5 -208.5Q705 -143 656 -93.5Q607 -44 542.5 -16.5Q478 11 404 11ZM404 -32Q469 -32 525.5 -56.5Q582 -81 624 -124Q666 -167 689.5 -225Q713 -283 713 -350Q713 -417 689.5 -475Q666 -533 624 -576Q582 -619 525.5 -643.5Q469 -668 404 -668Q339 -668 282.5 -643.5Q226 -619 184 -576Q142 -533 118.5 -475Q95 -417 95 -350Q95 -283 118.5 -225Q142 -167 184 -124Q226 -81 282.5 -56.5Q339 -32 404 -32Z", "x": 704.0, "b": [48.0, -711.0, 760.0, 11.0]}, {"d": "M83 0V-700H133L585 -81V-700H631V0H591L129 -632V0Z", "x": 1512.0, "b": [83.0, -700.0, 631.0, 0.0]}, {"d": "M300 11Q216 11 143 -23.5Q70 -58 15 -123L51 -153Q101 -94 164.5 -63Q228 -32 300 -32Q360 -32 407 -53Q454 -74 481 -110.5Q508 -147 508 -193Q508 -254 466.5 -286.5Q425 -319 327 -335L242 -349Q137 -366 88 -408Q39 -450 39 -523Q39 -579 68.5 -621Q98 -663 151 -687Q204 -711 272 -711Q341 -711 410 -687.5Q479 -664 541 -618L513 -580Q395 -668 272 -668Q218 -668 176 -650Q134 -632 110 -599.5Q86 -567 86 -525Q86 -470 123 -439.5Q160 -409 247 -395L332 -381Q451 -362 503 -317.5Q555 -273 555 -190Q555 -132 522 -86.5Q489 -41 431.5 -15Q374 11 300 11Z", "x": 2226.0, "b": [15.0, -711.0, 555.0, 11.0]}, {"d": "M347 11Q264 11 201 -24.5Q138 -60 103 -128Q68 -196 68 -293V-700H114V-293Q114 -210 144 -151.5Q174 -93 226.5 -62.5Q279 -32 347 -32Q415 -32 467.5 -62.5Q520 -93 550 -151.5Q580 -210 580 -293V-700H626V-293Q626 -196 591 -128Q556 -60 493 -24.5Q430 11 347 11Z", "x": 2812.0, "b": [68.0, -700.0, 626.0, 11.0]}, {"d": "M83 0V-700H129V-43H561V0Z", "x": 3506.0, "b": [83.0, -700.0, 561.0, 0.0]}, {"d": "M277 0V-657H17V-700H583V-657H323V0Z", "x": 3909.0, "b": [17.0, -700.0, 583.0, 0.0]}, {"d": "M404 11Q330 11 265.5 -16.5Q201 -44 152 -93.5Q103 -143 75.5 -208.5Q48 -274 48 -350Q48 -426 75.5 -491.5Q103 -557 152 -606.5Q201 -656 265.5 -683.5Q330 -711 404 -711Q478 -711 542.5 -683.5Q607 -656 656 -606.5Q705 -557 732.5 -491.5Q760 -426 760 -350Q760 -274 732.5 -208.5Q705 -143 656 -93.5Q607 -44 542.5 -16.5Q478 11 404 11ZM404 -32Q469 -32 525.5 -56.5Q582 -81 624 -124Q666 -167 689.5 -225Q713 -283 713 -350Q713 -417 689.5 -475Q666 -533 624 -576Q582 -619 525.5 -643.5Q469 -668 404 -668Q339 -668 282.5 -643.5Q226 -619 184 -576Q142 -533 118.5 -475Q95 -417 95 -350Q95 -283 118.5 -225Q142 -167 184 -124Q226 -81 282.5 -56.5Q339 -32 404 -32Z", "x": 4444.0, "b": [48.0, -711.0, 760.0, 11.0]}, {"d": "M83 0V-700H365Q436 -700 485.5 -674.5Q535 -649 560.5 -605.5Q586 -562 586 -506Q586 -438 547 -387Q508 -336 434 -319L589 0H539L388 -312H129V0ZM129 -355H362Q448 -355 493.5 -398.5Q539 -442 539 -506Q539 -571 493.5 -614Q448 -657 362 -657H129Z", "x": 5252.0, "b": [83.0, -700.0, 589.0, 0.0]}, {"d": "M8 0 300 -700H357L648 0H598L501 -237H154L56 0ZM171 -278H484L328 -657Z", "x": 5896.0, "b": [8.0, -700.0, 648.0, 0.0]}], "400": [{"d": "M407 11Q331 11 265 -16.5Q199 -44 149 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 149 -606.5Q199 -656 265 -683.5Q331 -711 407 -711Q462 -711 512.5 -697.5Q563 -684 606.5 -658.5Q650 -633 684 -596L633 -542Q592 -589 532 -614.5Q472 -640 407 -640Q346 -640 294 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 204 -143.5Q243 -104 295.5 -82Q348 -60 409 -60Q474 -60 533 -85.5Q592 -111 632 -156L682 -104Q647 -68 603.5 -42Q560 -16 510 -2.5Q460 11 407 11Z", "x": 0.0, "b": [44.0, -711.0, 684.0, 11.0]}, {"d": "M405 11Q329 11 263.5 -16.5Q198 -44 148.5 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 148.5 -606.5Q198 -656 263.5 -683.5Q329 -711 405 -711Q480 -711 545.5 -683.5Q611 -656 660.5 -606.5Q710 -557 737.5 -491.5Q765 -426 765 -350Q765 -274 737.5 -208.5Q710 -143 660.5 -93.5Q611 -44 545.5 -16.5Q480 11 405 11ZM405 -60Q465 -60 516 -82Q567 -104 605.5 -143.5Q644 -183 665.5 -236Q687 -289 687 -350Q687 -412 665.5 -464.5Q644 -517 605.5 -556.5Q567 -596 516 -618Q465 -640 405 -640Q345 -640 293.5 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 203.5 -143.5Q242 -104 293.5 -82Q345 -60 405 -60Z", "x": 707.0, "b": [44.0, -711.0, 765.0, 11.0]}, {"d": "M77 0V-700H154L575 -132V-700H648V0H580L150 -583V0Z", "x": 1516.0, "b": [77.0, -700.0, 648.0, 0.0]}, {"d": "M304 10Q221 10 145 -23.5Q69 -57 11 -120L62 -173Q116 -115 177.5 -86Q239 -57 307 -57Q362 -57 404.5 -74.5Q447 -92 471 -123.5Q495 -155 495 -195Q495 -249 457.5 -278Q420 -307 334 -321L233 -337Q132 -354 84 -397Q36 -440 36 -514Q36 -572 67 -616Q98 -660 153.5 -684.5Q209 -709 282 -709Q356 -709 427.5 -685Q499 -661 558 -616L514 -556Q399 -643 279 -643Q229 -643 191 -627.5Q153 -612 132 -584.5Q111 -557 111 -520Q111 -471 144 -445Q177 -419 253 -407L353 -391Q468 -372 520 -326.5Q572 -281 572 -199Q572 -138 538 -90.5Q504 -43 443.5 -16.5Q383 10 304 10Z", "x": 2241.0, "b": [11.0, -709.0, 572.0, 10.0]}, {"d": "M352 11Q263 11 198 -26.5Q133 -64 98 -133Q63 -202 63 -296V-700H140V-296Q140 -224 166 -171Q192 -118 240 -89Q288 -60 352 -60Q417 -60 464.5 -89Q512 -118 538 -171Q564 -224 564 -296V-700H641V-296Q641 -202 605.5 -133Q570 -64 505.5 -26.5Q441 11 352 11Z", "x": 2841.0, "b": [63.0, -700.0, 641.0, 11.0]}, {"d": "M77 0V-700H154V-69H571V0Z", "x": 3545.0, "b": [77.0, -700.0, 571.0, 0.0]}, {"d": "M270 0V-631H17V-700H600V-631H347V0Z", "x": 3999.0, "b": [17.0, -700.0, 600.0, 0.0]}, {"d": "M405 11Q329 11 263.5 -16.5Q198 -44 148.5 -93.5Q99 -143 71.5 -208.5Q44 -274 44 -350Q44 -426 71.5 -491.5Q99 -557 148.5 -606.5Q198 -656 263.5 -683.5Q329 -711 405 -711Q480 -711 545.5 -683.5Q611 -656 660.5 -606.5Q710 -557 737.5 -491.5Q765 -426 765 -350Q765 -274 737.5 -208.5Q710 -143 660.5 -93.5Q611 -44 545.5 -16.5Q480 11 405 11ZM405 -60Q465 -60 516 -82Q567 -104 605.5 -143.5Q644 -183 665.5 -236Q687 -289 687 -350Q687 -412 665.5 -464.5Q644 -517 605.5 -556.5Q567 -596 516 -618Q465 -640 405 -640Q345 -640 293.5 -618Q242 -596 203.5 -556.5Q165 -517 143.5 -464.5Q122 -412 122 -350Q122 -289 143.5 -236Q165 -183 203.5 -143.5Q242 -104 293.5 -82Q345 -60 405 -60Z", "x": 4566.0, "b": [44.0, -711.0, 765.0, 11.0]}, {"d": "M77 0V-700H377Q446 -700 497 -675Q548 -650 576.5 -605Q605 -560 605 -499Q605 -430 564.5 -380.5Q524 -331 456 -311L613 0H528L378 -301H154V0ZM154 -366H372Q443 -366 485.5 -402Q528 -438 528 -499Q528 -559 485.5 -595Q443 -631 372 -631H154Z", "x": 5375.0, "b": [77.0, -700.0, 613.0, 0.0]}, {"d": "M4 0 294 -700H387L675 0H591L503 -220H173L84 0ZM200 -286H476L338 -629Z", "x": 6030.0, "b": [4.0, -700.0, 675.0, 0.0]}], "500": [{"d": "M407 11Q331 11 264.5 -16.5Q198 -44 148 -93.5Q98 -143 70.5 -208.5Q43 -274 43 -350Q43 -426 70.5 -491.5Q98 -557 148 -606.5Q198 -656 264.5 -683.5Q331 -711 407 -711Q463 -711 514 -697Q565 -683 609 -657Q653 -631 687 -593L627 -531Q587 -578 529 -603Q471 -628 407 -628Q349 -628 299 -607Q249 -586 212 -548Q175 -510 154.5 -460Q134 -410 134 -350Q134 -291 154.5 -240.5Q175 -190 212.5 -152Q250 -114 300.5 -93Q351 -72 410 -72Q473 -72 530 -97Q587 -122 626 -167L685 -107Q650 -70 606 -43.5Q562 -17 511.5 -3Q461 11 407 11Z", "x": 0.0, "b": [43.0, -711.0, 687.0, 11.0]}, {"d": "M405 11Q329 11 263 -16.5Q197 -44 147.5 -93.5Q98 -143 70.5 -208.5Q43 -274 43 -350Q43 -426 70.5 -491.5Q98 -557 147.5 -606.5Q197 -656 263 -683.5Q329 -711 405 -711Q481 -711 546.5 -683.5Q612 -656 662 -606.5Q712 -557 739.5 -491.5Q767 -426 767 -350Q767 -274 739.5 -208.5Q712 -143 662 -93.5Q612 -44 546.5 -16.5Q481 11 405 11ZM405 -72Q463 -72 512 -93Q561 -114 597.5 -152Q634 -190 655 -240.5Q676 -291 676 -350Q676 -410 655 -460Q634 -510 597.5 -548Q561 -586 512 -607Q463 -628 405 -628Q348 -628 298.5 -607Q249 -586 212 -548Q175 -510 154.5 -460Q134 -410 134 -350Q134 -291 154.5 -240.5Q175 -190 212 -152Q249 -114 298.5 -93Q348 -72 405 -72Z", "x": 706.0, "b": [43.0, -711.0, 767.0, 11.0]}, {"d": "M74 0V-700H163L570 -154V-700H655V0H576L160 -561V0Z", "x": 1516.0, "b": [74.0, -700.0, 655.0, 0.0]}, {"d": "M306 10Q222 10 145 -23Q68 -56 10 -118L67 -181Q122 -124 182.5 -96Q243 -68 310 -68Q363 -68 403.5 -84Q444 -100 467 -129.5Q490 -159 490 -196Q490 -247 454.5 -274Q419 -301 337 -314L229 -332Q130 -349 82.5 -393Q35 -437 35 -511Q35 -570 66.5 -615Q98 -660 154.5 -684.5Q211 -709 286 -709Q361 -709 433.5 -684.5Q506 -660 565 -615L514 -546Q400 -633 282 -633Q234 -633 198 -618.5Q162 -604 142 -578.5Q122 -553 122 -518Q122 -472 153 -447.5Q184 -423 256 -412L362 -395Q475 -376 527 -330Q579 -284 579 -202Q579 -139 544.5 -91Q510 -43 448.5 -16.5Q387 10 306 10Z", "x": 2245.0, "b": [10.0, -709.0, 579.0, 10.0]}, {"d": "M354 11Q264 11 198 -26.5Q132 -64 96.5 -133.5Q61 -203 61 -297V-700H151V-297Q151 -229 176 -178Q201 -127 247 -99.5Q293 -72 354 -72Q416 -72 461.5 -99.5Q507 -127 532 -178Q557 -229 557 -297V-700H647V-297Q647 -203 611 -134Q575 -65 509.5 -27Q444 11 354 11Z", "x": 2851.0, "b": [61.0, -700.0, 647.0, 11.0]}, {"d": "M74 0V-700H164V-80H575V0Z", "x": 3559.0, "b": [74.0, -700.0, 575.0, 0.0]}, {"d": "M267 0V-620H17V-700H607V-620H357V0Z", "x": 4018.0, "b": [17.0, -700.0, 607.0, 0.0]}, {"d": "M405 11Q329 11 263 -16.5Q197 -44 147.5 -93.5Q98 -143 70.5 -208.5Q43 -274 43 -350Q43 -426 70.5 -491.5Q98 -557 147.5 -606.5Q197 -656 263 -683.5Q329 -711 405 -711Q481 -711 546.5 -683.5Q612 -656 662 -606.5Q712 -557 739.5 -491.5Q767 -426 767 -350Q767 -274 739.5 -208.5Q712 -143 662 -93.5Q612 -44 546.5 -16.5Q481 11 405 11ZM405 -72Q463 -72 512 -93Q561 -114 597.5 -152Q634 -190 655 -240.5Q676 -291 676 -350Q676 -410 655 -460Q634 -510 597.5 -548Q561 -586 512 -607Q463 -628 405 -628Q348 -628 298.5 -607Q249 -586 212 -548Q175 -510 154.5 -460Q134 -410 134 -350Q134 -291 154.5 -240.5Q175 -190 212 -152Q249 -114 298.5 -93Q348 -72 405 -72Z", "x": 4593.0, "b": [43.0, -711.0, 767.0, 11.0]}, {"d": "M74 0V-700H382Q452 -700 503.5 -674.5Q555 -649 584 -603.5Q613 -558 613 -496Q613 -427 573 -377.5Q533 -328 466 -307L623 0H523L376 -295H164V0ZM164 -370H376Q443 -370 483 -404Q523 -438 523 -496Q523 -552 483 -586Q443 -620 376 -620H164Z", "x": 5403.0, "b": [74.0, -700.0, 623.0, 0.0]}, {"d": "M3 0 292 -700H399L687 0H589L504 -213H182L96 0ZM212 -289H474L343 -616Z", "x": 6065.0, "b": [3.0, -700.0, 687.0, 0.0]}]}, "capHeight": 700};
 (function(){
-  const REDS = { actual:['Rojo señal','#FF4D3A'], rojo:['Rojo puro','#E5242B'], carmin:['Carmín','#D0103A'], granate:['Granate','#9B1B30'] };
-  const N = '#0F1430', B = '#F6F6F4';
+  // [nombre, acento, tinta oscura, fondo claro, color legible sobre el acento]
+  const REDS = {
+    actual:['Señal · Rojo señal','#FF4D3A','#0F1430','#F6F6F4','#0F1430'],
+    rojo:['Señal · Rojo puro','#E5242B','#0F1430','#F6F6F4','#0F1430'],
+    carmin:['Señal · Carmín','#D0103A','#0F1430','#F6F6F4','#F6F6F4'],
+    granate:['Señal · Granate','#9B1B30','#0F1430','#F6F6F4','#F6F6F4'],
+    cadete:['Cadete · crema, azul y naranja','#F54F1B','#1E223D','#E6D5B7','#1E223D'],
+  };
+  let N = '#0F1430', B = '#F6F6F4';
+  const WEIGHTS = { '300':'Light 300', '400':'Regular 400', '500':'Medium 500' };
+  const DMODES = { fit:'Ajustada a "Senda"', free:'Libre' };
+  const DALIGNS = { left:'Izquierda', center:'Centrada', right:'Derecha' };
   const PRESETS = [
     { id:'r5', name:'Ronda 5 (referencia)', scale:1.0, track:0, desc:245, sep:1, align:'center' },
     { id:'a', name:'A · Sutil', scale:1.25, track:-15, desc:215, sep:0.9, align:'center' },
@@ -167,11 +193,12 @@ const GLYPHS = {"senda": [{"d": "M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -215Q
     { id:'c', name:'C · S protagonista', scale:1.65, track:-30, desc:185, sep:0.8, align:'center' },
   ];
   const ALIGNS = { center:'Centrada', base:'Apoyada en la base', top:'Colgada del tope' };
-  const state = Object.assign({ red:'carmin', guides:false }, PRESETS[2]);
+  const state = Object.assign({ red:'carmin', guides:false, descW:'400', descMode:'fit', descTrack:300, descAlign:'left', lead:70 }, PRESETS[2]);
   try{ const s = JSON.parse(localStorage.getItem('senda-r6')||'null'); if (s) Object.assign(state, s); }catch(e){}
+  if (!REDS[state.red]) state.red = 'carmin';
 
   function compose(p, mark, ink, opts={}){
-    const S = GLYPHS.senda, C = GLYPHS.consultora, cap = GLYPHS.capHeight;
+    const S = GLYPHS.senda, C = (GLYPHS.consultoraPorPeso||{})[p.descW||'400'] || GLYPHS.consultora, cap = GLYPHS.capHeight;
     const t = p.track, n = S.length;
     const inkL = S[0].x + S[0].b[0];
     const inkR = S[n-1].x + (n-1)*t + S[n-1].b[2];
@@ -181,8 +208,11 @@ const GLYPHS = {"senda": [{"d": "M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -215Q
     const k = p.desc/1000, m = C.length;
     const c0 = (C[0].x + C[0].b[0]) * k;
     const cw0 = (C[m-1].x + C[m-1].b[2]) * k - c0;
-    const tc = (W - cw0) / (m-1);
-    const capD = cap*k, gapL = 0.7*capD, descBase = gapL + capD;
+    const free = p.descMode === 'free';
+    const tc = free ? (p.descTrack ?? 300) * k : (W - cw0) / (m-1);
+    const cw = cw0 + (m-1)*tc;
+    const dOff = !free ? 0 : p.descAlign==='center' ? (W-cw)/2 : p.descAlign==='right' ? W-cw : 0;
+    const capD = cap*k, gapL = ((p.lead ?? 70)/100)*capD, descBase = gapL + capD;
     const descBottom = descBase + Math.max(...C.map(g=>g.b[3]))*k;
     const blockH = descBase - sTop;
     const H = blockH * p.scale, mw = H*68/84;
@@ -194,20 +224,21 @@ const GLYPHS = {"senda": [{"d": "M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -215Q
     const topP = [[84,8],[40,8],[27,21],[27,37],[40,50],[48,50],[48,29],[84,29]];
     const markD = poly(topP) + ' ' + poly(topP.map(([a,b])=>[100-a,100-b]));
     const word = S.map((g,i)=>`<path transform="translate(${(mx - inkL + g.x + i*t).toFixed(1)} 0)" d="${g.d}"/>`).join('');
-    const desc = opts.short ? '' : C.map((g,j)=>`<path transform="translate(${(mx + g.x*k - c0 + j*tc).toFixed(1)} ${descBase.toFixed(1)}) scale(${k})" d="${g.d}"/>`).join('');
+    const desc = opts.short ? '' : C.map((g,j)=>`<path transform="translate(${(mx + dOff + g.x*k - c0 + j*tc).toFixed(1)} ${descBase.toFixed(1)}) scale(${k})" d="${g.d}"/>`).join('');
     const y0 = Math.min(markTop, top), y1 = Math.max(markTop+H, opts.short ? 0 : descBottom);
-    const x1 = mx + W;
+    const x1 = mx + (opts.short ? W : Math.max(W, dOff + cw));
     let guides = '';
     if (opts.guides){
       const gc = '#1E8CFF', sw = Math.max(3, H/220);
       const hl = y => `<line x1="${-H*0.15}" x2="${x1+H*0.15}" y1="${y}" y2="${y}" stroke="${gc}" stroke-width="${sw}" stroke-dasharray="${sw*4} ${sw*3}"/>`;
       const vl = x => `<line y1="${y0-H*0.15}" y2="${y1+H*0.15}" x1="${x}" x2="${x}" stroke="${gc}" stroke-width="${sw}" stroke-dasharray="${sw*4} ${sw*3}"/>`;
-      guides = `<g>${hl(sTop)}${hl(0)}${hl(descBase-capD)}${hl(descBase)}${hl(markTop)}${hl(markTop+H)}${vl(mw)}${vl(mx)}${vl(x1)}</g>`;
+      guides = `<g>${hl(sTop)}${hl(0)}${hl(descBase-capD)}${hl(descBase)}${hl(markTop)}${hl(markTop+H)}${vl(mw)}${vl(mx)}${vl(mx+W)}${opts.short?'':vl(mx+dOff)+vl(mx+dOff+cw)}</g>`;
     }
     const pad = opts.guides ? H*0.2 : 0;
-    const vb = [-pad, y0-pad, x1+2*pad, (y1-y0)+2*pad].map(v=>v.toFixed(1)).join(' ');
+    const xMin = Math.min(0, opts.short ? 0 : mx + dOff);
+    const vb = [xMin-pad, y0-pad, (x1-xMin)+2*pad, (y1-y0)+2*pad].map(v=>v.toFixed(1)).join(' ');
     return { svg:`<svg viewBox="${vb}" role="img" aria-label="Senda Consultora" ${opts.attrs||''}><path d="${markD}" fill="${mark}"/><g fill="${ink}">${word}${desc}</g>${guides}</svg>`,
-             info:{ tc, W, H, blockH } , mark:{ d:markD, x:0, y:markTop, w:mw, h:H } };
+             info:{ tc, W, H, blockH, k } , mark:{ d:markD, x:0, y:markTop, w:mw, h:H } };
   }
   function monogram(color, size){
     const w = size*68/84, sc = size/84;
@@ -217,13 +248,15 @@ const GLYPHS = {"senda": [{"d": "M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -215Q
   }
 
   const red = () => REDS[state.red][1];
+  const onAcc = () => REDS[state.red][4];
+  function syncPalette(){ N = REDS[state.red][2]; B = REDS[state.red][3]; }
 
   /* ---------- variantes fijas ---------- */
   function presets(){
     document.getElementById('presets').innerHTML = PRESETS.map(p=>{
       const cur = ['scale','track','desc','sep','align'].every(k=>state[k]===p[k]);
       return `<button type="button" class="preset" aria-current="${cur}" data-p="${p.id}">
-        <div class="art">${compose(p, red(), N).svg}</div>
+        <div class="art" style="background:${B}">${compose(Object.assign({}, state, p), red(), N).svg}</div>
         <div class="meta">${p.tag?`<span class="tag">${p.tag}</span>`:''}<b>${p.name}</b><span>S ${p.scale.toFixed(2)}× · interletrado ${p.track} · CONSULTORA ${(p.desc/10).toFixed(1)}%</span></div></button>`;
     }).join('');
   }
@@ -232,11 +265,20 @@ const GLYPHS = {"senda": [{"d": "M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -215Q
 
   /* ---------- controles ---------- */
   const $ = id => document.getElementById(id);
-  const sliders = { scale:'k-scale', track:'k-track', desc:'k-desc', sep:'k-sep' };
+  const sliders = { scale:'k-scale', track:'k-track', desc:'k-desc', sep:'k-sep', descTrack:'k-dtrack', lead:'k-lead' };
   for (const [k,id] of Object.entries(sliders)) $(id).addEventListener('input', e=>{ state[k] = parseFloat(e.target.value); render(); });
   $('k-align').addEventListener('click', e=>{const b=e.target.closest('[data-a]'); if(!b) return; state.align=b.dataset.a; render();});
   $('k-red').addEventListener('click', e=>{const b=e.target.closest('[data-r]'); if(!b) return; state.red=b.dataset.r; render();});
   $('k-guides').addEventListener('click', ()=>{ state.guides=!state.guides; render(); });
+  const radio = (id, attr, key) => $(id).addEventListener('click', e=>{const b=e.target.closest(`[${attr}]`); if(!b) return; state[key]=b.getAttribute(attr); render();});
+  radio('k-dw','data-w','descW'); radio('k-dmode','data-m','descMode'); radio('k-dalign','data-al','descAlign');
+  $('k-copy').addEventListener('click', ()=>{
+    const txt = $('readout').textContent, b = $('k-copy');
+    const done = ()=>{ b.textContent = 'Copiado'; setTimeout(()=>b.textContent='Copiar valores', 1600); };
+    try{ navigator.clipboard.writeText(txt).then(done, ()=>{ selectReadout(); b.textContent='Seleccionado: copialo con Ctrl+C'; }); }
+    catch(e){ selectReadout(); b.textContent='Seleccionado: copialo con Ctrl+C'; }
+  });
+  function selectReadout(){ const r = document.createRange(); r.selectNodeContents($('readout')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
 
   function controls(){
     for (const [k,id] of Object.entries(sliders)) $(id).value = state[k];
@@ -244,13 +286,24 @@ const GLYPHS = {"senda": [{"d": "M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -215Q
     $('o-track').textContent = (state.track>0?'+':'')+state.track;
     $('o-desc').textContent = (state.desc/10).toFixed(1)+'%';
     $('o-sep').textContent = state.sep.toFixed(2)+'×';
+    const opt = (map, cur, attr) => Object.entries(map).map(([k,v])=>`<button type="button" class="pick" role="radio" aria-checked="${cur===k}" ${attr}="${k}">${v}</button>`).join('');
+    $('k-dw').innerHTML = opt(WEIGHTS, state.descW, 'data-w');
+    $('k-dmode').innerHTML = opt(DMODES, state.descMode, 'data-m');
+    $('k-dalign').innerHTML = opt(DALIGNS, state.descAlign, 'data-al');
+    const free = state.descMode==='free';
+    const tcNow = compose(state, '#000', '#000').info;
+    if (!free) $('k-dtrack').value = Math.round(tcNow.tc / tcNow.k);
+    $('o-dtrack').textContent = free ? state.descTrack : Math.round(tcNow.tc / tcNow.k) + ' (auto)';
+    $('k-dtrack').disabled = !free; $('free-track').classList.toggle('dim', !free); $('free-align').classList.toggle('dim', !free);
+    $('o-lead').textContent = state.lead + '%';
     $('k-align').innerHTML = Object.entries(ALIGNS).map(([k,v])=>`<button type="button" class="pick" role="radio" aria-checked="${state.align===k}" data-a="${k}">${v}</button>`).join('');
-    $('k-red').innerHTML = Object.entries(REDS).map(([k,[n,h]])=>`<button type="button" class="pick" role="radio" aria-checked="${state.red===k}" data-r="${k}"><i style="background:${h}"></i>${n}</button>`).join('');
+    $('k-red').innerHTML = Object.entries(REDS).map(([k,[n,h,ink,light]])=>`<button type="button" class="pick" role="radio" aria-checked="${state.red===k}" data-r="${k}"><i style="background:${h}"></i>${k==='cadete'?`<i style="background:${ink}"></i><i style="background:${light};border:1px solid #0002"></i>`:''}${n}</button>`).join('');
     $('k-guides').setAttribute('aria-checked', state.guides); $('k-guides').textContent = state.guides ? 'Ocultar guías' : 'Mostrar guías';
-    $('readout').textContent = `S: ${state.scale.toFixed(2)}×  ·  posición: ${ALIGNS[state.align].toLowerCase()}\nInterletrado Senda: ${state.track}\nCONSULTORA: ${(state.desc/10).toFixed(1)}%\nSeparación: ${state.sep.toFixed(2)}×\nRojo: ${REDS[state.red][0]} ${red()}`;
+    $('readout').textContent = `S: ${state.scale.toFixed(2)}×  ·  posición: ${ALIGNS[state.align].toLowerCase()}\nInterletrado Senda: ${state.track}\nCONSULTORA: ${(state.desc/10).toFixed(1)}% · ${WEIGHTS[state.descW]}\nCONSULTORA ancho: ${DMODES[state.descMode]}${free?` · interletrado ${state.descTrack} · ${DALIGNS[state.descAlign].toLowerCase()}`:` · interletrado auto ${Math.round(tcNow.tc/tcNow.k)}`}\nInterlineado: ${state.lead}%\nSeparación: ${state.sep.toFixed(2)}×\nPaleta: ${REDS[state.red][0]} ${red()}`;
   }
 
   function stage(){
+    $('stage').style.background = B; $('sizes').style.background = B;
     $('stage').innerHTML = compose(state, red(), N, {guides: state.guides}).svg;
     $('sizes').innerHTML = [320,200,160].map(w=>`<figure><div style="width:${w}px">${compose(state, red(), N).svg}</div><figcaption>${w} px</figcaption></figure>`).join('')
       + `<figure><div style="width:110px">${compose(state, red(), N, {short:true}).svg}</div><figcaption>Corta · 110 px</figcaption></figure>`
@@ -258,10 +311,10 @@ const GLYPHS = {"senda": [{"d": "M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -215Q
   }
 
   function apps(){
-    const r = red(), on = ['carmin','granate'].includes(state.red) ? B : N;
+    const r = red(), on = onAcc();
     $('apps').innerHTML = `
       <figure class="a1"><div class="frame r-card" style="background:${N};display:grid;place-items:center"><div style="width:62%">${compose(state, r, B).svg}</div></div><figcaption>Tarjeta · frente</figcaption></figure>
-      <figure class="a2"><div class="frame r-card" style="background:${r};display:grid;place-items:center"><div style="width:62%">${compose(state, on, on).svg}</div></div><figcaption>Sobre el rojo, en un solo color</figcaption></figure>
+      <figure class="a2"><div class="frame r-card" style="background:${r};display:grid;place-items:center"><div style="width:62%">${compose(state, on, on).svg}</div></div><figcaption>Sobre el color de acento, en un solo color</figcaption></figure>
       <figure class="a3"><div class="frame r-web" style="background:${B}">
         <div style="position:absolute;inset:0;padding:3.5% 4.5%;display:grid;grid-template-rows:auto 1fr;color:${N}">
           <div style="display:flex;justify-content:space-between;align-items:center;font-size:clamp(10px,1.2vw,13px)">
@@ -275,7 +328,7 @@ const GLYPHS = {"senda": [{"d": "M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -215Q
 
   function render(){
     try{ localStorage.setItem('senda-r6', JSON.stringify(state)); }catch(e){}
-    presets(); controls(); stage(); apps();
+    syncPalette(); presets(); controls(); stage(); apps();
   }
   render();
 })();

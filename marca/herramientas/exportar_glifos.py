@@ -1,4 +1,4 @@
-"""Exporta los contornos de "Senda" (Red Hat Display 800) y "CONSULTORA" (400) con su kerning,
+"""Exporta los contornos de "Senda" (Red Hat Display 800) y "CONSULTORA" (300, 400 y 500) con su kerning,
 para que la página del constructor pueda recomponer el logo con cualquier interletrado y tamaño.
 
 Uso: python3 exportar_glifos.py <carpeta_fuentes> <salida.json>
@@ -30,5 +30,6 @@ def glyphs(path, text):
 fd, dst = sys.argv[1], sys.argv[2]
 json.dump({"senda": glyphs(f"{fd}/RHD-800.ttf", "Senda"),
            "consultora": glyphs(f"{fd}/RHD-400.ttf", "CONSULTORA"),
+           "consultoraPorPeso": {w: glyphs(f"{fd}/RHD-{w}.ttf", "CONSULTORA") for w in ("300", "400", "500")},
            "capHeight": 700}, open(dst, "w"))
 print("ok")
