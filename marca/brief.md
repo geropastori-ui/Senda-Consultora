@@ -71,3 +71,15 @@ Geometría del logo en `marca/logo/geometria.json`, generada con `marca/herramie
 3. ¿La marca va a firmar como equipo ("Senda") o va a haber caras visibles?
 4. ¿Tres consultoras o marcas que admires y tres que te parezcan exactamente lo que no querés ser?
 5. ¿Hay alguna palabra o idea que te parezca que *tiene* que estar?
+
+## Propuesta final (aprobada)
+
+- **Símbolo:** S **Contrapeso** (dos medios círculos con barra, una pieza girada 180° respecto de la otra).
+- **Nombre:** "Senda", Red Hat Display ExtraBold, interletrado −25.
+- **Bajada:** "CONSULTORA", Red Hat Display Medium, 20% del nombre, mismo ancho que "Senda", interlineado 115%.
+- **Composición:** S de 1,4 × el alto del bloque de texto, centrada; separación 0,85 × la barra.
+- **Paleta Fiordo:** pizarra #16232B (fondo principal), niebla #E4EEF0, verde mar #075056, naranja #FF5B04 (la S).
+- **Tipografía:** Red Hat Display (títulos) y Red Hat Text (textos).
+
+Archivos finales en `marca/logo/final/` (SVG) y `marca/logo/final/png/` (PNG), generados con `marca/herramientas/logo_final.py`.
+Manual en `marca/manual/senda-manual-de-marca.html`.

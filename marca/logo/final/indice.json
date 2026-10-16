@@ -1,0 +1,342 @@
+{
+ "params": {
+  "font": "redhat",
+  "cas": "title",
+  "track": -25,
+  "scale": 1.4,
+  "sep": 0.85,
+  "align": "center",
+  "desc": 200,
+  "descW": "500",
+  "lead": 115
+ },
+ "colores": {
+  "pizarra": "#16232B",
+  "naranja": "#FF5B04",
+  "verde": "#075056",
+  "niebla": "#E4EEF0"
+ },
+ "medidas": {
+  "H": 1415.4,
+  "blockH": 1011.0,
+  "markTop": -912.2,
+  "markW": 1145.8,
+  "textX": 1360.64,
+  "textW": 2856.0,
+  "sTop": -710.0,
+  "descTop": 161.0,
+  "descBase": 301.0,
+  "bar": 353.85,
+  "gap": 214.84
+ },
+ "archivos": {
+  "senda-principal-positivo.svg": {
+   "version": "principal",
+   "variante": "positivo",
+   "fondo": "#E4EEF0",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-principal-negativo.svg": {
+   "version": "principal",
+   "variante": "negativo",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-principal-sobre-verde.svg": {
+   "version": "principal",
+   "variante": "sobre-verde",
+   "fondo": "#075056",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-principal-sobre-naranja.svg": {
+   "version": "principal",
+   "variante": "sobre-naranja",
+   "fondo": "#FF5B04",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-principal-mono-pizarra.svg": {
+   "version": "principal",
+   "variante": "mono-pizarra",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-principal-mono-blanco.svg": {
+   "version": "principal",
+   "variante": "mono-blanco",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-principal-mono-negro.svg": {
+   "version": "principal",
+   "variante": "mono-negro",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-corta-positivo.svg": {
+   "version": "corta",
+   "variante": "positivo",
+   "fondo": "#E4EEF0",
+   "viewBox": [
+    0,
+    -852.0,
+    3811.54,
+    994.0
+   ]
+  },
+  "senda-corta-negativo.svg": {
+   "version": "corta",
+   "variante": "negativo",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    -852.0,
+    3811.54,
+    994.0
+   ]
+  },
+  "senda-corta-sobre-verde.svg": {
+   "version": "corta",
+   "variante": "sobre-verde",
+   "fondo": "#075056",
+   "viewBox": [
+    0,
+    -852.0,
+    3811.54,
+    994.0
+   ]
+  },
+  "senda-corta-sobre-naranja.svg": {
+   "version": "corta",
+   "variante": "sobre-naranja",
+   "fondo": "#FF5B04",
+   "viewBox": [
+    0,
+    -852.0,
+    3811.54,
+    994.0
+   ]
+  },
+  "senda-corta-mono-pizarra.svg": {
+   "version": "corta",
+   "variante": "mono-pizarra",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    -852.0,
+    3811.54,
+    994.0
+   ]
+  },
+  "senda-corta-mono-blanco.svg": {
+   "version": "corta",
+   "variante": "mono-blanco",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    -852.0,
+    3811.54,
+    994.0
+   ]
+  },
+  "senda-corta-mono-negro.svg": {
+   "version": "corta",
+   "variante": "mono-negro",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    -852.0,
+    3811.54,
+    994.0
+   ]
+  },
+  "senda-vertical-positivo.svg": {
+   "version": "vertical",
+   "variante": "positivo",
+   "fondo": "#E4EEF0",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-vertical-negativo.svg": {
+   "version": "vertical",
+   "variante": "negativo",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-vertical-sobre-verde.svg": {
+   "version": "vertical",
+   "variante": "sobre-verde",
+   "fondo": "#075056",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-vertical-sobre-naranja.svg": {
+   "version": "vertical",
+   "variante": "sobre-naranja",
+   "fondo": "#FF5B04",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-vertical-mono-pizarra.svg": {
+   "version": "vertical",
+   "variante": "mono-pizarra",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-vertical-mono-blanco.svg": {
+   "version": "vertical",
+   "variante": "mono-blanco",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-vertical-mono-negro.svg": {
+   "version": "vertical",
+   "variante": "mono-negro",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-monograma-positivo.svg": {
+   "version": "monograma",
+   "variante": "positivo",
+   "fondo": "#E4EEF0",
+   "viewBox": [
+    0,
+    0,
+    680.0,
+    840
+   ]
+  },
+  "senda-monograma-negativo.svg": {
+   "version": "monograma",
+   "variante": "negativo",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    0,
+    680.0,
+    840
+   ]
+  },
+  "senda-monograma-sobre-verde.svg": {
+   "version": "monograma",
+   "variante": "sobre-verde",
+   "fondo": "#075056",
+   "viewBox": [
+    0,
+    0,
+    680.0,
+    840
+   ]
+  },
+  "senda-monograma-sobre-naranja.svg": {
+   "version": "monograma",
+   "variante": "sobre-naranja",
+   "fondo": "#FF5B04",
+   "viewBox": [
+    0,
+    0,
+    680.0,
+    840
+   ]
+  },
+  "senda-monograma-mono-pizarra.svg": {
+   "version": "monograma",
+   "variante": "mono-pizarra",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    0,
+    680.0,
+    840
+   ]
+  },
+  "senda-monograma-mono-blanco.svg": {
+   "version": "monograma",
+   "variante": "mono-blanco",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    0,
+    680.0,
+    840
+   ]
+  },
+  "senda-monograma-mono-negro.svg": {
+   "version": "monograma",
+   "variante": "mono-negro",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    0,
+    680.0,
+    840
+   ]
+  }
+ }
+}
