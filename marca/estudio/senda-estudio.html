@@ -196,7 +196,7 @@ input[type=range]{width:100%;accent-color:var(--fg)}
 
 <section class="wrap section" id="paletas">
   <div class="section-head"><h2>Comparar paletas</h2><span class="label">La configuración actual en cada paleta</span></div>
-  <p class="muted">Para decidir solo el color: el logo que tienen armado arriba, en todas las paletas, sobre fondo claro y sobre fondo oscuro. Tocá una para aplicarla. Las tres de Vino son la misma paleta con los roles repartidos de distinta forma.</p>
+  <p class="muted">Para decidir solo el color: el logo que tienen armado arriba, en todas las paletas, sobre fondo claro y sobre fondo oscuro. Tocá una para aplicarla. Las de Fiordo y las de Vino son, cada una, la misma paleta con los colores repartidos de distinta forma.</p>
   <div class="palcmp" id="palcmp"></div>
 </section>
 
@@ -235,11 +235,17 @@ const G = {"redhat":{"title":[{"d":"M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -2
     carmin:{ name:'Señal · Carmín', L:'#F6F6F4', ink:'#0F1430', mark:'#D0103A', dark:'#0F1430', onDark:'#F6F6F4', markDark:'#D0103A', acc:'#D0103A', onAcc:'#F6F6F4', extra:'#8B91A8' },
     granate:{ name:'Señal · Granate', L:'#F6F6F4', ink:'#0F1430', mark:'#9B1B30', dark:'#0F1430', onDark:'#F6F6F4', markDark:'#C2324A', acc:'#9B1B30', onAcc:'#F6F6F4', extra:'#8B91A8' },
     cadete:{ name:'Cadete', L:'#E6D5B7', ink:'#1E223D', mark:'#F54F1B', dark:'#1E223D', onDark:'#E6D5B7', markDark:'#F54F1B', acc:'#F54F1B', onAcc:'#1E223D', extra:'#1E223D' },
+    // Paleta Fiordo: pizarra #16232B, naranja #FF5B04, verde mar #075056, niebla #E4EEF0, en tres repartos de roles.
+    fiordo:{ name:'Fiordo · naranja y pizarra', L:'#E4EEF0', ink:'#16232B', mark:'#FF5B04', dark:'#16232B', onDark:'#E4EEF0', markDark:'#FF5B04', acc:'#FF5B04', onAcc:'#16232B', extra:'#075056', group:'fiordo' },
+    fiordoverde:{ name:'Fiordo · verde mar', L:'#E4EEF0', ink:'#16232B', mark:'#075056', dark:'#075056', onDark:'#E4EEF0', markDark:'#FF5B04', acc:'#075056', onAcc:'#E4EEF0', extra:'#FF5B04', group:'fiordo' },
+    fiordooscuro:{ name:'Fiordo · fondo pizarra', L:'#16232B', ink:'#E4EEF0', mark:'#FF5B04', dark:'#075056', onDark:'#E4EEF0', markDark:'#E4EEF0', acc:'#FF5B04', onAcc:'#16232B', extra:'#075056', group:'fiordo' },
     // Paleta Vino: vino #6B2138, pizarra #263343, crema #F3E7D7, celeste #B7D9FE, en tres repartos de roles.
     vino:{ name:'Vino · crema y pizarra', L:'#F3E7D7', ink:'#263343', mark:'#6B2138', dark:'#263343', onDark:'#F3E7D7', markDark:'#B7D9FE', acc:'#6B2138', onAcc:'#F3E7D7', extra:'#B7D9FE', group:'vino' },
     vinomono:{ name:'Vino · todo vino', L:'#F3E7D7', ink:'#6B2138', mark:'#6B2138', dark:'#6B2138', onDark:'#F3E7D7', markDark:'#B7D9FE', acc:'#263343', onAcc:'#F3E7D7', extra:'#B7D9FE', group:'vino' },
     vinoceleste:{ name:'Vino · fondo celeste', L:'#B7D9FE', ink:'#263343', mark:'#6B2138', dark:'#263343', onDark:'#F3E7D7', markDark:'#B7D9FE', acc:'#6B2138', onAcc:'#F3E7D7', extra:'#F3E7D7', group:'vino' },
   };
+  // Las paletas más nuevas primero: Fiordo, Vino y después las anteriores.
+  const GROUP_RANK = P => P.group==='fiordo' ? 0 : P.group==='vino' ? 1 : 2;
   const ROT = 'transform="rotate(180 50 50)"';
   // Cada S en una grilla de 100 × 100, con su caja exacta [x0, y0, x1, y1].
   const MARKS = {
@@ -271,6 +277,7 @@ const G = {"redhat":{"title":[{"d":"M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -2
     { name:'Ronda 5 · proporción original', p:{ scale:1, track:0, desc:245, sep:1 } },
     { name:'Bisel · Cadete', p:{ pal:'cadete' } },
     { name:'Favorita · Vino', p:{ pal:'vino', descW:'500', lead:115 } },
+    { name:'Favorita · Fiordo', p:{ pal:'fiordo', descW:'500', lead:115 } },
     { name:'Contrapeso · Bosque · Spectral', p:{ mono:'contrapeso', pal:'bosque', font:'spectral', track:-10, scale:1.3 } },
     { name:'Bisel · Señal · SENDA', p:{ cas:'caps', track:60, pal:'actual' } },
     { name:'Bisel · Instrument condensada', p:{ font:'instrument', track:0, descW:'400' } },
@@ -353,7 +360,7 @@ const G = {"redhat":{"title":[{"d":"M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -2
   function renderPanel(){
     const p = state, P = PALS[p.pal];
     $('c-mono').innerHTML = Object.entries(MARKS).map(([k,M])=>`<button type="button" class="mono" role="radio" aria-checked="${p.mono===k}" data-mono="${k}">${markSVG(k, 'currentColor')}<span>${M.name}</span></button>`).join('');
-    $('c-pal').innerHTML = opt(Object.fromEntries(Object.entries(PALS).sort((a,b)=>(!!b[1].group)-(!!a[1].group)).map(([k,v])=>[k,v.name])), p.pal, 'data-pal', k=>`<i style="background:${PALS[k].mark}"></i><i style="background:${PALS[k].ink}"></i><i style="background:${PALS[k].L}"></i>`);
+    $('c-pal').innerHTML = opt(Object.fromEntries(Object.entries(PALS).sort((a,b)=>GROUP_RANK(a[1])-GROUP_RANK(b[1])).map(([k,v])=>[k,v.name])), p.pal, 'data-pal', k=>`<i style="background:${PALS[k].mark}"></i><i style="background:${PALS[k].ink}"></i><i style="background:${PALS[k].L}"></i>`);
     $('c-cas').innerHTML = opt(CASES, p.cas, 'data-cas');
     $('c-font').innerHTML = Object.entries(FONTS).map(([k,F])=>`<button type="button" class="pick" role="radio" aria-checked="${p.font===k}" data-font="${k}" style="font-family:${F.css};font-weight:${F.wt};font-stretch:${F.stretch}">${F.name}</button>`).join('');
     $('c-align').innerHTML = opt(ALIGNS, p.align, 'data-align');
@@ -422,13 +429,13 @@ const G = {"redhat":{"title":[{"d":"M313 10Q228 10 147 -21.5Q66 -53 3 -111L86 -2
   }
 
   function renderPalCmp(){
-    const order = ['vino','vinomono','vinoceleste', ...Object.keys(PALS).filter(k=>!PALS[k].group)];
+    const order = Object.keys(PALS).sort((a,b)=>GROUP_RANK(PALS[a])-GROUP_RANK(PALS[b]));
     $('palcmp').innerHTML = order.map(k=>{ const P = PALS[k], p = Object.assign({}, state, {pal:k});
       const sw = [...new Set([P.L, P.ink, P.mark, P.acc, P.extra, P.dark])];
       return `<button type="button" class="pc" aria-current="${state.pal===k}" data-pc="${k}">
         <div class="pair"><div style="background:${P.L}">${compose(p, P.mark, P.ink).svg}</div><div style="background:${P.dark}">${compose(p, P.markDark, P.onDark).svg}</div></div>
         <div class="sw">${sw.map(c=>`<i style="background:${c}"></i>`).join('')}</div>
-        <div class="meta">${P.group?'<span class="new">Nueva</span>':''}<b>${esc(P.name)}</b><span>${sw.join(' · ')}</span></div></button>`; }).join('');
+        <div class="meta">${P.group?`<span class="new">Nueva · ${P.group==='fiordo'?'Fiordo':'Vino'}</span>`:''}<b>${esc(P.name)}</b><span>${sw.join(' · ')}</span></div></button>`; }).join('');
   }
   $('palcmp').addEventListener('click', e=>{ const b = e.target.closest('[data-pc]'); if(!b) return; state.pal = b.dataset.pc; render(); window.scrollTo({top: $('stage').getBoundingClientRect().top + scrollY - 20, behavior:'smooth'}); });
 
