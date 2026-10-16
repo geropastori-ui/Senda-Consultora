@@ -1,0 +1,528 @@
+<title>Estudio de marca Senda</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Geist+Mono:wght@400;500&family=Instrument+Sans:wdth,wght@75..100,400..700&family=Red+Hat+Display:wght@400;500;700;800&family=Red+Hat+Text:wght@400;500;600&family=Spectral:wght@400;500;800&display=swap">
+<style>
+/* Layout: mesa de trabajo. Arriba la vista del logo y el panel con todas las opciones; debajo las piezas aplicadas y el registro compartido de versiones para decidir entre dos. */
+:root{
+  --bg:#F4F4F2; --fg:#10132B; --muted:#5A5F75; --line:#D9DAE0; --panel:#FFFFFF; --chip:#EBECEF; --focus:#2F6BFF; --danger:#B42318;
+  --f-display:"Red Hat Display", system-ui, sans-serif;
+  --f-text:"Red Hat Text", system-ui, sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, Menlo, monospace;
+  --max:1240px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0B0D1C; --fg:#ECEDF2; --muted:#9EA3B8; --line:#262A48; --panel:#13162E; --chip:#1C2040; --focus:#7FA4FF; --danger:#FF8A80; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#0B0D1C; --fg:#ECEDF2; --muted:#9EA3B8; --line:#262A48; --panel:#13162E; --chip:#1C2040; --focus:#7FA4FF; --danger:#FF8A80; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-text);font-size:16px;line-height:1.5;margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--f-display)}
+p{margin:0;max-width:66ch}
+.label{font-family:var(--f-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+.intro{padding-block:44px 18px;display:grid;gap:14px}
+.intro h1{font-weight:800;font-size:clamp(36px,6vw,64px);line-height:1;letter-spacing:-.015em}
+.intro .lead{font-size:18px}
+.steps{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:15px;color:var(--muted);margin:0;padding:0;list-style:none}
+.steps b{color:var(--fg);font-weight:600}
+
+.banner{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:14px 16px;border:1px solid var(--fg);background:var(--panel)}
+.banner p{flex:1 1 320px}
+.banner[hidden]{display:none}
+.btn{border:1px solid var(--fg);background:var(--fg);color:var(--bg);padding:9px 16px;cursor:pointer;font-family:var(--f-display);font-weight:700;font-size:14px;border-radius:2px}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.small{padding:6px 11px;font-size:13px}
+.btn.danger{background:transparent;color:var(--danger);border-color:var(--danger)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+.section{padding-block:28px;display:grid;gap:16px}
+.section-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:8px 20px}
+.section-head h2{font-weight:800;font-size:clamp(24px,3.2vw,34px);letter-spacing:-.01em}
+
+/* mesa */
+.desk{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:start}
+@media (max-width:980px){ .desk{grid-template-columns:1fr} }
+.view{display:grid;gap:12px;min-width:0;position:sticky;top:calc(env(safe-area-inset-top, 0px) + 10px)}
+@media (max-width:980px){ .view{position:static} }
+.stage{border:1px solid var(--line);display:grid;place-items:center;padding:clamp(28px,6vw,72px) clamp(16px,4vw,56px);min-width:0}
+.stage svg{width:100%;height:auto;max-height:46vh;overflow:visible}
+.sizes{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 28px;padding:14px 16px;border:1px solid var(--line)}
+.sizes figure{margin:0;display:grid;gap:6px}
+.sizes figcaption{font-family:var(--f-mono);font-size:10px;opacity:.7}
+.savebar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) auto;gap:8px;align-items:end;background:var(--panel);border:1px solid var(--line);padding:12px}
+@media (max-width:640px){ .savebar{grid-template-columns:1fr} }
+.field{display:grid;gap:4px;min-width:0}
+.field input{width:100%;border:1px solid var(--line);background:var(--bg);padding:8px 10px;border-radius:2px}
+.status{font-size:13px;color:var(--muted);min-height:1.2em}
+
+.panel{background:var(--panel);border:1px solid var(--line);display:grid}
+.grp{border-bottom:1px solid var(--line);padding:14px 16px;display:grid;gap:10px}
+.grp:last-child{border-bottom:0}
+.grp > summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--f-display);font-weight:700;font-size:15px}
+.grp > summary::-webkit-details-marker{display:none}
+.grp > summary::after{content:"+";font-family:var(--f-mono);color:var(--muted)}
+.grp[open] > summary::after{content:"−"}
+.grp .body{display:grid;gap:12px;margin-top:4px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.pick{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:5px 11px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.pick[aria-checked="true"]{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+.pick i{width:12px;height:12px;border-radius:50%;display:inline-block;border:1px solid rgba(127,127,127,.3)}
+.pick i + i{margin-left:-6px}
+.monos{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.mono{border:1px solid var(--line);background:var(--bg);padding:8px 6px 6px;cursor:pointer;display:grid;justify-items:center;gap:4px;font-size:12px;border-radius:2px}
+.mono svg{width:34px;height:34px}
+.mono[aria-checked="true"]{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+.ctl{display:grid;gap:4px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ctl label{font-weight:600;font-size:14px}
+.ctl output{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.ctl small{font-size:12px;color:var(--muted);line-height:1.35}
+input[type=range]{width:100%;accent-color:var(--fg)}
+.dim{opacity:.4;pointer-events:none}
+.readout{font-family:var(--f-mono);font-size:11.5px;background:var(--chip);padding:10px 12px;line-height:1.6;white-space:pre-wrap;user-select:all}
+
+/* aplicaciones */
+.apps{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+.apps figure{margin:0;min-width:0;display:grid;gap:6px;align-content:start}
+.apps figcaption{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.a-card{grid-column:span 4}.a-web{grid-column:span 8}.a-post{grid-column:span 4}.a-icons{grid-column:span 4}
+@media (max-width:860px){ .a-card,.a-web,.a-post,.a-icons{grid-column:span 12} }
+.frame{position:relative;overflow:hidden;max-width:100%;box-shadow:0 1px 2px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.07)}
+.r-card{aspect-ratio:85/55}.r-web{aspect-ratio:16/8}.r-post{aspect-ratio:4/5}
+
+/* versiones */
+.versions{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:12px}
+.ver{background:var(--panel);border:1px solid var(--line);display:grid;grid-template-rows:auto 1fr;min-width:0}
+.ver.fav{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+.ver .thumb{display:grid;place-items:center;padding:24px 18px;aspect-ratio:16/8}
+.ver .thumb svg{width:100%;height:auto;max-height:100%}
+.ver .info{padding:12px 14px 14px;display:grid;gap:6px;align-content:start}
+.ver .name{font-family:var(--f-display);font-weight:700;font-size:17px;overflow-wrap:anywhere}
+.ver .note{font-size:14px;color:var(--muted);overflow-wrap:anywhere}
+.ver .who{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.ver .who img{width:18px;height:18px;border-radius:50%}
+.ver .spec{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);line-height:1.5}
+.ver .actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.like[aria-pressed="true"]{border-color:var(--fg);background:var(--fg);color:var(--bg)}
+.tag{justify-self:start;font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:var(--fg);color:var(--bg);padding:2px 7px}
+.empty{border:1px dashed var(--line);padding:22px;color:var(--muted);font-size:15px}
+
+.starts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));gap:10px}
+.start{border:1px solid var(--line);background:var(--panel);padding:0;cursor:pointer;text-align:left;display:grid;min-width:0}
+.start .thumb{display:grid;place-items:center;padding:16px 14px;aspect-ratio:16/7}
+.start .thumb svg{width:100%;height:auto;max-height:100%}
+.start span{padding:8px 10px;font-size:13px;font-weight:600}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header class="wrap intro">
+  <div class="label">Senda Consultora · Identidad</div>
+  <h1>Estudio de marca</h1>
+  <p class="lead">Todas las opciones que exploramos, en un solo lugar: las nueve S, las paletas, las dos escrituras del nombre, las cuatro tipografías y todos los ajustes del logo. Lo que guarden queda compartido para las dos personas.</p>
+  <ul class="steps">
+    <li><b>1.</b> Armen una combinación con el panel.</li>
+    <li><b>2.</b> Pónganle un nombre y guárdenla.</li>
+    <li><b>3.</b> Marquen con "Me gusta" sus favoritas y compárenlas abajo.</li>
+  </ul>
+  <div class="banner" id="banner" hidden>
+    <p><b>En este navegador está la versión que te gustó en la ronda 6.</b> Guardala en el registro compartido para que también la vea tu socia.</p>
+    <button type="button" class="btn" id="save-fav">Guardar como "Versión favorita"</button>
+  </div>
+</header>
+
+<section class="wrap section">
+  <div class="desk">
+    <div class="view">
+      <div class="stage" id="stage"></div>
+      <div class="sizes" id="sizes"></div>
+      <form class="savebar" id="savebar">
+        <div class="field"><label class="label" for="v-name">Nombre de la versión</label><input id="v-name" maxlength="60" placeholder="Ej.: Bisel carmín compacta" required></div>
+        <div class="field"><label class="label" for="v-note">Comentario (opcional)</label><input id="v-note" maxlength="160" placeholder="Qué les gusta de esta"></div>
+        <button class="btn" type="submit" id="v-save">Guardar versión</button>
+        <div class="status" id="v-status" role="status" style="grid-column:1/-1"></div>
+      </form>
+    </div>
+
+    <div class="panel" id="panel">
+      <details class="grp" open><summary>Símbolo</summary><div class="body"><div class="monos" id="c-mono" role="radiogroup" aria-label="Símbolo"></div></div></details>
+      <details class="grp" open><summary>Color</summary><div class="body"><div class="opts" id="c-pal" role="radiogroup" aria-label="Paleta"></div></div></details>
+      <details class="grp" open><summary>Nombre y tipografía</summary><div class="body">
+        <div class="ctl"><span class="label">Escritura</span><div class="opts" id="c-cas" role="radiogroup" aria-label="Escritura"></div></div>
+        <div class="ctl"><span class="label">Tipografía</span><div class="opts" id="c-font" role="radiogroup" aria-label="Tipografía"></div></div>
+        <div class="ctl"><div class="row"><label for="k-track">Interletrado del nombre</label><output id="o-track"></output></div><input type="range" id="k-track" min="-60" max="140" step="1"><small>En milésimas del tamaño. 0 es el espaciado original de la letra.</small></div>
+      </div></details>
+      <details class="grp" open><summary>Símbolo junto al nombre</summary><div class="body">
+        <div class="ctl"><div class="row"><label for="k-scale">Tamaño de la S</label><output id="o-scale"></output></div><input type="range" id="k-scale" min="0.8" max="2" step="0.05"><small>Veces el alto del bloque de texto.</small></div>
+        <div class="ctl"><div class="row"><label for="k-sep">Separación S–texto</label><output id="o-sep"></output></div><input type="range" id="k-sep" min="0.4" max="1.8" step="0.05"><small>Veces el grosor de la barra de la S.</small></div>
+        <div class="ctl"><span class="label">Posición de la S</span><div class="opts" id="c-align" role="radiogroup" aria-label="Posición de la S"></div></div>
+      </div></details>
+      <details class="grp" open><summary>Bajada "CONSULTORA"</summary><div class="body">
+        <div class="ctl"><span class="label">Mostrar</span><div class="opts" id="c-show" role="radiogroup" aria-label="Mostrar bajada"></div></div>
+        <div id="desc-ctls" class="body" style="margin:0">
+          <div class="ctl"><div class="row"><label for="k-desc">Tamaño</label><output id="o-desc"></output></div><input type="range" id="k-desc" min="140" max="280" step="5"><small>Porcentaje del tamaño del nombre.</small></div>
+          <div class="ctl"><span class="label">Peso</span><div class="opts" id="c-dw" role="radiogroup" aria-label="Peso de la bajada"></div></div>
+          <div class="ctl"><span class="label">Ancho</span><div class="opts" id="c-dmode" role="radiogroup" aria-label="Ancho de la bajada"></div></div>
+          <div class="ctl" id="free-track"><div class="row"><label for="k-dtrack">Interletrado</label><output id="o-dtrack"></output></div><input type="range" id="k-dtrack" min="0" max="900" step="10"><small>En milésimas del tamaño de la bajada.</small></div>
+          <div class="ctl" id="free-align"><span class="label">Alineación</span><div class="opts" id="c-dalign" role="radiogroup" aria-label="Alineación de la bajada"></div></div>
+          <div class="ctl"><div class="row"><label for="k-lead">Interlineado</label><output id="o-lead"></output></div><input type="range" id="k-lead" min="20" max="220" step="5"><small>Espacio entre el nombre y la bajada, en % de la altura de las mayúsculas de la bajada.</small></div>
+        </div>
+      </div></details>
+      <details class="grp"><summary>Medidas y valores</summary><div class="body">
+        <div class="opts"><button type="button" class="pick" id="k-guides" role="switch" aria-checked="false">Mostrar guías</button><button type="button" class="pick" id="k-copy">Copiar valores</button></div>
+        <div class="readout" id="readout" aria-live="polite"></div>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><h2>Así se ve en uso</h2><span class="label">Se actualiza con cada cambio</span></div>
+  <div class="apps" id="apps"></div>
+</section>
+
+<section class="wrap section" id="versiones">
+  <div class="section-head"><h2>Versiones guardadas</h2><span class="label" id="v-count"></span></div>
+  <p class="muted">Compartidas: lo que guarda una persona lo ve la otra al instante. "Cargar" lleva la versión al panel para seguir ajustándola.</p>
+  <div class="versions" id="versions"><div class="empty">Cargando versiones…</div></div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><h2>Puntos de partida</h2><span class="label">Combinaciones de las rondas anteriores</span></div>
+  <div class="starts" id="starts"></div>
+</section>
+
+<script>
+const G = __GLYPHS__;
+(function(){
+  "use strict";
+  /* ================= datos ================= */
+  const FONTS = {
+    redhat:{ name:'Red Hat Display', css:"'Red Hat Display', system-ui, sans-serif", wt:800, stretch:'100%' },
+    spectral:{ name:'Spectral', css:"'Spectral', Georgia, serif", wt:800, stretch:'100%' },
+    bodoni:{ name:'Bodoni Moda', css:"'Bodoni Moda', Georgia, serif", wt:800, stretch:'100%' },
+    instrument:{ name:'Instrument Sans', css:"'Instrument Sans', system-ui, sans-serif", wt:700, stretch:'75%' },
+  };
+  const PALS = {
+    cobalto:{ name:'Cobalto', L:'#F4F2EE', ink:'#0A0F2C', mark:'#1638E8', dark:'#0A0F2C', onDark:'#F4F2EE', markDark:'#7DF2C8', acc:'#1638E8', onAcc:'#F4F2EE', extra:'#7DF2C8' },
+    bosque:{ name:'Bosque', L:'#EEF2EA', ink:'#111613', mark:'#0B3D2E', dark:'#111613', onDark:'#EEF2EA', markDark:'#D9FF72', acc:'#0B3D2E', onAcc:'#D9FF72', extra:'#D9FF72' },
+    actual:{ name:'Señal · Rojo señal', L:'#F6F6F4', ink:'#0F1430', mark:'#FF4D3A', dark:'#0F1430', onDark:'#F6F6F4', markDark:'#FF4D3A', acc:'#FF4D3A', onAcc:'#0F1430', extra:'#8B91A8' },
+    rojo:{ name:'Señal · Rojo puro', L:'#F6F6F4', ink:'#0F1430', mark:'#E5242B', dark:'#0F1430', onDark:'#F6F6F4', markDark:'#E5242B', acc:'#E5242B', onAcc:'#0F1430', extra:'#8B91A8' },
+    carmin:{ name:'Señal · Carmín', L:'#F6F6F4', ink:'#0F1430', mark:'#D0103A', dark:'#0F1430', onDark:'#F6F6F4', markDark:'#D0103A', acc:'#D0103A', onAcc:'#F6F6F4', extra:'#8B91A8' },
+    granate:{ name:'Señal · Granate', L:'#F6F6F4', ink:'#0F1430', mark:'#9B1B30', dark:'#0F1430', onDark:'#F6F6F4', markDark:'#C2324A', acc:'#9B1B30', onAcc:'#F6F6F4', extra:'#8B91A8' },
+    cadete:{ name:'Cadete', L:'#E6D5B7', ink:'#1E223D', mark:'#F54F1B', dark:'#1E223D', onDark:'#E6D5B7', markDark:'#F54F1B', acc:'#F54F1B', onAcc:'#1E223D', extra:'#1E223D' },
+  };
+  const ROT = 'transform="rotate(180 50 50)"';
+  // Cada S en una grilla de 100 × 100, con su caja exacta [x0, y0, x1, y1].
+  const MARKS = {
+    bisel:{ name:'Bisel', box:[16,8,84,92], draw:()=>{const p='84,8 40,8 27,21 27,37 40,50 48,50 48,29 84,29'; return `<polygon points="${p}"/><g ${ROT}><polygon points="${p}"/></g>`;} },
+    contrapeso:{ name:'Contrapeso', box:[16,8,84,92], draw:()=>{const p='M48 8 H84 V29 H48 Z M48 8 A21 21 0 0 0 48 50 Z'; return `<path d="${p}"/><g ${ROT}><path d="${p}"/></g>`;} },
+    modulos:{ name:'Módulos', box:[22,7,78,93], draw:()=>{
+      const s=26,g=4,x0=22,y0=7; const c=(cx,cy,k)=>{const x=x0+cx*(s+g),y=y0+cy*(s+g);return {tl:`M${x} ${y+s} A${s} ${s} 0 0 1 ${x+s} ${y} V${y+s} Z`,tr:`M${x} ${y} A${s} ${s} 0 0 1 ${x+s} ${y+s} H${x} Z`,bl:`M${x} ${y} H${x+s} V${y+s} A${s} ${s} 0 0 1 ${x} ${y} Z`,br:`M${x} ${y} H${x+s} A${s} ${s} 0 0 1 ${x} ${y+s} Z`,sq:`M${x} ${y} h${s} v${s} h-${s} Z`}[k];};
+      return `<path d="${[c(0,0,'tl'),c(1,0,'sq'),c(0,1,'bl'),c(1,1,'tr'),c(0,2,'sq'),c(1,2,'br')].join(' ')}"/>`;} },
+    trescuartos:{ name:'Tres cuartos', box:[28,5.5,72,94.5], draw:()=>{const p='M50 27.5 V49.5 A22 22 0 1 1 72 27.5 Z'; return `<path d="${p}"/><g ${ROT}><path d="${p}"/></g>`;} },
+    tramo:{ name:'Tramo', box:[16,8,84,92], draw:(u)=>{const p='M41 8 H86 V58 H41 A25 25 0 0 1 41 8 Z'; return `<clipPath id="ct${u}"><polygon points="0,0 92,0 0,92"/></clipPath><path clip-path="url(#ct${u})" d="${p}"/><g ${ROT}><path clip-path="url(#ct${u})" d="${p}"/></g>`;} },
+    desvio:{ name:'Desvío', box:[14,8,86,92], draw:(u)=>{const p='M41 8 H86 V60 H41 A26 26 0 0 1 41 8 Z'; return `<clipPath id="cd${u}"><polygon points="0,0 100,0 100,16 78,38 54,38 0,92"/></clipPath><path clip-path="url(#cd${u})" d="${p}"/><g ${ROT}><path clip-path="url(#cd${u})" d="${p}"/></g>`;} },
+    cuna:{ name:'Cuña', box:[7,7.8,93,92.2], draw:()=>{const p='M40 8 L93 22 L56 42 L27 54 A26 26 0 0 1 40 8 Z'; return `<path d="${p}"/><g ${ROT}><path d="${p}"/></g>`;} },
+    enlace:{ name:'Enlace', box:[23.5,5.5,76.5,94.5], draw:(u,c)=>`<g fill="none" stroke="${c}" stroke-width="13"><path d="M70 20 A20 20 0 1 0 50 52"/><path d="M30 80 A20 20 0 1 0 50 48"/></g>` },
+    senal:{ name:'Señal', box:[16,8,84,90.8], draw:()=>[[36,84],[16,40],[16,84],[60,84],[16,64]].map((r,i)=>`<rect x="${r[0]}" y="${(8+i*17.2).toFixed(1)}" width="${r[1]-r[0]}" height="14" rx="7"/>`).join('') },
+  };
+  const CASES = { title:'Senda', caps:'SENDA' };
+  const ALIGNS = { center:'Centrada', base:'Apoyada en la base', top:'Colgada del tope' };
+  const SHOW = { yes:'Con bajada', no:'Sin bajada' };
+  const DMODES = { fit:'Ajustada al nombre', free:'Libre' };
+  const DALIGNS = { left:'Izquierda', center:'Centrada', right:'Derecha' };
+  const WNAMES = { '300':'Light 300', '400':'Regular 400', '500':'Medium 500' };
+  const DEFAULTS = { mono:'bisel', pal:'carmin', cas:'title', font:'redhat', scale:1.4, track:-25, desc:200, descW:'400', descMode:'fit', descTrack:300, descAlign:'left', lead:70, sep:0.85, align:'center', show:'yes' };
+  const KEYS = Object.keys(DEFAULTS);
+
+  const STARTS = [
+    { name:'Ronda 6 · B Equilibrada', p:{} },
+    { name:'Ronda 6 · A Sutil', p:{ scale:1.25, track:-15, desc:215, sep:0.9 } },
+    { name:'Ronda 6 · C S protagonista', p:{ scale:1.65, track:-30, desc:185, sep:0.8 } },
+    { name:'Ronda 5 · proporción original', p:{ scale:1, track:0, desc:245, sep:1 } },
+    { name:'Bisel · Cadete', p:{ pal:'cadete' } },
+    { name:'Contrapeso · Bosque · Spectral', p:{ mono:'contrapeso', pal:'bosque', font:'spectral', track:-10, scale:1.3 } },
+    { name:'Bisel · Señal · SENDA', p:{ cas:'caps', track:60, pal:'actual' } },
+    { name:'Bisel · Instrument condensada', p:{ font:'instrument', track:0, descW:'400' } },
+    { name:'Módulos · Cobalto', p:{ mono:'modulos', pal:'cobalto', scale:1.3 } },
+    { name:'Contrapeso · Bodoni · SENDA', p:{ mono:'contrapeso', font:'bodoni', cas:'caps', track:50, pal:'granate' } },
+  ];
+
+  /* ================= estado local ================= */
+  const clean = p => { const o = {}; for (const k of KEYS) o[k] = (p && p[k] !== undefined && p[k] !== null) ? p[k] : DEFAULTS[k]; if(!PALS[o.pal]) o.pal = DEFAULTS.pal; if(!MARKS[o.mono]) o.mono = DEFAULTS.mono; if(!FONTS[o.font]) o.font = DEFAULTS.font; if(!CASES[o.cas]) o.cas = DEFAULTS.cas; return o; };
+  let state = clean({});
+  let guides = false;
+  const LS = (k,v) => { try{ if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); }catch(e){ return null; } };
+  // Versión de la ronda 6 guardada en este navegador (misma página).
+  let r6 = null;
+  try{ const s = JSON.parse(LS('senda-r6') || 'null'); if (s) r6 = clean({ mono:'bisel', font:'redhat', cas:'title', pal: s.red, scale:s.scale, track:s.track, desc:s.desc, descW:s.descW, descMode:s.descMode, descTrack:s.descTrack, descAlign:s.descAlign, lead:s.lead, sep:s.sep, align:s.align, show:'yes' }); }catch(e){}
+  try{ const s = JSON.parse(LS('senda-estudio') || 'null'); state = clean(s || r6 || {}); }catch(e){}
+
+  /* ================= composición del logo ================= */
+  let uid = 0;
+  function markSVG(key, color, size){
+    const M = MARKS[key], [x0,y0,x1,y1] = M.box, w = x1-x0, h = y1-y0, u = ++uid;
+    const sz = size ? `width="${(size*w/h).toFixed(1)}" height="${size}"` : '';
+    return `<svg viewBox="${x0} ${y0} ${w} ${h}" ${sz} fill="${color}" aria-hidden="true">${M.draw(u, color)}</svg>`;
+  }
+  function compose(p, mark, ink, opts={}){
+    const F = G[p.font], S = F[p.cas], cap = F.cap;
+    const w = F.desc[p.descW] ? p.descW : '400';
+    const C = F.desc[w], dcap = F.descCap[w];
+    const t = p.track, n = S.length;
+    const inkL = S[0].x + S[0].b[0];
+    const W = S[n-1].x + (n-1)*t + S[n-1].b[2] - inkL;
+    const sTop = S[0].b[1], top = Math.min(...S.map(g=>g.b[1])), bottom = Math.max(...S.map(g=>g.b[3]));
+    const showD = p.show === 'yes' && !opts.short;
+    const k = p.desc/1000, m = C.length;
+    const c0 = (C[0].x + C[0].b[0]) * k, cw0 = (C[m-1].x + C[m-1].b[2]) * k - c0;
+    const free = p.descMode === 'free';
+    const tc = free ? p.descTrack * k : (W - cw0) / (m-1);
+    const cw = cw0 + (m-1)*tc;
+    const dOff = !free ? 0 : p.descAlign==='center' ? (W-cw)/2 : p.descAlign==='right' ? W-cw : 0;
+    const capD = dcap*k, descBase = showD ? (p.lead/100)*capD + capD : 0;
+    const descBottom = descBase + Math.max(...C.map(g=>g.b[3]))*k;
+    const blockBase = showD ? descBase : 0;
+    const blockH = blockBase - sTop;
+    const H = blockH * p.scale;
+    const [bx0,by0,bx1,by1] = MARKS[p.mono].box, bw = bx1-bx0, bh = by1-by0, mw = H*bw/bh;
+    const markTop = p.align==='top' ? sTop : p.align==='base' ? blockBase - H : sTop + blockH/2 - H/2;
+    const gap = p.sep * blockH * 0.25;
+    const mx = mw + gap;
+    const sc = H/bh, u = ++uid;
+    const markG = `<g transform="translate(0 ${markTop.toFixed(1)}) scale(${sc.toFixed(4)}) translate(${-bx0} ${-by0})" fill="${mark}">${MARKS[p.mono].draw(u, mark)}</g>`;
+    const word = S.map((g,i)=>`<path transform="translate(${(mx - inkL + g.x + i*t).toFixed(1)} 0)" d="${g.d}"/>`).join('');
+    const desc = showD ? C.map((g,j)=>`<path transform="translate(${(mx + dOff + g.x*k - c0 + j*tc).toFixed(1)} ${descBase.toFixed(1)}) scale(${k})" d="${g.d}"/>`).join('') : '';
+    const y0 = Math.min(markTop, top), y1 = Math.max(markTop+H, showD ? descBottom : bottom);
+    const xMin = Math.min(0, showD ? mx + dOff : 0);
+    const x1 = mx + (showD ? Math.max(W, dOff + cw) : W);
+    let gl = '';
+    if (opts.guides){
+      const gc = '#2F6BFF', sw = Math.max(3, H/220), da = `stroke-dasharray="${sw*4} ${sw*3}"`;
+      const hl = y => `<line x1="${xMin-H*0.15}" x2="${x1+H*0.15}" y1="${y}" y2="${y}" stroke="${gc}" stroke-width="${sw}" ${da}/>`;
+      const vl = x => `<line y1="${y0-H*0.15}" y2="${y1+H*0.15}" x1="${x}" x2="${x}" stroke="${gc}" stroke-width="${sw}" ${da}/>`;
+      gl = hl(sTop)+hl(0)+(showD?hl(descBase-capD)+hl(descBase):'')+hl(markTop)+hl(markTop+H)+vl(mw)+vl(mx)+vl(mx+W)+(showD&&free?vl(mx+dOff)+vl(mx+dOff+cw):'');
+    }
+    const pad = opts.guides ? H*0.2 : 0;
+    const vb = [xMin-pad, y0-pad, (x1-xMin)+2*pad, (y1-y0)+2*pad].map(v=>v.toFixed(1)).join(' ');
+    return { svg:`<svg viewBox="${vb}" role="img" aria-label="Logo Senda">${markG}<g fill="${ink}">${word}${desc}</g>${gl}</svg>`, autoTrack: tc/k };
+  }
+
+  /* ================= render ================= */
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const opt = (map, cur, attr, extra) => Object.entries(map).map(([k,v])=>`<button type="button" class="pick" role="radio" aria-checked="${cur===k}" ${attr}="${k}">${extra?extra(k):''}${esc(v)}</button>`).join('');
+
+  function summary(p){
+    const P = PALS[p.pal], F = FONTS[p.font];
+    const w = G[p.font].desc[p.descW] ? p.descW : '400';
+    return `${MARKS[p.mono].name} · ${P.name} · ${CASES[p.cas]} · ${F.name}\nS ${(+p.scale).toFixed(2)}× (${ALIGNS[p.align].toLowerCase()}) · separación ${(+p.sep).toFixed(2)}×\nInterletrado nombre ${p.track}\n` +
+      (p.show==='yes' ? `Bajada ${(p.desc/10).toFixed(1)}% · ${WNAMES[w]} · ${p.descMode==='free' ? `libre, interletrado ${p.descTrack}, ${DALIGNS[p.descAlign].toLowerCase()}` : 'ajustada al nombre'} · interlineado ${p.lead}%` : 'Sin bajada');
+  }
+
+  function renderPanel(){
+    const p = state, P = PALS[p.pal];
+    $('c-mono').innerHTML = Object.entries(MARKS).map(([k,M])=>`<button type="button" class="mono" role="radio" aria-checked="${p.mono===k}" data-mono="${k}">${markSVG(k, 'currentColor')}<span>${M.name}</span></button>`).join('');
+    $('c-pal').innerHTML = opt(Object.fromEntries(Object.entries(PALS).map(([k,v])=>[k,v.name])), p.pal, 'data-pal', k=>`<i style="background:${PALS[k].mark}"></i><i style="background:${PALS[k].ink}"></i><i style="background:${PALS[k].L}"></i>`);
+    $('c-cas').innerHTML = opt(CASES, p.cas, 'data-cas');
+    $('c-font').innerHTML = Object.entries(FONTS).map(([k,F])=>`<button type="button" class="pick" role="radio" aria-checked="${p.font===k}" data-font="${k}" style="font-family:${F.css};font-weight:${F.wt};font-stretch:${F.stretch}">${F.name}</button>`).join('');
+    $('c-align').innerHTML = opt(ALIGNS, p.align, 'data-align');
+    $('c-show').innerHTML = opt(SHOW, p.show, 'data-show');
+    const avail = Object.fromEntries(Object.keys(G[p.font].desc).map(w=>[w, WNAMES[w]]));
+    $('c-dw').innerHTML = opt(avail, G[p.font].desc[p.descW] ? p.descW : '400', 'data-dw');
+    $('c-dmode').innerHTML = opt(DMODES, p.descMode, 'data-dmode');
+    $('c-dalign').innerHTML = opt(DALIGNS, p.descAlign, 'data-dalign');
+    const r = compose(p, '#000', '#000');
+    const free = p.descMode === 'free';
+    $('k-track').value = p.track; $('o-track').textContent = (p.track>0?'+':'') + p.track;
+    $('k-scale').value = p.scale; $('o-scale').textContent = (+p.scale).toFixed(2)+'×';
+    $('k-sep').value = p.sep; $('o-sep').textContent = (+p.sep).toFixed(2)+'×';
+    $('k-desc').value = p.desc; $('o-desc').textContent = (p.desc/10).toFixed(1)+'%';
+    $('k-dtrack').value = free ? p.descTrack : Math.round(r.autoTrack); $('o-dtrack').textContent = free ? p.descTrack : Math.round(r.autoTrack)+' (auto)';
+    $('k-lead').value = p.lead; $('o-lead').textContent = p.lead+'%';
+    $('desc-ctls').classList.toggle('dim', p.show !== 'yes');
+    $('free-track').classList.toggle('dim', !free); $('free-align').classList.toggle('dim', !free);
+    $('k-guides').setAttribute('aria-checked', guides); $('k-guides').textContent = guides ? 'Ocultar guías' : 'Mostrar guías';
+    $('readout').textContent = summary(p);
+  }
+
+  function renderView(){
+    const p = state, P = PALS[p.pal];
+    $('stage').style.background = P.L; $('sizes').style.background = P.L; $('sizes').style.color = P.ink;
+    $('stage').innerHTML = compose(p, P.mark, P.ink, {guides}).svg;
+    $('sizes').innerHTML = [300,200,150].map(w=>`<figure><div style="width:${w}px">${compose(p, P.mark, P.ink).svg}</div><figcaption>${w} px</figcaption></figure>`).join('')
+      + `<figure><div style="width:110px">${compose(p, P.mark, P.ink, {short:true}).svg}</div><figcaption>Corta</figcaption></figure>`
+      + `<figure><div style="display:flex;gap:8px;align-items:flex-end">${markSVG(p.mono, P.mark, 32)}${markSVG(p.mono, P.mark, 16)}</div><figcaption>Monograma</figcaption></figure>`;
+  }
+
+  function renderApps(){
+    const p = state, P = PALS[p.pal], F = FONTS[p.font];
+    const head = `font-family:${F.css};font-weight:${F.wt};font-stretch:${F.stretch}`;
+    $('apps').innerHTML = `
+      <figure class="a-card"><div class="frame r-card" style="background:${P.dark};display:grid;place-items:center"><div style="width:66%">${compose(p, P.markDark, P.onDark).svg}</div></div><figcaption>Tarjeta · frente</figcaption></figure>
+      <figure class="a-web"><div class="frame r-web" style="background:${P.L};color:${P.ink}">
+        <div style="position:absolute;inset:0;padding:3.5% 4.5%;display:grid;grid-template-rows:auto 1fr">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:clamp(10px,1.1vw,13px)">
+            <div style="width:clamp(110px,17vw,200px)">${compose(p, P.mark, P.ink).svg}</div>
+            <span style="display:flex;gap:1.8em;align-items:center"><span>Servicios</span><span>Casos</span><span style="background:${P.acc};color:${P.onAcc};padding:.55em 1.1em;font-weight:600">Agendá una charla</span></span>
+          </div>
+          <div style="align-self:center;${head};font-size:clamp(20px,3.2vw,40px);line-height:1.04;letter-spacing:-.01em;max-width:19ch">Estrategia comercial con la precisión de los datos.</div>
+        </div></div><figcaption>Encabezado del sitio web</figcaption></figure>
+      <figure class="a-card"><div class="frame r-card" style="background:${P.L};color:${P.ink}">
+        <div style="position:absolute;right:7%;top:12%;height:30%">${markSVG(p.mono, P.mark).replace('<svg','<svg style="height:100%;width:auto"')}</div>
+        <div style="position:absolute;left:8%;bottom:11%;display:grid;gap:2px">
+          <span style="${head};font-size:clamp(15px,1.7vw,20px)">Tu nombre</span>
+          <span style="font-size:clamp(11px,1.1vw,13px);opacity:.75">Socio · Desarrollo comercial</span>
+          <span style="font-family:var(--f-mono);font-size:clamp(9px,1vw,11px);margin-top:6px">hola@senda.com.ar</span>
+        </div></div><figcaption>Tarjeta · dorso</figcaption></figure>
+      <figure class="a-post"><div class="frame r-post" style="background:${P.acc}">
+        <div style="position:absolute;inset:9%;display:grid;grid-template-rows:auto 1fr auto;color:${P.onAcc}">
+          <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.85">Investigación de mercado</span>
+          <div style="align-self:center;${head};font-size:clamp(24px,2.8vw,36px);line-height:1.05">Antes de vender más, entendé por qué te compran.</div>
+          <div style="width:46%">${compose(p, P.onAcc, P.onAcc, {short:true}).svg}</div>
+        </div></div><figcaption>Post de LinkedIn · 4:5</figcaption></figure>
+      <figure class="a-icons"><div class="frame" style="background:${P.L};padding:22px;display:grid;gap:16px">
+          <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+            <div style="width:88px;height:88px;border-radius:50%;background:${P.acc};display:grid;place-items:center">${markSVG(p.mono, P.onAcc, 48)}</div>
+            <div style="width:88px;height:88px;border-radius:20px;background:${P.dark};display:grid;place-items:center">${markSVG(p.mono, P.markDark, 46)}</div>
+          </div>
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(127,127,127,.14);border-radius:8px 8px 0 0;padding:7px 12px 7px 9px;font-size:13px;color:${P.ink};justify-self:start">
+            <span style="width:16px;height:16px;background:${P.acc};border-radius:3px;display:grid;place-items:center">${markSVG(p.mono, P.onAcc, 11)}</span>Senda · Propuesta</div>
+        </div><figcaption>Avatar, ícono y favicon</figcaption></figure>`;
+  }
+
+  function render(){ LS('senda-estudio', JSON.stringify(state)); renderPanel(); renderView(); renderApps(); }
+
+  /* ================= controles ================= */
+  const sliders = { track:'k-track', scale:'k-scale', sep:'k-sep', desc:'k-desc', descTrack:'k-dtrack', lead:'k-lead' };
+  for (const [k,id] of Object.entries(sliders)) $(id).addEventListener('input', e=>{ state[k] = parseFloat(e.target.value); render(); });
+  $('panel').addEventListener('click', e=>{
+    const b = e.target.closest('button'); if (!b) return;
+    const map = { mono:'mono', pal:'pal', cas:'cas', font:'font', align:'align', show:'show', dw:'descW', dmode:'descMode', dalign:'descAlign' };
+    for (const [attr,key] of Object.entries(map)) if (b.dataset[attr] !== undefined){ state[key] = b.dataset[attr]; render(); return; }
+  });
+  $('k-guides').addEventListener('click', ()=>{ guides = !guides; render(); });
+  $('k-copy').addEventListener('click', ()=>{
+    const b = $('k-copy'), txt = $('readout').textContent;
+    const sel = ()=>{ const r = document.createRange(); r.selectNodeContents($('readout')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Seleccionado: Ctrl+C'; };
+    try{ navigator.clipboard.writeText(txt).then(()=>{ b.textContent='Copiado'; setTimeout(()=>b.textContent='Copiar valores',1600); }, sel); }catch(e){ sel(); }
+  });
+
+  /* ================= puntos de partida ================= */
+  $('starts').innerHTML = STARTS.map((s,i)=>{ const p = clean(Object.assign({}, DEFAULTS, s.p)), P = PALS[p.pal];
+    return `<button type="button" class="start" data-start="${i}"><div class="thumb" style="background:${P.L}">${compose(p, P.mark, P.ink).svg}</div><span>${esc(s.name)}</span></button>`; }).join('');
+  $('starts').addEventListener('click', e=>{ const b = e.target.closest('[data-start]'); if(!b) return; state = clean(Object.assign({}, DEFAULTS, STARTS[+b.dataset.start].p)); render(); window.scrollTo({top: $('stage').getBoundingClientRect().top + scrollY - 20, behavior:'smooth'}); });
+
+  /* ================= versiones compartidas ================= */
+  let db = null, user = null, meId = null, canWrite = null, versions = [], pendingDelete = null;
+  const status = t => { $('v-status').textContent = t || ''; };
+
+  function renderVersions(){
+    const box = $('versions');
+    if (!db){ box.innerHTML = `<div class="empty">El registro compartido no está disponible en esta vista. Podés seguir usando el panel; para guardar versiones, abrí la página con tu cuenta.</div>`; $('v-count').textContent=''; return; }
+    if (!versions.length){ box.innerHTML = `<div class="empty">Todavía no hay versiones guardadas. Armen una combinación arriba, pónganle un nombre y toquen "Guardar versión".</div>`; $('v-count').textContent=''; return; }
+    $('v-count').textContent = versions.length === 1 ? '1 versión' : versions.length + ' versiones';
+    const sorted = versions.slice().sort((a,b)=> (b.id==='favorita') - (a.id==='favorita') || (b.at||0) - (a.at||0));
+    box.innerHTML = sorted.map(v=>{
+      const p = clean(v.params), P = PALS[p.pal];
+      const likes = Object.entries(v.likes||{}).filter(([,x])=>x).map(([id])=>id);
+      const mine = meId && likes.includes(meId);
+      const canDel = canWrite !== false && (v.by === meId);
+      const date = v.at ? new Date(v.at).toLocaleDateString('es-AR',{day:'numeric',month:'short'}) + ' ' + new Date(v.at).toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'}) : '';
+      return `<article class="ver${v.id==='favorita'?' fav':''}" data-id="${esc(v.id)}">
+        <div class="thumb" style="background:${P.L}">${compose(p, P.mark, P.ink).svg}</div>
+        <div class="info">${v.id==='favorita'?'<span class="tag">Favorita · ronda 6</span>':''}
+          <div class="name">${esc(v.name||'Sin nombre')}</div>
+          ${v.note?`<div class="note">${esc(v.note)}</div>`:''}
+          <div class="who" data-by="${esc(v.by||'')}"><img alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw="><span></span><span>· ${esc(date)}</span></div>
+          <div class="spec">${esc(summary(p)).replace(/\n/g,'<br>')}</div>
+          <div class="actions">
+            <button type="button" class="btn small" data-load>Cargar</button>
+            <button type="button" class="btn small ghost like" data-like aria-pressed="${!!mine}" ${canWrite===false||!meId?'disabled':''}>♥ ${likes.length}</button>
+            ${canDel ? (pendingDelete===v.id ? `<button type="button" class="btn small danger" data-del-yes>Confirmar</button><button type="button" class="btn small ghost" data-del-no>Cancelar</button>` : `<button type="button" class="btn small ghost" data-del>Eliminar</button>`) : ''}
+          </div>
+        </div></article>`;
+    }).join('');
+    // nombres y avatares de quienes guardaron y marcaron
+    if (user){
+      const ids = [...new Set(versions.map(v=>v.by).filter(Boolean))];
+      user.profiles(ids).then(ps=>{
+        box.querySelectorAll('.who').forEach(el=>{ const id = el.dataset.by; const pr = id && ps[id];
+          if (!pr){ el.children[1].textContent = 'Alguien'; el.children[0].remove(); return; }
+          el.children[0].src = pr.avatarUrl; el.children[1].textContent = pr.isMe ? 'Vos' : (pr.name || 'Alguien'); });
+      });
+    } else box.querySelectorAll('.who').forEach(el=>{ el.children[1].textContent=''; el.children[0].remove(); });
+  }
+
+  $('versions').addEventListener('click', async e=>{
+    const card = e.target.closest('.ver'); if (!card) return;
+    const id = card.dataset.id, v = versions.find(x=>x.id===id); if (!v) return;
+    if (e.target.closest('[data-load]')){ state = clean(v.params); render(); status(`Cargaste "${v.name}". Los cambios que hagas no la modifican: guardá una versión nueva.`); window.scrollTo({top: $('stage').getBoundingClientRect().top + scrollY - 20, behavior:'smooth'}); return; }
+    if (e.target.closest('[data-like]')){
+      if (!meId) return;
+      const on = !(v.likes && v.likes[meId]);
+      try{ await db.doc('versiones/'+id).update({ likes: { [meId]: on } }); }catch(err){ status('No se pudo marcar: ' + (err && err.code === 'invalid_argument' ? 'tu acceso es solo de lectura.' : 'probá de nuevo.')); }
+      return;
+    }
+    if (e.target.closest('[data-del]')){ pendingDelete = id; renderVersions(); return; }
+    if (e.target.closest('[data-del-no]')){ pendingDelete = null; renderVersions(); return; }
+    if (e.target.closest('[data-del-yes]')){ pendingDelete = null; try{ await db.doc('versiones/'+id).delete(); }catch(err){ status('No se pudo eliminar. Probá de nuevo.'); } return; }
+  });
+
+  async function saveVersion(docId, name, note, params){
+    if (!db) { status('El registro compartido no está disponible en esta vista.'); return false; }
+    const body = { name, note: note || '', params: clean(params), by: meId, at: Date.now(), likes: {} };
+    try{
+      if (docId) await db.doc('versiones/'+docId).set(body); else await db.collection('versiones').add(body);
+      return true;
+    }catch(err){
+      const c = err && err.code;
+      status(c === 'invalid_argument' ? 'Tu acceso a esta página es de solo lectura: pedile a quien la comparte que te dé permiso de Colaborador o Editor.' : c === 'quota_exceeded' ? 'Se llenó el registro: eliminen algunas versiones viejas.' : 'No se pudo guardar. Probá de nuevo en unos segundos.');
+      if (c === 'invalid_argument') { canWrite = false; $('v-save').disabled = true; }
+      return false;
+    }
+  }
+
+  $('savebar').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const name = $('v-name').value.trim(); if (!name){ $('v-name').focus(); return; }
+    $('v-save').disabled = true; status('Guardando…');
+    const ok = await saveVersion(null, name, $('v-note').value.trim(), state);
+    $('v-save').disabled = canWrite === false;
+    if (ok){ status(`Guardada: "${name}".`); $('v-name').value=''; $('v-note').value=''; }
+  });
+
+  $('save-fav').addEventListener('click', async ()=>{
+    if (!r6) return;
+    $('save-fav').disabled = true;
+    const ok = await saveVersion('favorita', 'Versión favorita', 'La configuración que quedó al final de la ronda 6.', r6);
+    if (ok){ $('banner').hidden = true; status('Guardaste la versión favorita. Ya la ve tu socia.'); }
+    else $('save-fav').disabled = false;
+  });
+
+  render();
+  renderVersions();
+
+  (async ()=>{
+    const cl = window.claude;
+    if (!cl || typeof cl.use !== 'function'){ db = null; renderVersions(); $('v-save').disabled = true; return; }
+    [db, user] = await Promise.all([cl.use('db'), cl.use('user')]);
+    if (!db){ renderVersions(); $('v-save').disabled = true; return; }
+    if (user){ meId = await user.id(); canWrite = await user.can('data.write'); }
+    if (canWrite === false){ $('v-save').disabled = true; status('Podés ver y cargar versiones, pero tu acceso es de solo lectura.'); }
+    db.collection('versiones').orderBy('at','desc').limit(200).onSnapshot(snap=>{
+      versions = snap.docs.map(d=>Object.assign({ id: d.id }, d.data()));
+      const hasFav = versions.some(v=>v.id==='favorita');
+      $('banner').hidden = !(r6 && !hasFav && canWrite !== false);
+      renderVersions();
+    }, err=>{ status('Se cortó la conexión con el registro. Recargá la página.'); });
+  })();
+})();
+</script>

@@ -27,9 +27,10 @@ def glyphs(path, text):
         x += pos.x_advance
     return out
 
-fd, dst = sys.argv[1], sys.argv[2]
-json.dump({"senda": glyphs(f"{fd}/RHD-800.ttf", "Senda"),
+if __name__ == "__main__":
+  fd, dst = sys.argv[1], sys.argv[2]
+  json.dump({"senda": glyphs(f"{fd}/RHD-800.ttf", "Senda"),
            "consultora": glyphs(f"{fd}/RHD-400.ttf", "CONSULTORA"),
            "consultoraPorPeso": {w: glyphs(f"{fd}/RHD-{w}.ttf", "CONSULTORA") for w in ("300", "400", "500")},
            "capHeight": 700}, open(dst, "w"))
-print("ok")
+  print("ok")
