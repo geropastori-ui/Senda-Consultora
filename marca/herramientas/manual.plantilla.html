@@ -49,6 +49,18 @@ button{font:inherit;color:inherit}
 .idea .art{background:var(--pizarra-2);display:grid;place-items:center;padding:48px;aspect-ratio:1/1;max-width:100%;position:relative}
 .idea .art svg{width:70%;height:auto}
 
+/* arquitectura */
+.arch{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:32px 14px}
+.arch figure{margin:0;display:grid;gap:12px;min-width:0;align-content:start}
+.arch .box{display:grid;place-items:center;padding:clamp(28px,6vw,64px);aspect-ratio:16/9;max-width:100%}
+.arch .box svg{width:100%;height:auto;max-height:100%}
+.arch dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:15px}
+.arch dt{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--texto-2-osc);padding-top:2px}
+.arch dd{margin:0}
+.arch-rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:1px;background:var(--linea-osc);border:1px solid var(--linea-osc);margin:32px 0 0;padding:0;list-style:none}
+.arch-rules li{background:var(--pizarra-2);padding:18px 20px;font-size:15px}
+.arch-rules b{display:block;font-family:var(--f-display);font-size:18px;margin-bottom:4px}
+
 /* construcción */
 .build{background:var(--niebla);padding:clamp(28px,6vw,80px) clamp(16px,5vw,64px);display:grid;gap:28px}
 .build svg{width:100%;height:auto;overflow:visible}
@@ -151,7 +163,7 @@ figcaption span{font-size:14px;color:var(--texto-2-osc)}
 
 <!-- portada -->
 <header class="wrap cover">
-  <div class="top"><span class="label">Manual de marca · versión 1.0</span><span class="label">Octubre 2026</span></div>
+  <div class="top"><span class="label">Manual de marca · versión 1.1</span><span class="label">Octubre 2026</span></div>
   <div class="logo" id="cover-logo"></div>
   <div class="meta">
     <h1>Investigación de mercado, desarrollo comercial<br>y automatización con IA.</h1>
@@ -172,15 +184,29 @@ figcaption span{font-size:14px;color:var(--texto-2-osc)}
   </div>
 </div></section>
 
-<!-- 02 construcción -->
+<!-- 02 arquitectura -->
+<section class="band" style="background:var(--pizarra-2)"><div class="wrap">
+  <div class="chap"><span class="n">02</span><h2>Una marca, dos unidades</h2><p>Senda trabaja con dos unidades bajo la misma marca. La consultora diagnostica y recomienda; el estudio diseña y construye.</p></div>
+  <div class="arch" id="arch"></div>
+  <ul class="arch-rules">
+    <li><b>Una sola marca.</b> Misma S, mismo "Senda", misma paleta y misma tipografía. Lo único que cambia es la bajada. La versión corta y el monograma no llevan bajada, así que son iguales para las dos.</li>
+    <li><b>Quién firma.</b> Propuestas integrales, desarrollo comercial e investigación de mercado firman como Senda Consultora. Proyectos de implementación, automatizaciones e IA firman como Senda Estudio. Ante la duda, Senda Consultora.</li>
+    <li><b>El color que lidera.</b> La consultora abre con fondo pizarra; el estudio, con fondo verde mar y el logo todo en niebla. Los cuatro colores siguen siendo de las dos.</li>
+    <li><b>La palabra "estudio" es del estudio.</b> La investigación se llama "investigación de mercado", nunca "estudios de mercado", para que "Senda Estudio" no se lea como el área que hace estudios.</li>
+    <li><b>Con frase de apoyo.</b> Hasta que el nombre sea conocido, Senda Estudio sale acompañado de una línea que diga qué hace: "Diseñamos e implementamos IA en tu negocio".</li>
+    <li><b>Un solo canal.</b> Una cuenta por red, la de Senda, con el monograma como avatar. El estudio tiene su sección en la web (senda.com.ar/estudio) y su serie de contenidos, no un perfil aparte.</li>
+  </ul>
+</div></section>
+
+<!-- 03 construcción -->
 <section class="band"><div class="wrap">
-  <div class="chap"><span class="n">02</span><h2>Construcción</h2><p>Las medidas que no se tocan. El logo se usa siempre desde los archivos oficiales; nunca se rearma a mano.</p></div>
+  <div class="chap"><span class="n">03</span><h2>Construcción</h2><p>Las medidas que no se tocan. El logo se usa siempre desde los archivos oficiales; nunca se rearma a mano.</p></div>
   <div class="build"><div id="build"></div>
     <ol class="rules">
-      <li><span class="k">a</span><span><b>Alto del bloque.</b> Desde el tope de la "S" de Senda hasta la base de "CONSULTORA". Es la unidad de todo el logo.</span></li>
+      <li><span class="k">a</span><span><b>Alto del bloque.</b> Desde el tope de la "S" de Senda hasta la base de la bajada. Es la unidad de todo el logo.</span></li>
       <li><span class="k">b</span><span><b>La S mide 1,4 veces el bloque</b> y se centra verticalmente sobre él.</span></li>
       <li><span class="k">c</span><span><b>Separación entre la S y el texto:</b> 0,85 veces el grosor de la barra del bloque.</span></li>
-      <li><span class="k">d</span><span><b>"CONSULTORA" mide exactamente el ancho de "Senda"</b>, de punta a punta. El interletrado se calcula para lograrlo.</span></li>
+      <li><span class="k">d</span><span><b>La bajada mide exactamente el ancho de "Senda"</b>, de punta a punta, sea "CONSULTORA" o "ESTUDIO". El interletrado se calcula para lograrlo.</span></li>
     </ol>
   </div>
   <div class="specs" id="specs"></div>
@@ -188,13 +214,13 @@ figcaption span{font-size:14px;color:var(--texto-2-osc)}
 
 <!-- 03 versiones -->
 <section class="band claro"><div class="wrap">
-  <div class="chap"><span class="n">03</span><h2>Versiones</h2><p>Cuatro versiones, una para cada tamaño y formato. La principal es la primera opción siempre que entre.</p></div>
+  <div class="chap"><span class="n">04</span><h2>Versiones</h2><p>Cuatro versiones, una para cada tamaño y formato. La principal es la primera opción siempre que entre.</p></div>
   <div class="versions" id="versions"></div>
 </div></section>
 
 <!-- 04 resguardo y tamaños -->
 <section class="band claro" style="padding-top:0"><div class="wrap">
-  <div class="chap"><span class="n">04</span><h2>Espacio y tamaño mínimo</h2><p>El aire alrededor del logo es parte del logo.</p></div>
+  <div class="chap"><span class="n">05</span><h2>Espacio y tamaño mínimo</h2><p>El aire alrededor del logo es parte del logo.</p></div>
   <div class="two">
     <figure style="margin:0;display:grid;gap:10px"><div class="clear" id="clear"></div>
       <figcaption><b>Área de resguardo = X</b><span>X es el grosor de la barra de la S. Ningún texto, imagen ni borde entra en esa zona.</span></figcaption></figure>
@@ -204,19 +230,19 @@ figcaption span{font-size:14px;color:var(--texto-2-osc)}
 
 <!-- 05 color del logo -->
 <section class="band"><div class="wrap">
-  <div class="chap"><span class="n">05</span><h2>El logo sobre cada fondo</h2><p>La combinación principal es la S naranja con el texto niebla sobre pizarra. Para el resto de los fondos, estas son las únicas combinaciones válidas.</p></div>
+  <div class="chap"><span class="n">06</span><h2>El logo sobre cada fondo</h2><p>La combinación principal es la S naranja con el texto niebla sobre pizarra. Para el resto de los fondos, estas son las únicas combinaciones válidas. Valen igual para Senda Estudio.</p></div>
   <div class="colorways" id="colorways"></div>
 </div></section>
 
 <!-- 06 incorrectos -->
 <section class="band verde"><div class="wrap">
-  <div class="chap"><span class="n">06</span><h2>Lo que no se hace</h2><p>Los errores más comunes al aplicar un logo. Si una pieza pide alguno de estos cambios, la pieza está mal planteada, no el logo.</p></div>
+  <div class="chap"><span class="n">07</span><h2>Lo que no se hace</h2><p>Los errores más comunes al aplicar un logo. Si una pieza pide alguno de estos cambios, la pieza está mal planteada, no el logo.</p></div>
   <div class="donts" id="donts"></div>
 </div></section>
 
 <!-- 07 paleta -->
 <section class="band"><div class="wrap">
-  <div class="chap"><span class="n">07</span><h2>Paleta Fiordo</h2><p>Cuatro colores. El pizarra manda, la niebla da aire, el verde mar ordena y el naranja se usa poco, para que cuando aparezca se note.</p></div>
+  <div class="chap"><span class="n">08</span><h2>Paleta Fiordo</h2><p>Cuatro colores. El pizarra manda, la niebla da aire, el verde mar ordena y el naranja se usa poco, para que cuando aparezca se note.</p></div>
 </div>
   <div class="pal" id="pal"></div>
   <div class="wrap">
@@ -228,7 +254,7 @@ figcaption span{font-size:14px;color:var(--texto-2-osc)}
 
 <!-- 08 tipografía -->
 <section class="band claro"><div class="wrap">
-  <div class="chap"><span class="n">08</span><h2>Tipografía</h2><p>Una sola familia, Red Hat, en dos cortes: Display para títulos y Text para leer. Las dos son gratuitas y están en Google Fonts, así que funcionan en Google Slides, Docs y Canva sin instalar nada.</p></div>
+  <div class="chap"><span class="n">09</span><h2>Tipografía</h2><p>Una sola familia, Red Hat, en dos cortes: Display para títulos y Text para leer. Las dos son gratuitas y están en Google Fonts, así que funcionan en Google Slides, Docs y Canva sin instalar nada.</p></div>
   <div class="families">
     <div class="fam"><span class="label">Títulos</span><div class="aa" style="font-family:var(--f-display);font-weight:800">Aa</div><h3 style="font-size:24px">Red Hat Display</h3><p>ExtraBold 800 para títulos, Bold 700 para subtítulos. Es la misma letra del logo. Interletrado −1% en títulos grandes.</p></div>
     <div class="fam"><span class="label">Textos</span><div class="aa" style="font-family:var(--f-text);font-weight:400">Aa</div><h3 style="font-size:24px;font-family:var(--f-text)">Red Hat Text</h3><p>Regular 400 para leer, Medium 500 para destacar. Dibujada para textos largos y tamaños chicos.</p></div>
@@ -238,18 +264,18 @@ figcaption span{font-size:14px;color:var(--texto-2-osc)}
 
 <!-- 09 aplicaciones -->
 <section class="band"><div class="wrap">
-  <div class="chap"><span class="n">09</span><h2>Aplicaciones</h2><p>Cómo se ve la marca en las piezas de todos los días.</p></div>
+  <div class="chap"><span class="n">10</span><h2>Aplicaciones</h2><p>Cómo se ve la marca en las piezas de todos los días.</p></div>
   <div class="apps" id="apps"></div>
 </div></section>
 
 <!-- 10 descargas -->
 <section class="band" style="background:var(--pizarra-2)" id="descargas"><div class="wrap">
-  <div class="chap"><span class="n">10</span><h2>Descargas</h2><p>Todos los archivos del logo. SVG para web, impresión y diseño (se puede agrandar sin perder calidad). PNG con fondo transparente para Slides, Docs, Canva y redes.</p></div>
+  <div class="chap"><span class="n">11</span><h2>Descargas</h2><p>Todos los archivos del logo. SVG para web, impresión y diseño (se puede agrandar sin perder calidad). PNG con fondo transparente para Slides, Docs, Canva y redes.</p></div>
   <div class="dl-top"><button type="button" class="btn" id="dl-all">Descargar todo (.zip)</button><span class="dl-status" id="dl-status" role="status"></span></div>
   <div class="dl-grid" id="dl-grid"></div>
 </div></section>
 
-<footer class="wrap foot">Senda Consultora · Manual de marca 1.0 · Logo construido con Red Hat Display (SIL Open Font License).</footer>
+<footer class="wrap foot">Senda Consultora y Senda Estudio · Manual de marca 1.1 · Logo construido con Red Hat Display (SIL Open Font License).</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
@@ -264,6 +290,14 @@ const LOGO = __LOGO__;
   /* portada e idea */
   $('cover-logo').innerHTML = inline('principal','negativo','width:100%;height:auto');
   $('idea-art').innerHTML = inline('monograma','negativo','width:62%;height:auto');
+
+  /* arquitectura */
+  const est = (v, var_, style) => LOGO.svgs[`senda-estudio-${v}-${var_}.svg`].replace('<svg ', `<svg style="${style||''}" `);
+  $('arch').innerHTML = `
+    <figure><div class="box" style="background:${C.pizarra};box-shadow:inset 0 0 0 1px #2C3E49">${inline('principal','negativo')}</div>
+      <dl><dt>Hace</dt><dd>Diagnostica y recomienda.</dd><dt>Servicios</dt><dd>Desarrollo comercial e investigación de mercado.</dd><dt>Fondo</dt><dd>Pizarra, S naranja.</dd></dl></figure>
+    <figure><div class="box" style="background:${C.verde}">${est('principal','sobre-verde')}</div>
+      <dl><dt>Hace</dt><dd>Diseña y construye.</dd><dt>Servicios</dt><dd>Implementación de IA y automatizaciones.</dd><dt>Fondo</dt><dd>Verde mar, logo en niebla.</dd></dl></figure>`;
 
   /* construcción con guías */
   (function(){
@@ -296,7 +330,7 @@ const LOGO = __LOGO__;
   $('versions').innerHTML = `
     <figure class="v1"><div class="v-box" style="background:${C.pizarra}">${inline('principal','negativo')}</div><figcaption><b>Principal</b><span>Primera opción siempre. Web, propuestas, presentaciones, tarjetas, firma de mail.</span></figcaption></figure>
     <figure class="v2"><div class="v-box" style="background:${C.pizarra}">${inline('vertical','negativo','max-width:64%')}</div><figcaption><b>Vertical</b><span>Formatos cuadrados o altos: portadas, perfiles, merchandising.</span></figcaption></figure>
-    <figure class="v3"><div class="v-box" style="background:${C.pizarra}">${inline('corta','negativo','max-width:80%')}</div><figcaption><b>Corta</b><span>Cuando "CONSULTORA" no se lee: debajo de 160 px de ancho, encabezados, pies de página.</span></figcaption></figure>
+    <figure class="v3"><div class="v-box" style="background:${C.pizarra}">${inline('corta','negativo','max-width:80%')}</div><figcaption><b>Corta</b><span>Cuando la bajada no se lee: debajo de 160 px de ancho, encabezados, pies de página.</span></figcaption></figure>
     <figure class="v4"><div class="v-box" style="background:${C.naranja}">${inline('monograma','sobre-naranja','max-height:62%;width:auto')}</div><figcaption><b>Monograma</b><span>La S sola. Avatar, favicon, ícono de app, sellos. Nunca reemplaza al logo en la primera aparición de la marca.</span></figcaption></figure>`;
 
   /* resguardo */
@@ -412,15 +446,34 @@ const LOGO = __LOGO__;
     <figure class="a4"><div class="frame" style="background:${C.niebla};padding:28px;display:flex;gap:18px;align-items:center;flex-wrap:wrap">
       <div style="width:110px;height:110px;border-radius:50%;background:${C.pizarra};display:grid;place-items:center">${inline('monograma','negativo','height:56px;width:auto')}</div>
       <div style="width:110px;height:110px;border-radius:24px;background:${C.naranja};display:grid;place-items:center">${inline('monograma','sobre-naranja','height:54px;width:auto')}</div>
-      </div><figcaption><b>Avatar e ícono</b><span>LinkedIn, WhatsApp, Google. Archivo: senda-avatar-1024.png.</span></figcaption></figure>`;
+      </div><figcaption><b>Avatar e ícono</b><span>LinkedIn, WhatsApp, Google. Archivo: senda-avatar-1024.png.</span></figcaption></figure>
+    <figure class="a8"><div class="frame r-slide" style="background:${C.verde};color:${C.niebla}">
+      <div style="position:absolute;inset:0;padding:6% 7%;display:grid;grid-template-rows:auto 1fr auto">
+        <span style="font-family:var(--f-display);font-weight:500;font-size:clamp(9px,1.05vw,12px);letter-spacing:.08em;text-transform:uppercase">Senda Estudio · Caso</span>
+        <div style="align-self:center;display:grid;grid-template-columns:1.2fr 1fr;gap:6%;align-items:end">
+          <div style="font-family:var(--f-display);font-weight:800;font-size:clamp(18px,2.8vw,34px);line-height:1.04;letter-spacing:-.01em">Las consultas se responden solas en menos de 5 minutos.</div>
+          <div style="display:grid;gap:4px;border-left:2px solid ${C.naranja};padding-left:8%">
+            <span style="font-family:var(--f-display);font-weight:800;font-size:clamp(28px,4.6vw,56px);line-height:1;color:${C.niebla}">−32 h</span>
+            <span style="font-size:clamp(10px,1.2vw,13px)">de trabajo manual por mes</span>
+            <span style="font-family:var(--f-mono);font-size:9px;opacity:.6;margin-top:6px">Datos de ejemplo</span></div></div>
+        <div style="width:26%">${est('principal','sobre-verde','width:100%;height:auto')}</div>
+      </div></div><figcaption><b>Diapositiva de Senda Estudio</b><span>Fondo verde mar, logo en niebla; el naranja como acento del resultado.</span></figcaption></figure>
+    <figure class="a4"><div class="frame r-post" style="background:${C.verde};color:${C.niebla}">
+      <div style="position:absolute;inset:9%;display:grid;grid-template-rows:auto 1fr auto">
+        <span style="font-family:var(--f-display);font-weight:500;font-size:11px;letter-spacing:.1em;text-transform:uppercase">Automatizamos esto</span>
+        <div style="align-self:center;display:grid;gap:12px"><div style="font-family:var(--f-display);font-weight:800;font-size:clamp(24px,2.6vw,34px);line-height:1.05">Del formulario al CRM, sin copiar y pegar.</div>
+          <span style="font-size:13px;line-height:1.4">Diseñamos e implementamos IA en tu negocio.</span></div>
+        <div style="width:56%">${est('principal','sobre-verde','width:100%;height:auto')}</div></div></div><figcaption><b>Post de Senda Estudio</b><span>Serie "Automatizamos esto", desde la cuenta de Senda.</span></figcaption></figure>`;
 
   /* descargas */
   const VERS = { principal:'Principal', corta:'Corta', vertical:'Vertical', monograma:'Monograma' };
   const VARS = { negativo:['Sobre pizarra', C.pizarra], positivo:['Sobre claro', C.niebla], 'sobre-verde':['Sobre verde', C.verde], 'sobre-naranja':['Sobre naranja', C.naranja], 'mono-pizarra':['Pizarra, una tinta', '#FFFFFF'], 'mono-blanco':['Blanco', '#000000'], 'mono-negro':['Negro', '#FFFFFF'] };
   const items = [];
-  for (const v of Object.keys(VERS)) for (const k of Object.keys(VARS)) items.push({ v, k, name:`senda-${v}-${k}` });
-  $('dl-grid').innerHTML = items.map((it,i)=>`<div class="dl"><div class="box" style="background:${VARS[it.k][1]}">${inline(it.v, it.k)}</div>
-    <div class="meta"><b>${VERS[it.v]} · ${VARS[it.k][0]}</b><div class="opts"><button type="button" class="btn ghost" data-i="${i}" data-f="svg">SVG</button><button type="button" class="btn ghost" data-i="${i}" data-f="png">PNG</button></div></div></div>`).join('');
+  for (const v of Object.keys(VERS)) for (const k of Object.keys(VARS)) items.push({ v, k, name:`senda-${v}-${k}`, label:'Consultora' });
+  for (const v of ['principal','vertical']) for (const k of Object.keys(VARS)) items.push({ v, k, name:`senda-estudio-${v}-${k}`, label:'Estudio' });
+  const svgOf = it => LOGO.svgs[it.name + '.svg'];
+  $('dl-grid').innerHTML = items.map((it,i)=>`<div class="dl"><div class="box" style="background:${VARS[it.k][1]}">${svgOf(it).replace('<svg ','<svg style="" ')}</div>
+    <div class="meta"><b>${it.v==='corta'||it.v==='monograma' ? 'Ambas' : it.label} · ${VERS[it.v]} · ${VARS[it.k][0]}</b><div class="opts"><button type="button" class="btn ghost" data-i="${i}" data-f="svg">SVG</button><button type="button" class="btn ghost" data-i="${i}" data-f="png">PNG</button></div></div></div>`).join('');
 
   const status = t => { $('dl-status').textContent = t || ''; };
   function toPNG(svgText, width){
@@ -441,7 +494,7 @@ const LOGO = __LOGO__;
   }
   $('dl-grid').addEventListener('click', async e=>{
     const b = e.target.closest('[data-i]'); if (!b) return;
-    const it = items[+b.dataset.i], svg = file(it.v, it.k);
+    const it = items[+b.dataset.i], svg = svgOf(it);
     if (b.dataset.f === 'svg') return save(it.name + '.svg', svg);
     status('Generando PNG…');
     try{ save(it.name + '.png', await toPNG(svg, it.v==='monograma' ? 1024 : 2400)); }catch(err){ status('No se pudo generar el PNG.'); }
@@ -453,12 +506,12 @@ const LOGO = __LOGO__;
       const zip = new JSZip(), svgF = zip.folder('svg'), pngF = zip.folder('png');
       let n = 0;
       for (const it of items){
-        const svg = file(it.v, it.k);
+        const svg = svgOf(it);
         svgF.file(it.name + '.svg', svg);
         pngF.file(it.name + '.png', await toPNG(svg, it.v==='monograma' ? 1024 : 2400));
         status(`Preparando archivos… ${++n} de ${items.length}`);
       }
-      zip.file('LEEME.txt', 'Senda Consultora · Logo\n\nsvg/ : vectores para web, impresión y diseño.\npng/ : imágenes con fondo transparente (2400 px de ancho; monograma 1024 px).\n\nColores: Pizarra #16232B · Niebla #E4EEF0 · Verde mar #075056 · Naranja #FF5B04\nTipografía: Red Hat Display y Red Hat Text (Google Fonts).\n');
+      zip.file('LEEME.txt', 'Senda Consultora y Senda Estudio · Logo\n\nsenda-* : Senda Consultora (la corta y el monograma sirven para las dos).\nsenda-estudio-* : Senda Estudio.\n\nsvg/ : vectores para web, impresión y diseño.\npng/ : imágenes con fondo transparente (2400 px de ancho; monograma 1024 px).\n\nColores: Pizarra #16232B · Niebla #E4EEF0 · Verde mar #075056 · Naranja #FF5B04\nTipografía: Red Hat Display y Red Hat Text (Google Fonts).\n');
       const blob = await zip.generateAsync({ type:'blob' });
       await save('senda-logo.zip', blob);
     }catch(err){ status('No se pudo armar el .zip. Probá de nuevo.'); }

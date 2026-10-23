@@ -83,3 +83,12 @@ Geometría del logo en `marca/logo/geometria.json`, generada con `marca/herramie
 
 Archivos finales en `marca/logo/final/` (SVG) y `marca/logo/final/png/` (PNG), generados con `marca/herramientas/logo_final.py`.
 Manual en `marca/manual/senda-manual-de-marca.html`.
+
+## Arquitectura de marca: Senda Estudio
+
+- La unidad de implementación de IA se llama **Senda Estudio**. Mismo logo y mismos parámetros que la consultora; solo cambia la bajada: **ESTUDIO** en lugar de CONSULTORA, al mismo ancho que "Senda".
+- Reparto: **Senda Consultora** diagnostica y recomienda (desarrollo comercial, investigación de mercado). **Senda Estudio** diseña y construye (IA y automatizaciones).
+- Color que lidera: la consultora, pizarra; el estudio, verde mar con el logo en niebla.
+- La palabra "estudio" queda reservada para la unidad. La investigación se llama "investigación de mercado", nunca "estudios de mercado".
+- Frase de apoyo mientras el nombre se instala: "Diseñamos e implementamos IA en tu negocio".
+- Archivos: `marca/logo/final/senda-estudio-*.svg` y sus PNG. La corta y el monograma son compartidos.

@@ -29,8 +29,22 @@
   "bar": 353.85,
   "gap": 214.84
  },
+ "medidasEstudio": {
+  "H": 1415.4,
+  "blockH": 1011.0,
+  "markTop": -912.2,
+  "markW": 1145.8,
+  "textX": 1360.64,
+  "textW": 2856.0,
+  "sTop": -710.0,
+  "descTop": 161.0,
+  "descBase": 301.0,
+  "bar": 353.85,
+  "gap": 214.84
+ },
  "archivos": {
   "senda-principal-positivo.svg": {
+   "marca": "consultora",
    "version": "principal",
    "variante": "positivo",
    "fondo": "#E4EEF0",
@@ -42,6 +56,7 @@
    ]
   },
   "senda-principal-negativo.svg": {
+   "marca": "consultora",
    "version": "principal",
    "variante": "negativo",
    "fondo": "#16232B",
@@ -53,6 +68,7 @@
    ]
   },
   "senda-principal-sobre-verde.svg": {
+   "marca": "consultora",
    "version": "principal",
    "variante": "sobre-verde",
    "fondo": "#075056",
@@ -64,6 +80,7 @@
    ]
   },
   "senda-principal-sobre-naranja.svg": {
+   "marca": "consultora",
    "version": "principal",
    "variante": "sobre-naranja",
    "fondo": "#FF5B04",
@@ -75,6 +92,7 @@
    ]
   },
   "senda-principal-mono-pizarra.svg": {
+   "marca": "consultora",
    "version": "principal",
    "variante": "mono-pizarra",
    "fondo": "#FFFFFF",
@@ -86,6 +104,7 @@
    ]
   },
   "senda-principal-mono-blanco.svg": {
+   "marca": "consultora",
    "version": "principal",
    "variante": "mono-blanco",
    "fondo": "#16232B",
@@ -97,6 +116,7 @@
    ]
   },
   "senda-principal-mono-negro.svg": {
+   "marca": "consultora",
    "version": "principal",
    "variante": "mono-negro",
    "fondo": "#FFFFFF",
@@ -108,6 +128,7 @@
    ]
   },
   "senda-corta-positivo.svg": {
+   "marca": "consultora",
    "version": "corta",
    "variante": "positivo",
    "fondo": "#E4EEF0",
@@ -119,6 +140,7 @@
    ]
   },
   "senda-corta-negativo.svg": {
+   "marca": "consultora",
    "version": "corta",
    "variante": "negativo",
    "fondo": "#16232B",
@@ -130,6 +152,7 @@
    ]
   },
   "senda-corta-sobre-verde.svg": {
+   "marca": "consultora",
    "version": "corta",
    "variante": "sobre-verde",
    "fondo": "#075056",
@@ -141,6 +164,7 @@
    ]
   },
   "senda-corta-sobre-naranja.svg": {
+   "marca": "consultora",
    "version": "corta",
    "variante": "sobre-naranja",
    "fondo": "#FF5B04",
@@ -152,6 +176,7 @@
    ]
   },
   "senda-corta-mono-pizarra.svg": {
+   "marca": "consultora",
    "version": "corta",
    "variante": "mono-pizarra",
    "fondo": "#FFFFFF",
@@ -163,6 +188,7 @@
    ]
   },
   "senda-corta-mono-blanco.svg": {
+   "marca": "consultora",
    "version": "corta",
    "variante": "mono-blanco",
    "fondo": "#16232B",
@@ -174,6 +200,7 @@
    ]
   },
   "senda-corta-mono-negro.svg": {
+   "marca": "consultora",
    "version": "corta",
    "variante": "mono-negro",
    "fondo": "#FFFFFF",
@@ -185,6 +212,7 @@
    ]
   },
   "senda-vertical-positivo.svg": {
+   "marca": "consultora",
    "version": "vertical",
    "variante": "positivo",
    "fondo": "#E4EEF0",
@@ -196,6 +224,7 @@
    ]
   },
   "senda-vertical-negativo.svg": {
+   "marca": "consultora",
    "version": "vertical",
    "variante": "negativo",
    "fondo": "#16232B",
@@ -207,6 +236,7 @@
    ]
   },
   "senda-vertical-sobre-verde.svg": {
+   "marca": "consultora",
    "version": "vertical",
    "variante": "sobre-verde",
    "fondo": "#075056",
@@ -218,6 +248,7 @@
    ]
   },
   "senda-vertical-sobre-naranja.svg": {
+   "marca": "consultora",
    "version": "vertical",
    "variante": "sobre-naranja",
    "fondo": "#FF5B04",
@@ -229,6 +260,7 @@
    ]
   },
   "senda-vertical-mono-pizarra.svg": {
+   "marca": "consultora",
    "version": "vertical",
    "variante": "mono-pizarra",
    "fondo": "#FFFFFF",
@@ -240,6 +272,7 @@
    ]
   },
   "senda-vertical-mono-blanco.svg": {
+   "marca": "consultora",
    "version": "vertical",
    "variante": "mono-blanco",
    "fondo": "#16232B",
@@ -251,6 +284,7 @@
    ]
   },
   "senda-vertical-mono-negro.svg": {
+   "marca": "consultora",
    "version": "vertical",
    "variante": "mono-negro",
    "fondo": "#FFFFFF",
@@ -262,6 +296,7 @@
    ]
   },
   "senda-monograma-positivo.svg": {
+   "marca": "consultora",
    "version": "monograma",
    "variante": "positivo",
    "fondo": "#E4EEF0",
@@ -273,6 +308,7 @@
    ]
   },
   "senda-monograma-negativo.svg": {
+   "marca": "consultora",
    "version": "monograma",
    "variante": "negativo",
    "fondo": "#16232B",
@@ -284,6 +320,7 @@
    ]
   },
   "senda-monograma-sobre-verde.svg": {
+   "marca": "consultora",
    "version": "monograma",
    "variante": "sobre-verde",
    "fondo": "#075056",
@@ -295,6 +332,7 @@
    ]
   },
   "senda-monograma-sobre-naranja.svg": {
+   "marca": "consultora",
    "version": "monograma",
    "variante": "sobre-naranja",
    "fondo": "#FF5B04",
@@ -306,6 +344,7 @@
    ]
   },
   "senda-monograma-mono-pizarra.svg": {
+   "marca": "consultora",
    "version": "monograma",
    "variante": "mono-pizarra",
    "fondo": "#FFFFFF",
@@ -317,6 +356,7 @@
    ]
   },
   "senda-monograma-mono-blanco.svg": {
+   "marca": "consultora",
    "version": "monograma",
    "variante": "mono-blanco",
    "fondo": "#16232B",
@@ -328,6 +368,7 @@
    ]
   },
   "senda-monograma-mono-negro.svg": {
+   "marca": "consultora",
    "version": "monograma",
    "variante": "mono-negro",
    "fondo": "#FFFFFF",
@@ -336,6 +377,174 @@
     0,
     680.0,
     840
+   ]
+  },
+  "senda-estudio-principal-positivo.svg": {
+   "marca": "estudio",
+   "version": "principal",
+   "variante": "positivo",
+   "fondo": "#E4EEF0",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-estudio-principal-negativo.svg": {
+   "marca": "estudio",
+   "version": "principal",
+   "variante": "negativo",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-estudio-principal-sobre-verde.svg": {
+   "marca": "estudio",
+   "version": "principal",
+   "variante": "sobre-verde",
+   "fondo": "#075056",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-estudio-principal-sobre-naranja.svg": {
+   "marca": "estudio",
+   "version": "principal",
+   "variante": "sobre-naranja",
+   "fondo": "#FF5B04",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-estudio-principal-mono-pizarra.svg": {
+   "marca": "estudio",
+   "version": "principal",
+   "variante": "mono-pizarra",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-estudio-principal-mono-blanco.svg": {
+   "marca": "estudio",
+   "version": "principal",
+   "variante": "mono-blanco",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-estudio-principal-mono-negro.svg": {
+   "marca": "estudio",
+   "version": "principal",
+   "variante": "mono-negro",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    -912.2,
+    4216.64,
+    1415.4
+   ]
+  },
+  "senda-estudio-vertical-positivo.svg": {
+   "marca": "estudio",
+   "version": "vertical",
+   "variante": "positivo",
+   "fondo": "#E4EEF0",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-estudio-vertical-negativo.svg": {
+   "marca": "estudio",
+   "version": "vertical",
+   "variante": "negativo",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-estudio-vertical-sobre-verde.svg": {
+   "marca": "estudio",
+   "version": "vertical",
+   "variante": "sobre-verde",
+   "fondo": "#075056",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-estudio-vertical-sobre-naranja.svg": {
+   "marca": "estudio",
+   "version": "vertical",
+   "variante": "sobre-naranja",
+   "fondo": "#FF5B04",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-estudio-vertical-mono-pizarra.svg": {
+   "marca": "estudio",
+   "version": "vertical",
+   "variante": "mono-pizarra",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-estudio-vertical-mono-blanco.svg": {
+   "marca": "estudio",
+   "version": "vertical",
+   "variante": "mono-blanco",
+   "fondo": "#16232B",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
+   ]
+  },
+  "senda-estudio-vertical-mono-negro.svg": {
+   "marca": "estudio",
+   "version": "vertical",
+   "variante": "mono-negro",
+   "fondo": "#FFFFFF",
+   "viewBox": [
+    0,
+    0,
+    2856.0,
+    2468.7
    ]
   }
  }

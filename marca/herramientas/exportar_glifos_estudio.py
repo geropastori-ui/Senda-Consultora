@@ -1,4 +1,4 @@
-"""Exporta "Senda", "SENDA" y "CONSULTORA" convertidos a vectores (con kerning) en las cuatro
+"""Exporta "Senda", "SENDA", "CONSULTORA" y "ESTUDIO" convertidos a vectores (con kerning) en las cuatro
 tipografías evaluadas, para el estudio interactivo de marca.
 
 Uso: python3 exportar_glifos_estudio.py <carpeta_fuentes> <salida.json>
@@ -27,6 +27,7 @@ for key, spec in FONTS.items():
         "title": glyphs(d, "Senda"), "caps": glyphs(d, "SENDA"), "cap": cap(d),
         "desc": {w: glyphs(f"{fd}/{p}", "CONSULTORA") for w, p in spec["desc"].items()},
         "descCap": {w: cap(f"{fd}/{p}") for w, p in spec["desc"].items()},
+        "descEstudio": {w: glyphs(f"{fd}/{p}", "ESTUDIO") for w, p in spec["desc"].items()},
     }
 json.dump(out, open(dst, "w"), separators=(",", ":"))
 print("ok", {k: v["cap"] for k, v in out.items()})

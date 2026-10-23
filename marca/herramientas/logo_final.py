@@ -1,5 +1,8 @@
 """Genera los SVG finales del logo de Senda (S Contrapeso + Red Hat Display, paleta Fiordo).
 
+Dos marcas con el mismo sistema: Senda Consultora (bajada CONSULTORA) y Senda Estudio (bajada
+ESTUDIO). La corta y el monograma no llevan bajada, así que son las mismas para las dos.
+
 Parámetros definidos en el estudio de marca (ver PARAMS). Todo en vectores: no depende de
 que la tipografía esté instalada.
 
@@ -48,10 +51,14 @@ def place(glyphs, dx, dy, k=1.0, track=0.0, x0=0.0):
         out.append(f'<path transform="{tr}" d="{g["d"]}"/>')
     return "".join(out)
 
-MEDIDAS = {}
+# marca: (clave de la bajada en el JSON de glifos, nombre, prefijo de archivo, versiones propias)
+MARCAS = {
+    "consultora": ("desc", "Senda Consultora", "senda", ("principal", "corta", "vertical", "monograma")),
+    "estudio": ("descEstudio", "Senda Estudio", "senda-estudio", ("principal", "vertical")),
+}
 
-def build(G, kind):
-    p = PARAMS; F = G[p["font"]]; S = F[p["cas"]]; C = F["desc"][p["descW"]]; dcap = F["descCap"][p["descW"]]
+def build(G, kind, dkey="desc", medidas=None):
+    p = PARAMS; F = G[p["font"]]; S = F[p["cas"]]; C = F[dkey][p["descW"]]; dcap = F["descCap"][p["descW"]]
     t = p["track"]; n = len(S)
     inkL = S[0]["x"] + S[0]["b"][0]
     W = S[-1]["x"] + (n - 1) * t + S[-1]["b"][2] - inkL
@@ -76,8 +83,8 @@ def build(G, kind):
         desc = place(C, mx, descBase, k, tc, c0) if withD else ""
         y0 = min(mTop, top); y1 = max(mTop + H, descBottom if withD else bottom)
         vb = (0, y0, mx + W, y1 - y0)
-        if withD:
-            MEDIDAS.update(H=H, blockH=blockH, markTop=mTop, markW=mw, textX=mx, textW=W, sTop=sTop,
+        if withD and medidas is not None:
+            medidas.update(H=H, blockH=blockH, markTop=mTop, markW=mw, textX=mx, textW=W, sTop=sTop,
                            descTop=descBase - capD, descBase=descBase, bar=H * 21 / 84, gap=mx - mw)
     elif kind == "vertical":
         capS = -sTop
@@ -104,14 +111,17 @@ def svg(parts, mark_c, ink_c, title):
 
 def main(src, outdir):
     G = json.load(open(src)); os.makedirs(outdir, exist_ok=True)
-    index = {}
-    for kind in ("principal", "corta", "vertical", "monograma"):
-        parts = build(G, kind)
-        for var, (mc, ic, bg) in VARIANTES.items():
-            name = f"senda-{kind}-{var}.svg"
-            open(f"{outdir}/{name}", "w").write(svg(parts, mc, ic, "Senda Consultora"))
-            index[name] = {"version": kind, "variante": var, "fondo": bg, "viewBox": [round(x, 2) for x in parts[3]]}
-    json.dump({"params": PARAMS, "colores": COLORES, "medidas": {k: round(v, 2) for k, v in MEDIDAS.items()}, "archivos": index}, open(f"{outdir}/indice.json", "w"), indent=1, ensure_ascii=False)
+    index = {}; medidas = {}
+    for marca, (dkey, title, prefix, kinds) in MARCAS.items():
+        medidas[marca] = {}
+        for kind in kinds:
+            parts = build(G, kind, dkey, medidas[marca])
+            for var, (mc, ic, bg) in VARIANTES.items():
+                name = f"{prefix}-{kind}-{var}.svg"
+                open(f"{outdir}/{name}", "w").write(svg(parts, mc, ic, title))
+                index[name] = {"marca": marca, "version": kind, "variante": var, "fondo": bg, "viewBox": [round(x, 2) for x in parts[3]]}
+    med = {m: {k: round(v, 2) for k, v in d.items()} for m, d in medidas.items()}
+    json.dump({"params": PARAMS, "colores": COLORES, "medidas": med["consultora"], "medidasEstudio": med["estudio"], "archivos": index}, open(f"{outdir}/indice.json", "w"), indent=1, ensure_ascii=False)
     print(len(index), "archivos")
 
 if __name__ == "__main__":
